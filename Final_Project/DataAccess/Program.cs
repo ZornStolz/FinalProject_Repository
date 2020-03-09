@@ -18,20 +18,24 @@ namespace DataAccess
          */
         public static String URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
 
+        private static String DATA = "";
+
         static void Main(string[] args)
         {
-            readInfo(URL + "variable=CO&$limit=5");
+            readInfo(URL + "$limit=5");
+
+            var dataSet = JsonNet.Deserialize<Dictionary<string, string>[]> (DATA);
+
+            Console.WriteLine(dataSet[0]);
 
             /*
              * the first number in seconds
              */
             Thread.Sleep(60 * (Int32)Math.Pow(10, 3));
-
         }
 
         private static void readInfo(String query)
         {
-            string result = "";
             try
             {
                 var url = query;
@@ -40,12 +44,11 @@ namespace DataAccess
                 using (var reader = new StreamReader(stream))
                 {
                     String line = reader.ReadLine();
-                    int count = 0;
-                    while ((line = reader.ReadLine()) != null && count <= 10)
+                    while (line != null)
                     {
-                        String[] args = line.Split(',');
-                        Console.WriteLine(args[count]);
-                        count++;
+                        DATA += line;
+                        //Console.WriteLine(line);
+                        line = reader.ReadLine();
                     }
                     reader.Close();
                     stream.Close();
@@ -53,9 +56,8 @@ namespace DataAccess
 
             }
             catch (WebException e)
-            {
-                result = string.Format("F", e);
-                Console.WriteLine(result);
+            {          
+                Console.WriteLine(e.Message);
             }
 
         }
