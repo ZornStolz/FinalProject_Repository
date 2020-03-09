@@ -55,7 +55,7 @@
       <HintPath>..\packages\CSM.SodaDotNet.0.10.1\lib\net45\SODA.dll</HintPath>
     </Reference>
     <Reference Include="SODA.Utilities, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSM.SodaDotNet.Utilities.0.10.1\lib\net45\SODA.Utilities.dll</HintPath>
+      <HintPath>..\packages\CSM.SodaDotNet.Utilities.0.9.0\lib\net45\SODA.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
