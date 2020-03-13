@@ -13,10 +13,10 @@ namespace GUI
         /// </summary>
         [STAThread]
         static void Main()
-        {
+       {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainFrame());
+            Application.Run(new mainFrame());
         }
     }
 }

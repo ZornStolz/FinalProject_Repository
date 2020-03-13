@@ -10,23 +10,25 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class MainFrame : Form
+    public partial class mainFrame : Form
     {
         /// <summary>
         /// Count the click number of the button
         /// </summary>
         private int count_click;
 
-        private Label lbFilterBy;
-        private ComboBox cbFilterBy;
-        private Label lbValueToFilter;
-        private TextBox txValueToFilter;
-        private Button btAdd;
-        private Button btClear;
-        public MainFrame()
+        private List<Element> elements;
+
+
+
+
+
+
+        public mainFrame()
         {
             InitializeComponent();
-            count_click = 1;
+            count_click = 0;
+            elements = new List<Element>();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
@@ -76,18 +78,28 @@ namespace GUI
         private void btCreateNewFilter_Click(object sender, EventArgs e)
         {
 
-            lbFilterBy = new Label();
+            Label lbFilterBy = new Label();
 
-            cbFilterBy = new ComboBox();
+            ComboBox cbFilterBy = new ComboBox();
 
-            lbValueToFilter = new Label();
+            Label lbValueToFilter = new Label();
 
-            txValueToFilter = new TextBox();
+            TextBox txValueToFilter = new TextBox();
 
-            btAdd = new Button();
-            btClear = new Button();
+            Button btAdd = new Button();
+            Button btClear = new Button();
+
 
             createControlsyToFilter(lbFilterBy, cbFilterBy, lbValueToFilter, txValueToFilter, btAdd, btClear);
+            elements.Add(new Element(lbFilterBy,cbFilterBy,lbValueToFilter,txValueToFilter,btAdd,btClear));
+            
+            
+            this.fLP.Controls.Add(elements[count_click].Label1);
+            this.fLP.Controls.Add(elements[count_click].ComboBox);
+            this.fLP.Controls.Add(elements[count_click].Label2);
+            this.fLP.Controls.Add(elements[count_click].TextBox);
+            this.fLP.Controls.Add(elements[count_click].ButtonAdd);
+            this.fLP.Controls.Add(elements[count_click].ButtonClear);
 
             count_click++;
 
@@ -95,12 +107,7 @@ namespace GUI
         }
 
 
-        private void clearFilter()
-        {
-
-
-        }
-
+     
 
 
 
@@ -118,7 +125,6 @@ namespace GUI
             | System.Windows.Forms.AnchorStyles.Right)));
             lbFilterBy.AutoSize = true;
             lbFilterBy.Location = new System.Drawing.Point(3, 0);
-            lbFilterBy.Name = "lbFilterBy";
             lbFilterBy.Size = new System.Drawing.Size(53, 29);
             lbFilterBy.TabIndex = 6;
             lbFilterBy.Text = "Filtrar por:";
@@ -131,7 +137,6 @@ namespace GUI
             // 
             cbFilterBy.FormattingEnabled = true;
             cbFilterBy.Location = new System.Drawing.Point(62, 3);
-            cbFilterBy.Name = "cbFilterBy";
             cbFilterBy.Size = new System.Drawing.Size(100, 21);
             cbFilterBy.TabIndex = 5;
             cbFilterBy.Name = "cbFilter" + count_click.ToString();
@@ -144,7 +149,6 @@ namespace GUI
             | System.Windows.Forms.AnchorStyles.Right)));
             lbValueToFilter.AutoSize = true;
             lbValueToFilter.Location = new System.Drawing.Point(168, 0);
-            lbValueToFilter.Name = "lbvalueToFilter";
             lbValueToFilter.RightToLeft = System.Windows.Forms.RightToLeft.No;
             lbValueToFilter.Size = new System.Drawing.Size(71, 29);
             lbValueToFilter.TabIndex = 7;
@@ -157,7 +161,6 @@ namespace GUI
             // valueToFilter
             // 
             txValueToFilter.Location = new System.Drawing.Point(245, 3);
-            txValueToFilter.Name = "valueToFilter";
             txValueToFilter.Size = new System.Drawing.Size(100, 20);
             txValueToFilter.TabIndex = 1;
             txValueToFilter.Name = "txValueToFilter" + count_click.ToString();
@@ -167,10 +170,9 @@ namespace GUI
             // btAdd
             // 
             btAdd.Location = new System.Drawing.Point(351, 3);
-            btAdd.Name = "btAdd";
             btAdd.Size = new System.Drawing.Size(75, 23);
             btAdd.TabIndex = 8;
-            btAdd.Text = "Agregar";
+            btAdd.Text = "Agregar" + count_click.ToString();
             btAdd.UseVisualStyleBackColor = true;
             btAdd.UseVisualStyleBackColor = true;
             btAdd.Name = "btAdd" + count_click.ToString();
@@ -180,7 +182,6 @@ namespace GUI
             // btClear
             // 
             btClear.Location = new System.Drawing.Point(432, 3);
-            btClear.Name = "btClear";
             btClear.Size = new System.Drawing.Size(21, 23);
             btClear.TabIndex = 9;
             btClear.Text = "X";
@@ -190,12 +191,16 @@ namespace GUI
 
 
             /// Add elements to control Flow panel
+            /**
             this.fLP.Controls.Add(lbFilterBy);
             this.fLP.Controls.Add(cbFilterBy);
             this.fLP.Controls.Add(lbValueToFilter);
             this.fLP.Controls.Add(txValueToFilter);
             this.fLP.Controls.Add(btAdd);
-            this.fLP.Controls.Add(btClear);
+           */
+            
+            
+           
         }
 
 
@@ -204,40 +209,42 @@ namespace GUI
 
         public void HandlerButtonAddAndClear(object sender, EventArgs e)
         {
-            Console.WriteLine("ss");
-            int i = 1;
+            int i = 0;
             bool found = false;
-            if (btClear != null )
+            if (elements != null)
             {
-                while (i <= count_click && !found)
+                while (i < count_click && !found)
                 {
                     if (((Button)sender).Name == "btClear"+i.ToString())
                     {
-
-                        foreach (TextBox thecontrol in this.Controls.OfType<TextBox>().Where((fLP) => fLP.Name.Contains("lbFilterBy" + i.ToString())))
+                        for (int j = 0; j < elements.Count(); j++)
                         {
-                            fLP.Controls.Remove(thecontrol);
-                            MessageBox.Show("Se presiono el boton"+i.ToString());
+                            if (elements[j].ButtonAdd.Name == "btAdd"+i.ToString())
+                            {
+                                elements.Remove(elements[j]);
+                                fLP.Controls.Remove(elements[j].Label1);
+                                fLP.Controls.Remove(elements[j].ComboBox);
+                                fLP.Controls.Remove(elements[j].Label2);
+                                fLP.Controls.Remove(elements[j].TextBox);
+                                fLP.Controls.Remove(elements[j].ButtonAdd);
+                                fLP.Controls.Remove(elements[j].ButtonClear);
+                                MessageBox.Show("Lo borre");
+                            }
                         }
-                        if (lbFilterBy.Name == "lbFilterBy"+i.ToString())
-                        {
-                        }
-
+                        MessageBox.Show("Se presiono el boton"+i.ToString());
                         found = true;
+                        fLP.Update();
+                    
                     }
+                        
+              
+                    
                     i++;
                 }
-               prueba.Text = btClear.Name;
             }         
               
 
         }
-            
 
-            
-           
-
-           
-        
     }
 }

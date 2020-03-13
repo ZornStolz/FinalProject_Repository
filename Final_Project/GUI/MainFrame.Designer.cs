@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class MainFrame
+    partial class mainFrame
     {
         /// <summary>
         /// Required designer variable.
@@ -150,7 +150,7 @@
             this.prueba.TabIndex = 15;
             this.prueba.Text = "label2";
             // 
-            // MainFrame
+            // mainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,7 +164,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btFilter);
             this.Controls.Add(this.txURL);
-            this.Name = "MainFrame";
+            this.Name = "mainFrame";
             this.Text = "MainFrame";
             this.Load += new System.EventHandler(this.MainFrame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
