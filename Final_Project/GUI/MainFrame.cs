@@ -26,8 +26,8 @@ namespace GUI
 
         public mainFrame()
         {
-            InitializeComponent();
             count_click = 0;
+            InitializeComponent();
             elements = new List<Element>();
         }
 
@@ -52,7 +52,7 @@ namespace GUI
             dtGrid.Columns.Add("Concentración", "Concentración");
             dtGrid.Columns.Add("Nueva columna georreferenciada", "Nueva columna georreferenciada");
 
-            HandlerButtonAddAndClear(sender,e);
+           // HandlerButtonAddAndClear(sender,e);
 
 
 
@@ -74,7 +74,11 @@ namespace GUI
         {
 
         }
-
+        /// <summary>
+        /// This method allows creating a new filter according to the database.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCreateNewFilter_Click(object sender, EventArgs e)
         {
 
@@ -219,15 +223,16 @@ namespace GUI
                     {
                         for (int j = 0; j < elements.Count(); j++)
                         {
-                            if (elements[j].ButtonAdd.Name == "btAdd"+i.ToString())
-                            {
-                                elements.Remove(elements[j]);
+                            if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
+                            {   
+
                                 fLP.Controls.Remove(elements[j].Label1);
                                 fLP.Controls.Remove(elements[j].ComboBox);
                                 fLP.Controls.Remove(elements[j].Label2);
                                 fLP.Controls.Remove(elements[j].TextBox);
                                 fLP.Controls.Remove(elements[j].ButtonAdd);
                                 fLP.Controls.Remove(elements[j].ButtonClear);
+                                elements.Remove(elements[j]);
                                 MessageBox.Show("Lo borre");
                             }
                         }
