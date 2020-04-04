@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+
 
 namespace GUI
 {
@@ -16,23 +20,26 @@ namespace GUI
         /// Count the click number of the button
         /// </summary>
         private int count_click;
-
         private List<Element> elements;
+        private List<String> columnsValues;
+        /*
+         * source data to be consulted
+         */
+        private static String uRL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
 
-
-
-
-
+        public static string URL { get => uRL; set => uRL = value; }
 
         public mainFrame()
         {
             count_click = 0;
             InitializeComponent();
+            columnsValues = new List<string>();
             elements = new List<Element>();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
         {
+            /**
             dtGrid.Columns.Add("Fecha", "Fecha");
             dtGrid.Columns.Add("Autoridad Ambiental", "Autoridad Ambiental");
             dtGrid.Columns.Add("Nombre de la estación", "Nombre de la estación");
@@ -52,18 +59,55 @@ namespace GUI
             dtGrid.Columns.Add("Concentración", "Concentración");
             dtGrid.Columns.Add("Nueva columna georreferenciada", "Nueva columna georreferenciada");
 
-           // HandlerButtonAddAndClear(sender,e);
+            // HandlerButtonAddAndClear(sender,e);
 
-
-
-
-
-            /////////////////////////////////
-
-
-
-
+            */
+            ViewGrid();
+            AddNameColumnToList();
         }
+
+        /// <summary>
+        /// Permite añadir los nombres de las columnas a una lista para luego ser utilizada.
+        /// </summary>
+        private void AddNameColumnToList() {
+
+            columnsValues.Add("fecha");
+            columnsValues.Add("autoridad_ambiental");
+            columnsValues.Add("nombre_de_la_estaci_n");
+            columnsValues.Add("tecnolog_a");
+            columnsValues.Add("latitud");
+            columnsValues.Add("longitud");
+            columnsValues.Add("c_digo_del_departamento");
+            columnsValues.Add("departamento");
+            columnsValues.Add("c_digo_del_municipio");
+            columnsValues.Add("nombre_del_municipio");
+            columnsValues.Add("tipo_de_estaci_n");
+            columnsValues.Add("tiempo_de_exposici_n");
+            columnsValues.Add("variable");
+            columnsValues.Add("unidades");
+            columnsValues.Add("concentraci_n");
+        }
+
+
+        private async void ViewGrid()
+        {
+            string respuesta = await GetHttp();
+            List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
+            dtGrid.DataSource = lst;
+        }
+        
+
+        public async Task<string> GetHttp()
+        {
+            WebRequest webRequest = WebRequest.Create(URL);
+            WebResponse webResponse = webRequest.GetResponse();
+            StreamReader sr = new StreamReader(webResponse.GetResponseStream());
+
+            return await sr.ReadToEndAsync();
+        }
+
+
+
 
         private void dtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -72,8 +116,97 @@ namespace GUI
 
         private void btFilter_Click(object sender, EventArgs e)
         {
+            if (elements != null)
+            {
+                foreach (var values in elements)
+                {
+                    string columnName = values.ComboBox.Text;
+                    string valueToFilter = values.TextBox.Text;
+                    if (columnName.Equals(columnsValues[0]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+                    }else if (columnName.Equals(columnsValues[1]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
 
+                    }else if (columnName.Equals(columnsValues[2]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[3]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[4]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[5]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[6]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[7]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[8]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[9]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[10]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[10]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[11]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[12]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[13]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }else if (columnName.Equals(columnsValues[14]))
+                    {
+                        URL += "" + columnName + "=" + valueToFilter+"&";
+
+                    }
+
+                    
+
+
+
+                }
+
+                
+
+                
+
+
+                ViewGrid();
+               // dtGrid.Refresh();
+                //dtGrid.Update();
+            }
         }
+
+
+
+
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -104,6 +237,7 @@ namespace GUI
             this.fLP.Controls.Add(elements[count_click].TextBox);
             this.fLP.Controls.Add(elements[count_click].ButtonAdd);
             this.fLP.Controls.Add(elements[count_click].ButtonClear);
+            
 
             count_click++;
 
@@ -144,7 +278,8 @@ namespace GUI
             cbFilterBy.Size = new System.Drawing.Size(100, 21);
             cbFilterBy.TabIndex = 5;
             cbFilterBy.Name = "cbFilter" + count_click.ToString();
-
+            //------------------------------------------------------------
+            cbFilterBy.DataSource = columnsValues;
             // 
             // lbvalueToFilter
             // 
