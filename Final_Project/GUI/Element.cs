@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+/// <summary>
+/// This class is auxiliar to class MainFrame.
+/// </summary>
 namespace GUI
 {
     class Element

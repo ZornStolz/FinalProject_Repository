@@ -8,6 +8,7 @@ using SODA;
 using Json.Net;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace DataAccess
 {
@@ -22,9 +23,14 @@ namespace DataAccess
 
         static void Main(string[] args)
         {
+            
             readInfo(URL + "$limit=5");
 
             var dataSet = JsonNet.Deserialize<Dictionary<string, string>[]> (DATA);
+            
+
+
+
 
             Console.WriteLine(dataSet[0]);
 
@@ -61,6 +67,25 @@ namespace DataAccess
             }
 
         }
+
+
+        /// <summary>
+        /// This method returns an arraylist with the name of the column of the dataset.
+        /// </summary>
+        /// <returns></returns>
+        public List<String> elementsDataSet() {
+            List<String> values = null;
+
+
+           
+
+
+
+            return values;
+        }
+
+
+
 
 
     } 
