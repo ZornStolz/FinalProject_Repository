@@ -254,8 +254,7 @@ namespace GUI
         /// This method allows you to create the controllers responsible for filtering.
         /// </summary>
         private void createControlsyToFilter(Label lbFilterBy, ComboBox cbFilterBy, Label lbValueToFilter, TextBox txValueToFilter, Button btAdd, Button btClear)
-        {
-
+        { 
             // 
             // lbFilterBy
             // 
