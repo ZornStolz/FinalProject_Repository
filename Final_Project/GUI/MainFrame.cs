@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -70,6 +73,7 @@ namespace GUI
             string respuesta = await GetHttp();
             List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
             dtGrid.DataSource = lst;
+            AddMarker(lst);
         }
 
 
@@ -405,6 +409,55 @@ namespace GUI
             URL = cadena;
             ViewGrid();
             
+        }
+
+        private void gMapC_Load(object sender, EventArgs e)
+        {
+            //Elementos de inicio Gmap
+            gMapC.DragButton = MouseButtons.Left;
+            gMapC.CanDragMap = true;
+            gMapC.MapProvider = GMap.NET.MapProviders.OpenCycleMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            gMapC.Position = new GMap.NET.PointLatLng(4.570868, -74.2973328);
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            gMapC.MinZoom = 2;
+            gMapC.MaxZoom = 18;
+            gMapC.Zoom = 6;
+            //Fin
+        }
+
+
+        private void AddMarker(List<ViewModel> lst)
+        {
+            foreach (var i in lst)
+            {
+
+                var markerOverlay = new GMapOverlay("markers");
+                var marker = new GMarkerGoogle(new PointLatLng(i.Latitud, i.Longitud), GMarkerGoogleType.green); ;
+                markerOverlay.Markers.Add(marker);
+
+
+                marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+                marker.ToolTipText = String.Format("Fecha: " + i.Fecha + "\n"
+                   + "Autoridad Ambiental: " + i.Autoridad_ambiental + "\n"
+                   + "Nombre de la estación: " + i.Nombre_de_la_estaci_n + "\n"
+                   + "Tecnologia: " + i.Tecnolog_a + "\n"
+                   + "Latitud: " + i.Latitud + "\n"
+                   + "Longitud: " + i.Longitud + "\n"
+                   + "Codigo del departamento: " + i.C_digo_del_departamento + "\n"
+                   + "Departamento: " + i.Departamento + "\n"
+                   + "Codigo de municipio: " + i.C_digo_del_municipio+ "\n"
+                   + "Municipio: " + i.Nombre_del_municipio + "\n"
+                   + "Tipo de estación: " + i.Tipo_de_estaci_n + "\n"
+                   + "Tiempo de exposición: " + i.Tiempo_de_exposici_n + "\n"
+                   + "Variable: " + i.Variable + "\n"
+                   + "Unidades: " + i.Unidades + "\n"
+                   + "Concentración: " + i.Concentraci_n
+                    );
+
+            gMapC.Overlays.Add(markerOverlay);
+            }
+
         }
 
     }

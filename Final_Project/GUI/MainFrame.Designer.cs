@@ -28,59 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txURL = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.dtGrid = new System.Windows.Forms.DataGridView();
-            this.btFilter = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.fLP = new System.Windows.Forms.FlowLayoutPanel();
-            this.btCreateNewFilter = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.prueba = new System.Windows.Forms.Label();
+            this.btCreateNewFilter = new System.Windows.Forms.Button();
+            this.fLP = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btFilter = new System.Windows.Forms.Button();
+            this.txURL = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.gMapC = new GMap.NET.WindowsForms.GMapControl();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txURL
-            // 
-            this.txURL.Location = new System.Drawing.Point(1039, 81);
-            this.txURL.Name = "txURL";
-            this.txURL.Size = new System.Drawing.Size(100, 20);
-            this.txURL.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1004, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "URL";
             // 
             // dtGrid
             // 
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGrid.Location = new System.Drawing.Point(12, 12);
+            this.dtGrid.Location = new System.Drawing.Point(3, 6);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(888, 643);
+            this.dtGrid.Size = new System.Drawing.Size(890, 664);
             this.dtGrid.TabIndex = 8;
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
             // 
-            // btFilter
-            // 
-            this.btFilter.Location = new System.Drawing.Point(1039, 508);
-            this.btFilter.Name = "btFilter";
-            this.btFilter.Size = new System.Drawing.Size(75, 23);
-            this.btFilter.TabIndex = 9;
-            this.btFilter.Text = "Filtrar";
-            this.btFilter.UseVisualStyleBackColor = true;
-            this.btFilter.Click += new System.EventHandler(this.btFilter_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(690, 700);
+            this.button1.Location = new System.Drawing.Point(573, 676);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -89,7 +71,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(319, 699);
+            this.button2.Location = new System.Drawing.Point(224, 676);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
@@ -119,74 +101,177 @@
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 2;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(0, 1);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1374, 752);
+            this.tabControl1.TabIndex = 16;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.prueba);
+            this.tabPage1.Controls.Add(this.btCreateNewFilter);
+            this.tabPage1.Controls.Add(this.fLP);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.btFilter);
+            this.tabPage1.Controls.Add(this.txURL);
+            this.tabPage1.Controls.Add(this.dtGrid);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1366, 726);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // prueba
+            // 
+            this.prueba.AutoSize = true;
+            this.prueba.Location = new System.Drawing.Point(1125, 572);
+            this.prueba.Name = "prueba";
+            this.prueba.Size = new System.Drawing.Size(35, 13);
+            this.prueba.TabIndex = 21;
+            this.prueba.Text = "label2";
+            // 
+            // btCreateNewFilter
+            // 
+            this.btCreateNewFilter.Location = new System.Drawing.Point(1022, 125);
+            this.btCreateNewFilter.Name = "btCreateNewFilter";
+            this.btCreateNewFilter.Size = new System.Drawing.Size(211, 23);
+            this.btCreateNewFilter.TabIndex = 20;
+            this.btCreateNewFilter.Text = "Crear nuevo filtro";
+            this.btCreateNewFilter.UseVisualStyleBackColor = true;
+            this.btCreateNewFilter.Click += new System.EventHandler(this.btCreateNewFilter_Click);
+            // 
             // fLP
             // 
             this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fLP.AutoScroll = true;
-            this.fLP.Location = new System.Drawing.Point(906, 175);
+            this.fLP.Location = new System.Drawing.Point(900, 167);
             this.fLP.Margin = new System.Windows.Forms.Padding(4);
             this.fLP.Name = "fLP";
             this.fLP.Size = new System.Drawing.Size(458, 326);
-            this.fLP.TabIndex = 13;
+            this.fLP.TabIndex = 19;
             // 
-            // btCreateNewFilter
+            // label1
             // 
-            this.btCreateNewFilter.Location = new System.Drawing.Point(1028, 133);
-            this.btCreateNewFilter.Name = "btCreateNewFilter";
-            this.btCreateNewFilter.Size = new System.Drawing.Size(211, 23);
-            this.btCreateNewFilter.TabIndex = 14;
-            this.btCreateNewFilter.Text = "Crear nuevo filtro";
-            this.btCreateNewFilter.UseVisualStyleBackColor = true;
-            this.btCreateNewFilter.Click += new System.EventHandler(this.btCreateNewFilter_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(998, 76);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "URL";
             // 
-            // prueba
+            // btFilter
             // 
-            this.prueba.AutoSize = true;
-            this.prueba.Location = new System.Drawing.Point(1054, 579);
-            this.prueba.Name = "prueba";
-            this.prueba.Size = new System.Drawing.Size(35, 13);
-            this.prueba.TabIndex = 15;
-            this.prueba.Text = "label2";
+            this.btFilter.Location = new System.Drawing.Point(1101, 509);
+            this.btFilter.Name = "btFilter";
+            this.btFilter.Size = new System.Drawing.Size(75, 23);
+            this.btFilter.TabIndex = 18;
+            this.btFilter.Text = "Filtrar";
+            this.btFilter.UseVisualStyleBackColor = true;
+            this.btFilter.Click += new System.EventHandler(this.btFilter_Click);
+            // 
+            // txURL
+            // 
+            this.txURL.Location = new System.Drawing.Point(1033, 73);
+            this.txURL.Name = "txURL";
+            this.txURL.Size = new System.Drawing.Size(100, 20);
+            this.txURL.TabIndex = 16;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.gMapC);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1366, 726);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1366, 726);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // gMapC
+            // 
+            this.gMapC.Bearing = 0F;
+            this.gMapC.CanDragMap = true;
+            this.gMapC.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapC.GrayScaleMode = false;
+            this.gMapC.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapC.LevelsKeepInMemmory = 5;
+            this.gMapC.Location = new System.Drawing.Point(8, 6);
+            this.gMapC.MarkersEnabled = true;
+            this.gMapC.MaxZoom = 2;
+            this.gMapC.MinZoom = 2;
+            this.gMapC.MouseWheelZoomEnabled = true;
+            this.gMapC.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapC.Name = "gMapC";
+            this.gMapC.NegativeMode = false;
+            this.gMapC.PolygonsEnabled = true;
+            this.gMapC.RetryLoadTile = 0;
+            this.gMapC.RoutesEnabled = true;
+            this.gMapC.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapC.ShowTileGridLines = false;
+            this.gMapC.Size = new System.Drawing.Size(1061, 708);
+            this.gMapC.TabIndex = 0;
+            this.gMapC.Zoom = 0D;
+            this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
             // 
             // mainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
-            this.Controls.Add(this.prueba);
-            this.Controls.Add(this.btCreateNewFilter);
-            this.Controls.Add(this.fLP);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dtGrid);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btFilter);
-            this.Controls.Add(this.txURL);
+            this.Controls.Add(this.tabControl1);
             this.Name = "mainFrame";
             this.Text = "MainFrame";
             this.Load += new System.EventHandler(this.MainFrame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txURL;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dtGrid;
-        private System.Windows.Forms.Button btFilter;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.FlowLayoutPanel fLP;
-        private System.Windows.Forms.Button btCreateNewFilter;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label prueba;
+        private System.Windows.Forms.Button btCreateNewFilter;
+        private System.Windows.Forms.FlowLayoutPanel fLP;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btFilter;
+        private System.Windows.Forms.TextBox txURL;
+        private System.Windows.Forms.TabPage tabPage2;
+        private GMap.NET.WindowsForms.GMapControl gMapC;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 
