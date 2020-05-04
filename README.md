@@ -1,9 +1,9 @@
-# Plume - Sistema de Monitoreo de la Calidad del Aire
-Plume es un Sistema de Monitoreo de la Calidad del Aire que apunta a  mostrar la información respecto a la calidad del aire en diferentes regiones del territorio Colombiano. Para ello, Plume interpreta y analiza diversos datos recogidos por el SISAIRE entre los años 2011 y 2017 en una [base de datos pública](https://www.datos.gov.co/Ambiente-y-Desarrollo-Sostenible/DATOS-DE-CALIDAD-DEL-AIRE-EN-COLOMBIA-2011-2017/ysq6-ri4e). Esto es realizado cómo proyecto del curso para la clase de Proyecto Integrador I del semestre 2020-1 de la Universidad ICESI en Cali, Colombia.
+# Blume - Sistema de Monitoreo de la Calidad del Aire
+Blume es un Sistema de Monitoreo de la Calidad del Aire que apunta a  mostrar la información respecto a la calidad del aire en diferentes regiones del territorio Colombiano. Para ello, Plume interpreta y analiza diversos datos recogidos por el SISAIRE entre los años 2011 y 2017 en una [base de datos pública](https://www.datos.gov.co/Ambiente-y-Desarrollo-Sostenible/DATOS-DE-CALIDAD-DEL-AIRE-EN-COLOMBIA-2011-2017/ysq6-ri4e). Esto es realizado cómo proyecto del curso para la clase de Proyecto Integrador I del semestre 2020-1 de la Universidad ICESI en Cali, Colombia.
 
 El proyecto está desarrollado en C#, utilizando el framework .NET, con mapas obtenidos de GMaps y trabajado en Visual Studio 2019.
 
-El grupo que hace posible Plume se conforma de:
+El grupo que hace posible Blume se conforma por:
  - Gabriel Cruz
  - Jhon Edward Mora
  - Oscar Riascos
