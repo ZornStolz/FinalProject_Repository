@@ -36,7 +36,7 @@ namespace GUI
             InitializeComponent();
             columnsValues = new string[15];
             elements = new List<Element>();
-            todos_los_municipios();
+           //todos_los_municipios();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
@@ -507,10 +507,12 @@ namespace GUI
                     municipios_list.Add(mun_complete.First());
                 }
             }
+           /*
             foreach (ViewModel element in municipios_list)
             {
                 Console.WriteLine(element.Nombre_del_municipio + ", " + element.Departamento);
             }
+            */
         }
 
 
