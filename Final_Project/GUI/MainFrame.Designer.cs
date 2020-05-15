@@ -1,6 +1,9 @@
-﻿namespace GUI
+﻿using GMap.NET.MapProviders;
+using Microsoft.Win32;
+
+namespace GUI
 {
-    partial class mainFrame
+    partial class blume
     {
         /// <summary>
         /// Required designer variable.
@@ -35,27 +38,29 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tab = new System.Windows.Forms.TabControl();
+            this.tabPageFilters = new System.Windows.Forms.TabPage();
             this.prueba = new System.Windows.Forms.Label();
             this.btCreateNewFilter = new System.Windows.Forms.Button();
             this.fLP = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.btFilter = new System.Windows.Forms.Button();
             this.txURL = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageGmap = new System.Windows.Forms.TabPage();
+            this.pB1 = new System.Windows.Forms.PictureBox();
             this.trackBarZoom = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.btRelief = new System.Windows.Forms.Button();
             this.btOriginal = new System.Windows.Forms.Button();
             this.btSatelite = new System.Windows.Forms.Button();
             this.gMapC = new GMap.NET.WindowsForms.GMapControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageStadistc = new System.Windows.Forms.TabPage();
             this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tab.SuspendLayout();
+            this.tabPageFilters.SuspendLayout();
+            this.tabPageGmap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,35 +114,35 @@
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 2;
             // 
-            // tabControl1
+            // tab
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(0, 1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1374, 752);
-            this.tabControl1.TabIndex = 16;
+            this.tab.Controls.Add(this.tabPageFilters);
+            this.tab.Controls.Add(this.tabPageGmap);
+            this.tab.Controls.Add(this.tabPageStadistc);
+            this.tab.Location = new System.Drawing.Point(0, 1);
+            this.tab.Name = "tab";
+            this.tab.SelectedIndex = 0;
+            this.tab.Size = new System.Drawing.Size(1374, 752);
+            this.tab.TabIndex = 16;
             // 
-            // tabPage1
+            // tabPageFilters
             // 
-            this.tabPage1.Controls.Add(this.prueba);
-            this.tabPage1.Controls.Add(this.btCreateNewFilter);
-            this.tabPage1.Controls.Add(this.fLP);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.btFilter);
-            this.tabPage1.Controls.Add(this.txURL);
-            this.tabPage1.Controls.Add(this.dtGrid);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1366, 726);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageFilters.Controls.Add(this.prueba);
+            this.tabPageFilters.Controls.Add(this.btCreateNewFilter);
+            this.tabPageFilters.Controls.Add(this.fLP);
+            this.tabPageFilters.Controls.Add(this.label1);
+            this.tabPageFilters.Controls.Add(this.btFilter);
+            this.tabPageFilters.Controls.Add(this.txURL);
+            this.tabPageFilters.Controls.Add(this.dtGrid);
+            this.tabPageFilters.Controls.Add(this.button2);
+            this.tabPageFilters.Controls.Add(this.button1);
+            this.tabPageFilters.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFilters.Name = "tabPageFilters";
+            this.tabPageFilters.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFilters.Size = new System.Drawing.Size(1366, 726);
+            this.tabPageFilters.TabIndex = 0;
+            this.tabPageFilters.Text = "Filtros";
+            this.tabPageFilters.UseVisualStyleBackColor = true;
             // 
             // prueba
             // 
@@ -196,21 +201,30 @@
             this.txURL.Size = new System.Drawing.Size(100, 20);
             this.txURL.TabIndex = 16;
             // 
-            // tabPage2
+            // tabPageGmap
             // 
-            this.tabPage2.Controls.Add(this.trackBarZoom);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.btRelief);
-            this.tabPage2.Controls.Add(this.btOriginal);
-            this.tabPage2.Controls.Add(this.btSatelite);
-            this.tabPage2.Controls.Add(this.gMapC);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1366, 726);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageGmap.Controls.Add(this.pB1);
+            this.tabPageGmap.Controls.Add(this.trackBarZoom);
+            this.tabPageGmap.Controls.Add(this.label2);
+            this.tabPageGmap.Controls.Add(this.btRelief);
+            this.tabPageGmap.Controls.Add(this.btOriginal);
+            this.tabPageGmap.Controls.Add(this.btSatelite);
+            this.tabPageGmap.Controls.Add(this.gMapC);
+            this.tabPageGmap.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGmap.Name = "tabPageGmap";
+            this.tabPageGmap.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGmap.Size = new System.Drawing.Size(1366, 726);
+            this.tabPageGmap.TabIndex = 1;
+            this.tabPageGmap.Text = "Gmap";
+            this.tabPageGmap.UseVisualStyleBackColor = true;
+            // 
+            // pB1
+            // 
+            this.pB1.Location = new System.Drawing.Point(1075, 6);
+            this.pB1.Name = "pB1";
+            this.pB1.Size = new System.Drawing.Size(102, 88);
+            this.pB1.TabIndex = 0;
+            this.pB1.TabStop = false;
             // 
             // trackBarZoom
             // 
@@ -289,15 +303,15 @@
             this.gMapC.Zoom = 0D;
             this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
             // 
-            // tabPage3
+            // tabPageStadistc
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1366, 726);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageStadistc.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStadistc.Name = "tabPageStadistc";
+            this.tabPageStadistc.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStadistc.Size = new System.Drawing.Size(1366, 726);
+            this.tabPageStadistc.TabIndex = 2;
+            this.tabPageStadistc.Text = "Estadisticas";
+            this.tabPageStadistc.UseVisualStyleBackColor = true;
             // 
             // timer
             // 
@@ -305,21 +319,22 @@
             this.timer.Interval = 10;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // mainFrame
+            // blume
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 713);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "mainFrame";
-            this.Text = "MainFrame";
+            this.Controls.Add(this.tab);
+            this.Name = "blume";
+            this.Text = "BLUME";
             this.Load += new System.EventHandler(this.MainFrame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tab.ResumeLayout(false);
+            this.tabPageFilters.ResumeLayout(false);
+            this.tabPageFilters.PerformLayout();
+            this.tabPageGmap.ResumeLayout(false);
+            this.tabPageGmap.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pB1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
             this.ResumeLayout(false);
 
@@ -332,23 +347,24 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tab;
+        private System.Windows.Forms.TabPage tabPageFilters;
         private System.Windows.Forms.Label prueba;
         private System.Windows.Forms.Button btCreateNewFilter;
         private System.Windows.Forms.FlowLayoutPanel fLP;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btFilter;
         private System.Windows.Forms.TextBox txURL;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageGmap;
         private GMap.NET.WindowsForms.GMapControl gMapC;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageStadistc;
         private System.Windows.Forms.Button btSatelite;
         private System.Windows.Forms.TrackBar trackBarZoom;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btRelief;
         private System.Windows.Forms.Button btOriginal;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.PictureBox pB1;
     }
 }
 

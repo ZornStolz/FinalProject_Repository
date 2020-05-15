@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class mainFrame : Form
+    public partial class blume : Form
     {
         /// <summary>
         /// Count the click number of the button
@@ -26,7 +26,7 @@ namespace GUI
         /*
          * source data to be consulted
          */
-        private static String uRL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?&";
+        private static String uRL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?$limit=50&";
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
@@ -55,19 +55,19 @@ namespace GUI
 
         public static string URL { get => uRL; set => uRL = value; }
 
-        public mainFrame()
+        public blume()
         {
             URL = uRL;
             count_click = 0;
             InitializeComponent();
             columnsValues = new string[15];
             elements = new List<Element>();
+
             //todos_los_municipios();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
         {
-
             ViewGrid();
             AddNameColumnToList();
         }
@@ -640,33 +640,33 @@ namespace GUI
         /// <param name="markerColor"></param> Representa el color del marcador, el cual representa el nivel de contaminación de la zona.
         private void AddMarker(ViewModel value, Color polygonColor, GMarkerGoogleType markerColor)
         {
-         
-                var markerOverlay = new GMapOverlay("markers");
-                var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor); ;
-                markerOverlay.Markers.Add(marker);
+
+            var markerOverlay = new GMapOverlay("markers");
+            var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor); ;
+            markerOverlay.Markers.Add(marker);
 
 
-                marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-                marker.ToolTipText = String.Format("Fecha: " + value.Fecha + "\n"
-                   + "Autoridad Ambiental: " + value.Autoridad_ambiental + "\n"
-                   + "Nombre de la estación: " + value.Nombre_de_la_estaci_n + "\n"
-                   + "Tecnologia: " + value.Tecnolog_a + "\n"
-                   + "Latitud: " + value.Latitud + "\n"
-                   + "Longitud: " + value.Longitud + "\n"
-                   + "Codigo del departamento: " + value.C_digo_del_departamento + "\n"
-                   + "Departamento: " + value.Departamento + "\n"
-                   + "Codigo de municipio: " + value.C_digo_del_municipio + "\n"
-                   + "Municipio: " + value.Nombre_del_municipio + "\n"
-                   + "Tipo de estación: " + value.Tipo_de_estaci_n + "\n"
-                   + "Tiempo de exposición: " + value.Tiempo_de_exposici_n + "\n"
-                   + "Variable: " + value.Variable + "\n"
-                   + "Unidades: " + value.Unidades + "\n"
-                   + "Concentración: " + value.Concentraci_n
-                    );
+            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+            marker.ToolTipText = String.Format("Fecha: " + value.Fecha + "\n"
+               + "Autoridad Ambiental: " + value.Autoridad_ambiental + "\n"
+               + "Nombre de la estación: " + value.Nombre_de_la_estaci_n + "\n"
+               + "Tecnologia: " + value.Tecnolog_a + "\n"
+               + "Latitud: " + value.Latitud + "\n"
+               + "Longitud: " + value.Longitud + "\n"
+               + "Codigo del departamento: " + value.C_digo_del_departamento + "\n"
+               + "Departamento: " + value.Departamento + "\n"
+               + "Codigo de municipio: " + value.C_digo_del_municipio + "\n"
+               + "Municipio: " + value.Nombre_del_municipio + "\n"
+               + "Tipo de estación: " + value.Tipo_de_estaci_n + "\n"
+               + "Tiempo de exposición: " + value.Tiempo_de_exposici_n + "\n"
+               + "Variable: " + value.Variable + "\n"
+               + "Unidades: " + value.Unidades + "\n"
+               + "Concentración: " + value.Concentraci_n
+                );
 
-                // Añade una poligono como representación al nivel de contaminación.
-                AddPolygon(value, polygonColor);
-                gMapC.Overlays.Add(markerOverlay);
+            // Añade una poligono como representación al nivel de contaminación.
+            AddPolygon(value, polygonColor);
+            gMapC.Overlays.Add(markerOverlay);
 
         }
 
@@ -827,6 +827,19 @@ namespace GUI
         }
 
 
+
+
+        private void Circle(object sender, MouseEventArgs e)
+        {
+
+            MessageBox.Show("hola");
+            Graphics papel;
+            papel = pB1.CreateGraphics();
+            SolidBrush myBrush = new SolidBrush(Color.Red);
+            Pen lapiz = new Pen(myBrush);
+            papel.FillRectangle(myBrush, 0, 0, pB1.Width, pB1.Height);
+        }
+
         /// <summary>
         /// Clases
         /// </summary>
@@ -884,6 +897,7 @@ namespace GUI
              }
              */
         }
+
 
 
     }
