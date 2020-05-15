@@ -77,7 +77,7 @@ namespace GUI
             string respuesta = await GetHttp(URL);
             List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
             dtGrid.DataSource = lst;
-            pollutionColor(lst);
+            PollutionColor(lst);
         }
 
 
@@ -399,17 +399,123 @@ namespace GUI
 
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////METODOS GMAPS/////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
         /// <summary>
         /// Este metodo permite añadirle colores a los marcadores y poligonos de acuerdo al nivel de contaminación que presentan.
         /// </summary>
         /// <param name="lst"></param> Lista con los elementos que se encuentran en la base de datos.
-        private void pollutionColor(List<ViewModel> lst)
+        private void PollutionColor(List<ViewModel> lst)
         {
+            foreach (var value in lst)
+            {
+                string pollutionLevel = DefineContaminationLevel(value.Variable, value.Concentraci_n);
 
+                if (pollutionLevel.Equals("Alto"))
+                {
+                    AddMarker(lst,Color.FromArgb(50, Color.Red),GMarkerGoogleType.red);
+                }
+                else if (pollutionLevel.Equals("Medio"))
+                {
+                    AddMarker(lst,Color.FromArgb(50, Color.Yellow),GMarkerGoogleType.yellow);
+                }
+                else
+                {
+                    AddMarker(lst,Color.FromArgb(50, Color.Red),GMarkerGoogleType.red);
+                }
+            } 
+           
+        }
+
+        /// <summary>
+        /// Retorna el nivel de contaminación.
+        /// Los niveles de contaminación son: Alto, medio y bajo.
+        /// Se evaluaran 3 casos:
+        /// 1) PM10:  
+        /// 2) O3:  
+        /// 3) Radiación Solar Global:  
+        /// </summary>
+        /// <param name="variable"></param> Variable con la cual se realizo la prueba de contaminación.
+        /// <param name="concentracion"></param> Nivel de concentración que toma la variable.
+        private string DefineContaminationLevel(String variable, double concentracion)
+        {
+            string pollutionLevel = "";
+          
+            ///Casos
+            if (variable.Equals("PM10"))
+            {
+                pollutionLevel = PM10PollutionLevel(concentracion);
+
+            }else if (variable.Equals("O3"))
+            {
+                pollutionLevel = O3PollutionLevel(concentracion);
+            }
+            else
+            {
+                pollutionLevel = SolarRadiationPollutionLevel(concentracion);
+            }
+
+            return pollutionLevel;
+        }
+
+        /// <summary>
+        /// Metodo auxiliar del metodo DefineContaminationLevel.
+        /// Establece el nivel de contaminación de la variable PM10.
+        /// Este nivel de contaminación se evaluara como:
+        /// Alto,medio y bajo.
+        /// </summary>
+        /// <param name="concentracion"></param> Nivel de concentración de la variable PM10
+        /// <returns></returns>
+        private string PM10PollutionLevel(double concentracion)
+        {
+            string pollutionLevel = "Bajo";
+                
+            //Casos.
+
+
+            return pollutionLevel;
         }
 
 
+        /// <summary>
+        /// Metodo auxiliar del metodo DefineContaminationLevel.
+        /// Establece el nivel de contaminación de la variable O3.
+        /// Este nivel de contaminación se evaluara como:
+        /// Alto,medio y bajo.
+        /// </summary>
+        /// <param name="concentracion"></param> Nivel de concentración de la variable O3
+        /// <returns></returns>
+        private string O3PollutionLevel(double concentracion)
+        {
+            string pollutionLevel = "Bajo";
+
+            //Casos.
+
+
+            return pollutionLevel;
+        }
+
+        /// <summary>
+        /// Metodo auxiliar del metodo DefineContaminationLevel.
+        /// Establece el nivel de contaminación de la variable Radiación Solar Global.
+        /// Este nivel de contaminación se evaluara como:
+        /// Alto, medio y bajo.
+        /// </summary>
+        /// <param name="concentracion"></param> Nivel de concentración de la variable Radiación Solar Global.
+        /// <returns></returns>
+        private string SolarRadiationPollutionLevel(double concentracion)
+        {
+            string pollutionLevel = "Bajo";
+
+            //Casos.
+
+
+            return pollutionLevel;
+        }
 
 
 
@@ -465,7 +571,7 @@ namespace GUI
                 var markerOverlay = new GMapOverlay("markers");
                 var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor); ;
                 markerOverlay.Markers.Add(marker);
-                
+
 
                 marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
                 marker.ToolTipText = String.Format("Fecha: " + value.Fecha + "\n"
@@ -602,6 +708,62 @@ namespace GUI
         }
 
 
+
+        /// <summary>
+        /// Cambia el tipo de mapa a satelite.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btSatelite_Click(object sender, EventArgs e)
+        {
+            gMapC.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
+        }
+        /// <summary>
+        /// Cambia el tipo de mapa al diseño normal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btOriginal_Click(object sender, EventArgs e)
+        {
+            gMapC.MapProvider = GMapProviders.GoogleMap;
+
+        }
+        /// <summary>
+        /// Cambia el tipo de mapa a relieve.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btRelief_Click(object sender, EventArgs e)
+        {
+            gMapC.MapProvider = GMapProviders.GoogleTerrainMap;
+        }
+
+        /// <summary>
+        /// Sincroniza el zoom que se realiza con el raton y actualiza el trackBar conforme lo amplia o disminuye el mapa.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            trackBarZoom.Value = Convert.ToInt32(gMapC.Zoom);
+        }
+
+        /// <summary>
+        /// Permite hacer zoom al mapa por medio de la barra StrackBar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void trackBarZoom_Scroll(object sender, EventArgs e)
+        {
+            gMapC.Zoom = trackBarZoom.Value;
+        }
+
+
+        /// <summary>
+        /// Clases
+        /// </summary>
+
+
         class Dpto
         {
             private String departamento;
@@ -655,31 +817,7 @@ namespace GUI
              */
         }
 
-        private void btSatelite_Click(object sender, EventArgs e)
-        {
-            gMapC.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
-        }
 
-        private void btOriginal_Click(object sender, EventArgs e)
-        {
-            gMapC.MapProvider = GMapProviders.GoogleMap;
-
-        }
-
-        private void btRelief_Click(object sender, EventArgs e)
-        {
-            gMapC.MapProvider = GMapProviders.GoogleTerrainMap;
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            trackBarZoom.Value = Convert.ToInt32(gMapC.Zoom);
-        }
-
-        private void trackBarZoom_Scroll(object sender, EventArgs e)
-        {
-            gMapC.Zoom = trackBarZoom.Value;
-        }
     }
 
 }
