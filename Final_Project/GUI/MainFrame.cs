@@ -1,4 +1,5 @@
 ﻿using GMap.NET;
+using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using Newtonsoft.Json;
@@ -442,8 +443,8 @@ namespace GUI
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gMapC.Position = new GMap.NET.PointLatLng(4.570868, -74.2973328);
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gMapC.MinZoom = 2;
-            gMapC.MaxZoom = 18;
+            gMapC.MinZoom = 0;
+            gMapC.MaxZoom = 20;
             gMapC.Zoom = 6;
             //Fin
         }
@@ -654,8 +655,31 @@ namespace GUI
              */
         }
 
+        private void btSatelite_Click(object sender, EventArgs e)
+        {
+            gMapC.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
+        }
 
+        private void btOriginal_Click(object sender, EventArgs e)
+        {
+            gMapC.MapProvider = GMapProviders.GoogleMap;
 
+        }
+
+        private void btRelief_Click(object sender, EventArgs e)
+        {
+            gMapC.MapProvider = GMapProviders.GoogleTerrainMap;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            trackBarZoom.Value = Convert.ToInt32(gMapC.Zoom);
+        }
+
+        private void trackBarZoom_Scroll(object sender, EventArgs e)
+        {
+            gMapC.Zoom = trackBarZoom.Value;
+        }
     }
 
 }

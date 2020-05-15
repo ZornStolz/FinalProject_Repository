@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,12 +44,19 @@
             this.btFilter = new System.Windows.Forms.Button();
             this.txURL = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.trackBarZoom = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btRelief = new System.Windows.Forms.Button();
+            this.btOriginal = new System.Windows.Forms.Button();
+            this.btSatelite = new System.Windows.Forms.Button();
             this.gMapC = new GMap.NET.WindowsForms.GMapControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
             this.SuspendLayout();
             // 
             // dtGrid
@@ -56,13 +64,13 @@
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid.Location = new System.Drawing.Point(3, 6);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(890, 664);
+            this.dtGrid.Size = new System.Drawing.Size(890, 630);
             this.dtGrid.TabIndex = 8;
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(573, 676);
+            this.button1.Location = new System.Drawing.Point(563, 655);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -71,7 +79,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(224, 676);
+            this.button2.Location = new System.Drawing.Point(230, 655);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
@@ -190,6 +198,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.trackBarZoom);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.btRelief);
+            this.tabPage2.Controls.Add(this.btOriginal);
+            this.tabPage2.Controls.Add(this.btSatelite);
             this.tabPage2.Controls.Add(this.gMapC);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -199,15 +212,55 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // trackBarZoom
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1366, 726);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.trackBarZoom.LargeChange = 1;
+            this.trackBarZoom.Location = new System.Drawing.Point(593, 643);
+            this.trackBarZoom.Maximum = 20;
+            this.trackBarZoom.Name = "trackBarZoom";
+            this.trackBarZoom.Size = new System.Drawing.Size(476, 45);
+            this.trackBarZoom.TabIndex = 5;
+            this.trackBarZoom.Value = 6;
+            this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(543, 654);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Zoom";
+            // 
+            // btRelief
+            // 
+            this.btRelief.Location = new System.Drawing.Point(361, 649);
+            this.btRelief.Name = "btRelief";
+            this.btRelief.Size = new System.Drawing.Size(109, 23);
+            this.btRelief.TabIndex = 3;
+            this.btRelief.Text = "Relieve";
+            this.btRelief.UseVisualStyleBackColor = true;
+            this.btRelief.Click += new System.EventHandler(this.btRelief_Click);
+            // 
+            // btOriginal
+            // 
+            this.btOriginal.Location = new System.Drawing.Point(236, 649);
+            this.btOriginal.Name = "btOriginal";
+            this.btOriginal.Size = new System.Drawing.Size(109, 23);
+            this.btOriginal.TabIndex = 2;
+            this.btOriginal.Text = "Original";
+            this.btOriginal.UseVisualStyleBackColor = true;
+            this.btOriginal.Click += new System.EventHandler(this.btOriginal_Click);
+            // 
+            // btSatelite
+            // 
+            this.btSatelite.Location = new System.Drawing.Point(112, 649);
+            this.btSatelite.Name = "btSatelite";
+            this.btSatelite.Size = new System.Drawing.Size(109, 23);
+            this.btSatelite.TabIndex = 1;
+            this.btSatelite.Text = "Satélite";
+            this.btSatelite.UseVisualStyleBackColor = true;
+            this.btSatelite.Click += new System.EventHandler(this.btSatelite_Click);
             // 
             // gMapC
             // 
@@ -231,16 +284,32 @@
             this.gMapC.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapC.ShowTileGridLines = false;
-            this.gMapC.Size = new System.Drawing.Size(1061, 708);
+            this.gMapC.Size = new System.Drawing.Size(1061, 631);
             this.gMapC.TabIndex = 0;
             this.gMapC.Zoom = 0D;
             this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1366, 726);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 10;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // mainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1300, 713);
             this.Controls.Add(this.tabControl1);
             this.Name = "mainFrame";
             this.Text = "MainFrame";
@@ -250,6 +319,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -272,6 +343,12 @@
         private System.Windows.Forms.TabPage tabPage2;
         private GMap.NET.WindowsForms.GMapControl gMapC;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btSatelite;
+        private System.Windows.Forms.TrackBar trackBarZoom;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btRelief;
+        private System.Windows.Forms.Button btOriginal;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
