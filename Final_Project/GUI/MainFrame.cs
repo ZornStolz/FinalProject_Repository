@@ -4,12 +4,12 @@ using GMap.NET.WindowsForms.Markers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace GUI
 {
@@ -36,7 +36,7 @@ namespace GUI
             InitializeComponent();
             columnsValues = new string[15];
             elements = new List<Element>();
-           //todos_los_municipios();
+            //todos_los_municipios();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
@@ -67,6 +67,7 @@ namespace GUI
             columnsValues[12] = "variable";
             columnsValues[13] = "unidades";
             columnsValues[14] = "concentraci_n";
+
         }
 
 
@@ -75,7 +76,7 @@ namespace GUI
             string respuesta = await GetHttp(URL);
             List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
             dtGrid.DataSource = lst;
-            AddMarker(lst);
+            pollutionColor(lst);
         }
 
 
@@ -397,6 +398,20 @@ namespace GUI
 
         }
 
+
+        /// <summary>
+        /// Este metodo permite añadirle colores a los marcadores y poligonos de acuerdo al nivel de contaminación que presentan.
+        /// </summary>
+        /// <param name="lst"></param> Lista con los elementos que se encuentran en la base de datos.
+        private void pollutionColor(List<ViewModel> lst)
+        {
+
+        }
+
+
+
+
+
         /// <summary>
         /// Permite eliminar la consulta que el usuario realizo.
         /// </summary>
@@ -413,6 +428,11 @@ namespace GUI
 
         }
 
+        /// <summary>
+        /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gMapC_Load(object sender, EventArgs e)
         {
             //Elementos de inicio Gmap
@@ -429,38 +449,157 @@ namespace GUI
         }
 
 
-        private void AddMarker(List<ViewModel> lst)
+        /// <summary>
+        /// Permite agregar un marcador en coordenadas especificas en el mapa de google que se muestra en pantalla. Del mismo modo,
+        /// permite agregar un cuadrado en las mismas coordenadas que representa el nivel de contaminación de la zona.
+        /// </summary>
+        /// <param name="lst"></param> Representa la información que esta almacenada en la base de datos.
+        /// <param name="polygonColor"></param> Representa el color que rellena el poligono, de esta forma representar el nivel de contaminación de la zona.
+        /// <param name="markerColor"></param> Representa el color del marcador, el cual representa el nivel de contaminación de la zona.
+        private void AddMarker(List<ViewModel> lst, Color polygonColor, GMarkerGoogleType markerColor)
         {
-            foreach (var i in lst)
+            foreach (var value in lst)
             {
 
                 var markerOverlay = new GMapOverlay("markers");
-                var marker = new GMarkerGoogle(new PointLatLng(i.Latitud, i.Longitud), GMarkerGoogleType.green); ;
+                var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor); ;
                 markerOverlay.Markers.Add(marker);
-
+                
 
                 marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-                marker.ToolTipText = String.Format("Fecha: " + i.Fecha + "\n"
-                   + "Autoridad Ambiental: " + i.Autoridad_ambiental + "\n"
-                   + "Nombre de la estación: " + i.Nombre_de_la_estaci_n + "\n"
-                   + "Tecnologia: " + i.Tecnolog_a + "\n"
-                   + "Latitud: " + i.Latitud + "\n"
-                   + "Longitud: " + i.Longitud + "\n"
-                   + "Codigo del departamento: " + i.C_digo_del_departamento + "\n"
-                   + "Departamento: " + i.Departamento + "\n"
-                   + "Codigo de municipio: " + i.C_digo_del_municipio + "\n"
-                   + "Municipio: " + i.Nombre_del_municipio + "\n"
-                   + "Tipo de estación: " + i.Tipo_de_estaci_n + "\n"
-                   + "Tiempo de exposición: " + i.Tiempo_de_exposici_n + "\n"
-                   + "Variable: " + i.Variable + "\n"
-                   + "Unidades: " + i.Unidades + "\n"
-                   + "Concentración: " + i.Concentraci_n
+                marker.ToolTipText = String.Format("Fecha: " + value.Fecha + "\n"
+                   + "Autoridad Ambiental: " + value.Autoridad_ambiental + "\n"
+                   + "Nombre de la estación: " + value.Nombre_de_la_estaci_n + "\n"
+                   + "Tecnologia: " + value.Tecnolog_a + "\n"
+                   + "Latitud: " + value.Latitud + "\n"
+                   + "Longitud: " + value.Longitud + "\n"
+                   + "Codigo del departamento: " + value.C_digo_del_departamento + "\n"
+                   + "Departamento: " + value.Departamento + "\n"
+                   + "Codigo de municipio: " + value.C_digo_del_municipio + "\n"
+                   + "Municipio: " + value.Nombre_del_municipio + "\n"
+                   + "Tipo de estación: " + value.Tipo_de_estaci_n + "\n"
+                   + "Tiempo de exposición: " + value.Tiempo_de_exposici_n + "\n"
+                   + "Variable: " + value.Variable + "\n"
+                   + "Unidades: " + value.Unidades + "\n"
+                   + "Concentración: " + value.Concentraci_n
                     );
 
+                // Añade una poligono como representación al nivel de contaminación.
+                AddPolygon(value, polygonColor);
+
                 gMapC.Overlays.Add(markerOverlay);
+
+
+
+
             }
 
         }
+
+        /// <summary>
+        /// Este metodo permite crear un poligono alrededor de las coordenadas donde se realizo la prueba y de 
+        /// esta manera generar un cuadrado como representación de el nivel de contaminación en esta zona.
+        /// </summary>
+        /// <param name="value"></param> Representa a un elemnento de la base de datos
+        /// <param name="polygonColor"></param> Representa el color que rellena el poligono, de esta forma representar el nivel de contaminación de la zona.
+        private void AddPolygon(ViewModel value, Color polygonColor)
+        {
+            GMapOverlay polygons = new GMapOverlay("Polygons");
+            List<PointLatLng> points = new List<PointLatLng>();
+            // Crea un cuadrado a partir de coordenas especificas.
+            PointAdd(value.Latitud, value.Longitud, points);
+            GMapPolygon polygon = new GMapPolygon(points, value.Nombre_del_municipio);
+            polygon.Stroke = new Pen(Color.Transparent, 10);
+            polygon.Fill = new SolidBrush(Color.FromArgb(50, polygonColor));
+            polygons.Polygons.Add(polygon);
+            gMapC.Overlays.Add(polygons);
+            points.Clear();
+        }
+
+
+
+
+
+        /// <summary>
+        /// Metodo auxiliar del metodo AddPolygon,este metodo permite crear un cuadrado, a partir de coordenadas alrededor de un punto en especifico.
+        /// </summary>
+        /// <param name="x"></param> Coordenada de latitud del punto medio.
+        /// <param name="y"></param> Coordenada de Longitud del punto medio.
+        /// <param name="points"></param> Lista de coordenadas que posteriormente se llenaran para realizar el poligono.
+        private void PointAdd(double x, double y, List<PointLatLng> points)
+        {
+            double d = 0.009;
+            points.Add(new PointLatLng(x + d, y));
+            points.Add(new PointLatLng(x, y + d));
+            points.Add(new PointLatLng(x - d, y));
+            points.Add(new PointLatLng(x, y - d));
+
+        }
+
+
+
+
+        private void DistanceTwoPoint(double x, double y, List<PointLatLng> points)
+        {
+
+            double d = 0.5;
+            double x1 = x;
+            double y1 = y;
+            double x2 = x;
+            double y2 = y;
+
+            // Verificar parte superior.
+            while (Distance(x1, y1, x2, y2) != d)
+            {
+                y2 += d;
+
+
+            }
+
+            points.Add(new PointLatLng(x2, y2));
+            y2 = y;
+
+            // Verificar parte  derecha.
+            while (Distance(x1, y1, x2, y2) != d)
+            {
+                x2 += d;
+            }
+
+            points.Add(new PointLatLng(x2, y2));
+
+            x2 = x;
+
+
+            // Verificar parte inferior.
+            while (Distance(x1, y1, x2, y2) != d)
+            {
+                y2 -= d;
+            }
+            points.Add(new PointLatLng(x2, y2));
+            y2 = y;
+
+            // Verificar parte  izquierda.
+            while (Distance(x1, y1, x2, y2) != d)
+            {
+                x2 -= d;
+            }
+
+            points.Add(new PointLatLng(x2, y2));
+
+        }
+
+
+        private double Distance(double x1, double y1, double x2, double y2)
+        {
+
+            double first = Math.Pow((x2 - x1), 2);
+            double second = Math.Pow((y2 - y1), 2);
+            double result = first + second;
+            double distance = Math.Sqrt(result);
+
+            return distance;
+        }
+
 
         class Dpto
         {
@@ -479,7 +618,7 @@ namespace GUI
          */
         private List<ViewModel> municipios_list = new List<ViewModel>();
 
-       public async void todos_los_municipios()
+        public async void todos_los_municipios()
         {
             //consulto cuales son todos los dptos
             String url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?$select=departamento&$group=departamento";
@@ -491,8 +630,8 @@ namespace GUI
             foreach (Dpto element in dptos)
             {
                 //Console.WriteLine(element.Departamento);
-                
-                url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?departamento="+element.Departamento+"&$select=Nombre_del_municipio&$group=Nombre_del_municipio";
+
+                url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?departamento=" + element.Departamento + "&$select=Nombre_del_municipio&$group=Nombre_del_municipio";
 
                 respuesta = await GetHttp(url);
                 List<Municipio> muns = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
@@ -500,23 +639,24 @@ namespace GUI
                 //saco la informacion completa de cada municipio y lo agrego a la lista de todos los municipios
                 foreach (Municipio municipio in muns)
                 {
-                    url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?nombre_del_municipio="+municipio.nombre_del_municipio+"&$limit=1";
-                    
+                    url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?nombre_del_municipio=" + municipio.nombre_del_municipio + "&$limit=1";
+
                     respuesta = await GetHttp(url);
                     List<ViewModel> mun_complete = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
                     municipios_list.Add(mun_complete.First());
                 }
             }
-           /*
-            foreach (ViewModel element in municipios_list)
-            {
-                Console.WriteLine(element.Nombre_del_municipio + ", " + element.Departamento);
-            }
-            */
+            /*
+             foreach (ViewModel element in municipios_list)
+             {
+                 Console.WriteLine(element.Nombre_del_municipio + ", " + element.Departamento);
+             }
+             */
         }
 
 
 
-
     }
+
 }
+
