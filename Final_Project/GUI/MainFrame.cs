@@ -26,7 +26,32 @@ namespace GUI
         /*
          * source data to be consulted
          */
-        private static String uRL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?$limit=50&";
+        private static String uRL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?&";
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Nivel de contaminación de emergencia.
+        /// </summary>
+        public const string EMERGENCIA = "Emergencia";
+        /// <summary>
+        ///  Nivel de contaminación de alerta.
+        /// </summary>
+        public const string ALERTA = "Alerta";
+        /// <summary>
+        /// Nivel de contaminación de prevencion.
+        /// </summary>
+        public const string PREVENCION = "Prevencion";
+        /// <summary>
+        /// Nivel de contaminación permisible.
+        /// </summary>
+        public const string PERMISIBLE = "Permisible";
+
+
+
+
 
         public static string URL { get => uRL; set => uRL = value; }
 
@@ -415,20 +440,24 @@ namespace GUI
             {
                 string pollutionLevel = DefineContaminationLevel(value.Variable, value.Concentraci_n);
 
-                if (pollutionLevel.Equals("Alto"))
+                if (pollutionLevel.Equals(EMERGENCIA))
                 {
-                    AddMarker(lst,Color.FromArgb(50, Color.Red),GMarkerGoogleType.red);
+                    AddMarker(value, Color.FromArgb(50, Color.Red), GMarkerGoogleType.red);
                 }
-                else if (pollutionLevel.Equals("Medio"))
+                else if (pollutionLevel.Equals(ALERTA))
                 {
-                    AddMarker(lst,Color.FromArgb(50, Color.Yellow),GMarkerGoogleType.yellow);
+                    AddMarker(value, Color.FromArgb(50, Color.OrangeRed), GMarkerGoogleType.orange);
+                }
+                else if (pollutionLevel.Equals(PREVENCION))
+                {
+                    AddMarker(value, Color.FromArgb(50, Color.Yellow), GMarkerGoogleType.yellow);
                 }
                 else
                 {
-                    AddMarker(lst,Color.FromArgb(50, Color.Red),GMarkerGoogleType.red);
+                    AddMarker(value, Color.FromArgb(50, Color.Green), GMarkerGoogleType.green);
                 }
-            } 
-           
+            }
+
         }
 
         /// <summary>
@@ -444,13 +473,14 @@ namespace GUI
         private string DefineContaminationLevel(String variable, double concentracion)
         {
             string pollutionLevel = "";
-          
+
             ///Casos
             if (variable.Equals("PM10"))
             {
                 pollutionLevel = PM10PollutionLevel(concentracion);
 
-            }else if (variable.Equals("O3"))
+            }
+            else if (variable.Equals("O3"))
             {
                 pollutionLevel = O3PollutionLevel(concentracion);
             }
@@ -465,17 +495,39 @@ namespace GUI
         /// <summary>
         /// Metodo auxiliar del metodo DefineContaminationLevel.
         /// Establece el nivel de contaminación de la variable PM10.
-        /// Este nivel de contaminación se evaluara como:
-        /// Alto,medio y bajo.
+        /// Este nivel de contaminación ( ug/m^3 ) se evaluara en un tiempo de exposición de 24 horas como:
+        /// Permisible: 100
+        /// Prevencion: 155 - 254
+        /// Alerta:  255 - 354 
+        /// Emergencia: >= 355
+        /// Estos niveles de contaminación son establecidos de acuerdo al Ministerio de Ambiente y Desarrollo sostenible.
+        /// https://www.minambiente.gov.co/images/normativa/app/resoluciones/96-res%202254%20de%202017.pdf#page=5&zoom=auto,-99,744
         /// </summary>
         /// <param name="concentracion"></param> Nivel de concentración de la variable PM10
         /// <returns></returns>
         private string PM10PollutionLevel(double concentracion)
         {
-            string pollutionLevel = "Bajo";
-                
-            //Casos.
+            string pollutionLevel = "";
 
+            //Casos.
+            if (concentracion <= 100)
+            {
+                pollutionLevel = PERMISIBLE;
+
+            }
+            else if (concentracion >= 155 && concentracion <= 254)
+            {
+                pollutionLevel = PREVENCION;
+
+            }
+            else if (concentracion >= 255 && concentracion <= 354)
+            {
+                pollutionLevel = ALERTA;
+            }
+            else if (concentracion >= 355)
+            {
+                pollutionLevel = EMERGENCIA;
+            }
 
             return pollutionLevel;
         }
@@ -484,32 +536,55 @@ namespace GUI
         /// <summary>
         /// Metodo auxiliar del metodo DefineContaminationLevel.
         /// Establece el nivel de contaminación de la variable O3.
-        /// Este nivel de contaminación se evaluara como:
-        /// Alto,medio y bajo.
+        /// Este nivel de contaminación ( ug/m^3 ) se evaluara en un tiempo de exposición de 8 horas como:
+        /// Permisible: 100
+        /// Prevencion: 139 - 167
+        /// Alerta:  168 - 207 
+        /// Emergencia: >= 208
+        /// Estos niveles de contaminación son establecidos de acuerdo al Ministerio de Ambiente y Desarrollo sostenible.
+        /// https://www.minambiente.gov.co/images/normativa/app/resoluciones/96-res%202254%20de%202017.pdf#page=5&zoom=auto,-99,744
         /// </summary>
         /// <param name="concentracion"></param> Nivel de concentración de la variable O3
         /// <returns></returns>
         private string O3PollutionLevel(double concentracion)
         {
-            string pollutionLevel = "Bajo";
+            string pollutionLevel = "";
 
-            //Casos.
+            // Casos.
+            if (concentracion <= 100)
+            {
+                pollutionLevel = PERMISIBLE;
 
+            }
+            else if (concentracion >= 139 && concentracion <= 167)
+            {
+                pollutionLevel = PREVENCION;
+
+            }
+            else if (concentracion >= 168 && concentracion <= 207)
+            {
+                pollutionLevel = ALERTA;
+            }
+            else if (concentracion >= 208)
+            {
+                pollutionLevel = EMERGENCIA;
+            }
 
             return pollutionLevel;
+
         }
 
         /// <summary>
         /// Metodo auxiliar del metodo DefineContaminationLevel.
         /// Establece el nivel de contaminación de la variable Radiación Solar Global.
         /// Este nivel de contaminación se evaluara como:
-        /// Alto, medio y bajo.
+        /// Permisible,Prevencion, Alerta, Emergencia.
         /// </summary>
         /// <param name="concentracion"></param> Nivel de concentración de la variable Radiación Solar Global.
         /// <returns></returns>
         private string SolarRadiationPollutionLevel(double concentracion)
         {
-            string pollutionLevel = "Bajo";
+            string pollutionLevel = PERMISIBLE;
 
             //Casos.
 
@@ -560,14 +635,12 @@ namespace GUI
         /// Permite agregar un marcador en coordenadas especificas en el mapa de google que se muestra en pantalla. Del mismo modo,
         /// permite agregar un cuadrado en las mismas coordenadas que representa el nivel de contaminación de la zona.
         /// </summary>
-        /// <param name="lst"></param> Representa la información que esta almacenada en la base de datos.
+        /// <param name="value"></param> Representa un elemento de la base de datos.
         /// <param name="polygonColor"></param> Representa el color que rellena el poligono, de esta forma representar el nivel de contaminación de la zona.
         /// <param name="markerColor"></param> Representa el color del marcador, el cual representa el nivel de contaminación de la zona.
-        private void AddMarker(List<ViewModel> lst, Color polygonColor, GMarkerGoogleType markerColor)
+        private void AddMarker(ViewModel value, Color polygonColor, GMarkerGoogleType markerColor)
         {
-            foreach (var value in lst)
-            {
-
+         
                 var markerOverlay = new GMapOverlay("markers");
                 var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor); ;
                 markerOverlay.Markers.Add(marker);
@@ -593,13 +666,7 @@ namespace GUI
 
                 // Añade una poligono como representación al nivel de contaminación.
                 AddPolygon(value, polygonColor);
-
                 gMapC.Overlays.Add(markerOverlay);
-
-
-
-
-            }
 
         }
 
@@ -635,7 +702,8 @@ namespace GUI
         /// <param name="points"></param> Lista de coordenadas que posteriormente se llenaran para realizar el poligono.
         private void PointAdd(double x, double y, List<PointLatLng> points)
         {
-            double d = 0.009;
+            //Distancia
+            double d = 0.005;
             points.Add(new PointLatLng(x + d, y));
             points.Add(new PointLatLng(x, y + d));
             points.Add(new PointLatLng(x - d, y));
