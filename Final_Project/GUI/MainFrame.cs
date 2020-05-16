@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SODA;
 
 namespace GUI
 {
@@ -57,6 +58,27 @@ namespace GUI
 
         public blume()
         {
+
+            var client = new SodaClient("https://www.datos.gov.co", "8naPxF3oQIYI1NiilJm2JgR3q");
+            var dataset = client.GetResource<Dictionary<string, object>>("ysq6-ri4e");
+
+            //consulta
+
+            //  nombre_del_municipio = BOGOTÁ.% 20D.C.& variable = PM10
+
+            //var soql = new SoqlQuery("nombre_del_municipio=BOGOTÁ.%20D.C.&variable=PM10");
+
+            //var results = dataset.Query<Dictionary<string, object>>(soql);
+
+            var rows = dataset.GetRows(limit:10, offset: 0);
+
+           
+
+            foreach (var keyValue in rows.First())
+            {
+                Console.WriteLine(keyValue);
+            }
+
             URL = uRL;
             count_click = 0;
             InitializeComponent();
@@ -108,6 +130,10 @@ namespace GUI
 
         public async Task<string> GetHttp(String url)
         {
+
+  
+
+
             WebRequest webRequest = WebRequest.Create(url);
             WebResponse webResponse = webRequest.GetResponse();
             StreamReader sr = new StreamReader(webResponse.GetResponseStream());
