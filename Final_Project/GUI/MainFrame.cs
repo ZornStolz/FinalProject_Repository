@@ -898,8 +898,6 @@ namespace GUI
              */
         }
 
-
-
     }
 
 }
