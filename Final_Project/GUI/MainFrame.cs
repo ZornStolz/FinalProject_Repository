@@ -27,7 +27,7 @@ namespace GUI
         /*
          * source data to be consulted
          */
-        private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
+        private string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
@@ -49,7 +49,7 @@ namespace GUI
         /// Nivel de contaminación permisible.
         /// </summary>
         public const string PERMISIBLE = "Permisible";
-        
+
         public blume()
         {
             count_click = 0;
@@ -57,6 +57,7 @@ namespace GUI
             columnsValues = new string[15];
             elements = new List<Element>();
             inicializarMunicipios();
+            inicializarVariables();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
@@ -283,9 +284,9 @@ namespace GUI
         private void createControlsyToFilter(Label lbFilterBy, ComboBox cbFilterBy, Label lbValueToFilter, TextBox txValueToFilter, Button btAdd, Button btClear)
         {
 
-            // 
+            //
             // lbFilterBy
-            // 
+            //
             lbFilterBy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -298,9 +299,9 @@ namespace GUI
             lbFilterBy.Name = "lbFilterBy" + count_click.ToString();
 
 
-            // 
+            //
             // cbFilterBy
-            // 
+            //
             cbFilterBy.FormattingEnabled = true;
             cbFilterBy.Location = new System.Drawing.Point(62, 3);
             cbFilterBy.Size = new System.Drawing.Size(100, 21);
@@ -308,9 +309,9 @@ namespace GUI
             cbFilterBy.Name = "cbFilter" + count_click.ToString();
             //------------------------------------------------------------
             cbFilterBy.Items.AddRange(columnsValues);
-            // 
+            //
             // lbvalueToFilter
-            // 
+            //
             lbValueToFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -324,18 +325,18 @@ namespace GUI
             txValueToFilter.Name = "tbValueToFilter" + count_click.ToString();
 
 
-            // 
+            //
             // valueToFilter
-            // 
+            //
             txValueToFilter.Location = new System.Drawing.Point(245, 3);
             txValueToFilter.Size = new System.Drawing.Size(100, 20);
             txValueToFilter.TabIndex = 1;
             txValueToFilter.Name = "txValueToFilter" + count_click.ToString();
 
 
-            // 
+            //
             // btAdd
-            // 
+            //
             btAdd.Location = new System.Drawing.Point(351, 3);
             btAdd.Size = new System.Drawing.Size(75, 23);
             btAdd.TabIndex = 8;
@@ -345,9 +346,9 @@ namespace GUI
             btAdd.Name = "btAdd" + count_click.ToString();
             btAdd.Click += new EventHandler(HandlerButtonAddAndClear);
 
-            // 
+            //
             // btClear
-            // 
+            //
             btClear.Location = new System.Drawing.Point(432, 3);
             btClear.Size = new System.Drawing.Size(21, 23);
             btClear.TabIndex = 9;
@@ -458,9 +459,9 @@ namespace GUI
         /// Retorna el nivel de contaminación.
         /// Los niveles de contaminación son: Alto, medio y bajo.
         /// Se evaluaran 3 casos:
-        /// 1) PM10:  
-        /// 2) O3:  
-        /// 3) Radiación Solar Global:  
+        /// 1) PM10:
+        /// 2) O3:
+        /// 3) Radiación Solar Global:
         /// </summary>
         /// <param name="variable"></param> Variable con la cual se realizo la prueba de contaminación.
         /// <param name="concentracion"></param> Nivel de concentración que toma la variable.
@@ -492,7 +493,7 @@ namespace GUI
         /// Este nivel de contaminación ( ug/m^3 ) se evaluara en un tiempo de exposición de 24 horas como:
         /// Permisible: 100
         /// Prevencion: 155 - 254
-        /// Alerta:  255 - 354 
+        /// Alerta:  255 - 354
         /// Emergencia: >= 355
         /// Estos niveles de contaminación son establecidos de acuerdo al Ministerio de Ambiente y Desarrollo sostenible.
         /// https://www.minambiente.gov.co/images/normativa/app/resoluciones/96-res%202254%20de%202017.pdf#page=5&zoom=auto,-99,744
@@ -533,7 +534,7 @@ namespace GUI
         /// Este nivel de contaminación ( ug/m^3 ) se evaluara en un tiempo de exposición de 8 horas como:
         /// Permisible: 100
         /// Prevencion: 139 - 167
-        /// Alerta:  168 - 207 
+        /// Alerta:  168 - 207
         /// Emergencia: >= 208
         /// Estos niveles de contaminación son establecidos de acuerdo al Ministerio de Ambiente y Desarrollo sostenible.
         /// https://www.minambiente.gov.co/images/normativa/app/resoluciones/96-res%202254%20de%202017.pdf#page=5&zoom=auto,-99,744
@@ -606,7 +607,7 @@ namespace GUI
         **/
 
         /// <summary>
-        /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota. 
+        /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -666,7 +667,7 @@ namespace GUI
         }
 
         /// <summary>
-        /// Este metodo permite crear un poligono alrededor de las coordenadas donde se realizo la prueba y de 
+        /// Este metodo permite crear un poligono alrededor de las coordenadas donde se realizo la prueba y de
         /// esta manera generar un cuadrado como representación de el nivel de contaminación en esta zona.
         /// </summary>
         /// <param name="value"></param> Representa a un elemnento de la base de datos
@@ -835,37 +836,147 @@ namespace GUI
             papel.FillRectangle(myBrush, 0, 0, pB1.Width, pB1.Height);
         }
 
-        /// <summary>
-        /// Clases
-        /// </summary>
-
-
-        class Dpto
-        {
-            private String departamento;
-            public string Departamento { get => departamento; set => departamento = value; }
-        }
-
-       
         /*
-         * lista de todos los municipios de todos los dptos
+         * lista de todos los municipios a usar
          */
-        private List<Municipio> municipios = new List<Municipio>();
+        private List<Municipio> municipios_Set = new List<Municipio>();
 
         public async void inicializarMunicipios()
         {
-            string Base = "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
-          
+            string Base = URL +  "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
+
             string consulta = "'BOGOTÁ. D.C.')";
-            string url = URL + Base + consulta;
+            string url = Base + consulta;
             string respuesta = await GetHttp(url);
             List<Municipio> municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipios.Add(municipio.First());
-           
+            municipios_Set.Add(municipio.First());
 
+            consulta = "'MEDELLÍN')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'CALI')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'BUCARAMANGA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'ITAGÜÍ')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'CALDAS')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'BARBOSA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'BELLO')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'FLORIDABLANCA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'SOGAMOSO')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'NOBSA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'ENVIGADO')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'GIRARDOTA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'SANTA MARTA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'SOLEDAD')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'BARRANQUILLA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'CIÉNAGA')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
+
+            consulta = "'VILLAVICENCIO')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios_Set.Add(municipio.First());
         }
+        
+        private List<Variable> variales_Set = new List<Variable>();
 
+        public async void inicializarVariables()
+        {
+            string Base = URL + "$limit=1&$select=variable,unidades&$where=(variable=";
+
+            string consulta = "'PM10')";
+            string url = Base + consulta;
+            string respuesta = await GetHttp(url);
+            List<Variable> variable = JsonConvert.DeserializeObject<List<Variable>>(respuesta);
+            variales_Set.Add(variable.First());
+            
+            consulta = "'O3')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            variable = JsonConvert.DeserializeObject<List<Variable>>(respuesta);
+            variales_Set.Add(variable.First());
+            
+            consulta = "'Radiación Solar Global')";
+            url = Base + consulta;
+            respuesta = await GetHttp(url);
+            variable = JsonConvert.DeserializeObject<List<Variable>>(respuesta);
+            variales_Set.Add(variable.First());
+        }
     }
-
 }
-
