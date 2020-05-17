@@ -202,7 +202,7 @@ namespace GUI
             this.btFilter.TabIndex = 18;
             this.btFilter.Text = "Filtrar";
             this.btFilter.UseVisualStyleBackColor = true;
-            this.btFilter.Click += new System.EventHandler(this.btFilter_Click);
+            //this.btFilter.Click += new System.EventHandler(this.btFilter_Click);
             // 
             // txURL
             // 

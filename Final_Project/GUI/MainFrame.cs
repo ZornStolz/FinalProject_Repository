@@ -27,7 +27,7 @@ namespace GUI
         /*
          * source data to be consulted
          */
-        private static String uRL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?$limit=50&";
+        private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
@@ -49,43 +49,14 @@ namespace GUI
         /// Nivel de contaminación permisible.
         /// </summary>
         public const string PERMISIBLE = "Permisible";
-
-
-
-
-
-        public static string URL { get => uRL; set => uRL = value; }
-
+        
         public blume()
         {
-
-            var client = new SodaClient("https://www.datos.gov.co", "8naPxF3oQIYI1NiilJm2JgR3q");
-            var dataset = client.GetResource<Dictionary<string, object>>("ysq6-ri4e");
-
-            //consulta
-
-            //  nombre_del_municipio = BOGOTÁ.% 20D.C.& variable = PM10
-
-            //var soql = new SoqlQuery("nombre_del_municipio=BOGOTÁ.%20D.C.&variable=PM10");
-
-            //var results = dataset.Query<Dictionary<string, object>>(soql);
-
-            var rows = dataset.GetRows(limit:10, offset: 0);
-
-           
-
-            foreach (var keyValue in rows.First())
-            {
-                Console.WriteLine(keyValue);
-            }
-
-            URL = uRL;
             count_click = 0;
             InitializeComponent();
             columnsValues = new string[15];
             elements = new List<Element>();
-
-            //todos_los_municipios();
+            inicializarMunicipios();
         }
 
         private void MainFrame_Load(object sender, EventArgs e)
@@ -130,10 +101,6 @@ namespace GUI
 
         public async Task<string> GetHttp(String url)
         {
-
-  
-
-
             WebRequest webRequest = WebRequest.Create(url);
             WebResponse webResponse = webRequest.GetResponse();
             StreamReader sr = new StreamReader(webResponse.GetResponseStream());
@@ -149,6 +116,7 @@ namespace GUI
 
         }
 
+        /**
         private void btFilter_Click(object sender, EventArgs e)
         {
             if (elements != null)
@@ -264,7 +232,7 @@ namespace GUI
             }
         }
 
-
+            */
 
 
         /// <summary>
@@ -413,7 +381,7 @@ namespace GUI
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
-                                ClearValuesToURL(elements[j].ComboBox.Text, elements[j].TextBox.Text);
+                                //ClearValuesToURL(elements[j].ComboBox.Text, elements[j].TextBox.Text);
                                 fLP.Controls.Remove(elements[j].Label1);
                                 fLP.Controls.Remove(elements[j].ComboBox);
                                 fLP.Controls.Remove(elements[j].Label2);
@@ -619,7 +587,7 @@ namespace GUI
         }
 
 
-
+/**
         /// <summary>
         /// Permite eliminar la consulta que el usuario realizo.
         /// </summary>
@@ -635,6 +603,7 @@ namespace GUI
             ViewGrid();
 
         }
+        **/
 
         /// <summary>
         /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota. 
@@ -877,51 +846,23 @@ namespace GUI
             public string Departamento { get => departamento; set => departamento = value; }
         }
 
-        class Municipio
-        {
-            private String municipio;
-            public string nombre_del_municipio { get => municipio; set => municipio = value; }
-        }
-
+       
         /*
          * lista de todos los municipios de todos los dptos
          */
-        private List<ViewModel> municipios_list = new List<ViewModel>();
+        private List<Municipio> municipios = new List<Municipio>();
 
-        public async void todos_los_municipios()
+        public async void inicializarMunicipios()
         {
-            //consulto cuales son todos los dptos
-            String url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?$select=departamento&$group=departamento";
-
+            string Base = "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
+          
+            string consulta = "'BOGOTÁ. D.C.')";
+            string url = URL + Base + consulta;
             string respuesta = await GetHttp(url);
-            List<Dpto> dptos = JsonConvert.DeserializeObject<List<Dpto>>(respuesta);
+            List<Municipio> municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
+            municipios.Add(municipio.First());
+           
 
-            //para cada dpto encontrado voy a buscar sus municipios
-            foreach (Dpto element in dptos)
-            {
-                //Console.WriteLine(element.Departamento);
-
-                url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?departamento=" + element.Departamento + "&$select=Nombre_del_municipio&$group=Nombre_del_municipio";
-
-                respuesta = await GetHttp(url);
-                List<Municipio> muns = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-
-                //saco la informacion completa de cada municipio y lo agrego a la lista de todos los municipios
-                foreach (Municipio municipio in muns)
-                {
-                    url = "https://www.datos.gov.co/resource/ysq6-ri4e.json?nombre_del_municipio=" + municipio.nombre_del_municipio + "&$limit=1";
-
-                    respuesta = await GetHttp(url);
-                    List<ViewModel> mun_complete = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
-                    municipios_list.Add(mun_complete.First());
-                }
-            }
-            /*
-             foreach (ViewModel element in municipios_list)
-             {
-                 Console.WriteLine(element.Nombre_del_municipio + ", " + element.Departamento);
-             }
-             */
         }
 
     }
