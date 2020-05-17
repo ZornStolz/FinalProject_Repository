@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GUI
 {
@@ -7,8 +8,9 @@ namespace GUI
         //att
         private double latitud;
         private double longitud;
-        private String departamento;
-        private String nombre_del_municipio;
+        private string departamento;
+        private string nombre_del_municipio;
+        private List<Variable_Registrada> variables;
 
         public double Latitud
         {
@@ -32,6 +34,12 @@ namespace GUI
         {
             get => nombre_del_municipio;
             set => nombre_del_municipio = value;
+        }
+
+        public List<Variable_Registrada> Variables
+        {
+            get => variables;
+            set => variables = value;
         }
     }
 }
