@@ -2,12 +2,12 @@
 
 namespace GUI
 {
-    public class Variable
+    public class Variables
     {
-        private String Nombre;
+        private String variable;
         private String unidades; 
         
-        public string nombre { get => Nombre; set => Nombre = value; }
+        public string Variable { get => variable; set => variable = value; }
         public string Unidades { get => unidades; set => unidades = value; }
     }
 }

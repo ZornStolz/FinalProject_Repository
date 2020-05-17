@@ -954,7 +954,7 @@ namespace GUI
             municipios_Set.Add(municipio.First());
         }
         
-        private List<Variable> variales_Set = new List<Variable>();
+        private List<Variables> variales_Set = new List<Variables>();
 
         public async void inicializarVariables()
         {
@@ -963,19 +963,19 @@ namespace GUI
             string consulta = "'PM10')";
             string url = Base + consulta;
             string respuesta = await GetHttp(url);
-            List<Variable> variable = JsonConvert.DeserializeObject<List<Variable>>(respuesta);
+            List<Variables> variable = JsonConvert.DeserializeObject<List<Variables>>(respuesta);
             variales_Set.Add(variable.First());
             
             consulta = "'O3')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
-            variable = JsonConvert.DeserializeObject<List<Variable>>(respuesta);
+            variable = JsonConvert.DeserializeObject<List<Variables>>(respuesta);
             variales_Set.Add(variable.First());
             
             consulta = "'Radiación Solar Global')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
-            variable = JsonConvert.DeserializeObject<List<Variable>>(respuesta);
+            variable = JsonConvert.DeserializeObject<List<Variables>>(respuesta);
             variales_Set.Add(variable.First());
         }
     }

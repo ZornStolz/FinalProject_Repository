@@ -28,7 +28,7 @@ namespace GUI
             set => departamento = value;
         }
 
-        public string NombreDelMunicipio
+        public string Nombre_del_municipio
         {
             get => nombre_del_municipio;
             set => nombre_del_municipio = value;
