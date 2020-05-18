@@ -44,11 +44,6 @@ namespace GUI
         * variable para saber a que municipio pertenencen todos los datos de la variable consulta
         */
         private string municipioActual;
-                
-        /*
-         * set de variales por default, se usa para tener connsultas con menor  cantidad de datos
-         */
-        private List<Variable_Registrada> variables_Set;
         
         /*
         * lista de todos los municipios a usar
@@ -84,16 +79,13 @@ namespace GUI
         public blume()
         {
             YearActual = 2011;
-            VariablesSet = new List<Variable_Registrada>();
             MunicipiosSet = new List<Municipio>();
             Consulta = new List<Concentracion_Registro>();
             
-            inicializarVariables();
             inicializarMunicipios();
             
-            consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
-            
-           // inicializarDatosMunicipios();
+           // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
+            inicializarDatosMunicipios();
             
             count_click = 0;
             InitializeComponent();
@@ -117,12 +109,6 @@ namespace GUI
         {
             get => municipios_Set;
             set => municipios_Set = value;
-        }
-
-        public List<Variable_Registrada> VariablesSet
-        {
-            get => variables_Set;
-            set => variables_Set = value;
         }
 
         public List<Concentracion_Registro> Consulta
@@ -907,27 +893,22 @@ namespace GUI
             papel.FillRectangle(myBrush, 0, 0, pB1.Width, pB1.Height);
         }
 
-        public async void inicializarVariables()
+        public void inicializarVariables(List<Variable_Registrada> variables)
         {
-            string Base = URL + "$limit=1&$select=variable,unidades&$where=(variable=";
-
-            string consulta = "'PM10')";
-            string url = Base + consulta;
-            string respuesta = await GetHttp(url);
-            List<Variable_Registrada> variable = JsonConvert.DeserializeObject<List<Variable_Registrada>>(respuesta);
-            variables_Set.Add(variable.First());
-            
-            consulta = "'O3')";
-            url = Base + consulta;
-            respuesta = await GetHttp(url);
-            variable = JsonConvert.DeserializeObject<List<Variable_Registrada>>(respuesta);
-            variables_Set.Add(variable.First());
-            
-            consulta = "'Radiación Solar Global')";
-            url = Base + consulta;
-            respuesta = await GetHttp(url);
-            variable = JsonConvert.DeserializeObject<List<Variable_Registrada>>(respuesta);
-            variables_Set.Add(variable.First());
+           Variable_Registrada varUno = new Variable_Registrada();
+           varUno.Variable = "PM10";
+           varUno.Unidades = "µg/m3";
+           variables.Add(varUno);
+           
+           Variable_Registrada varDos = new Variable_Registrada();
+           varDos.Variable = "O3";
+           varDos.Unidades = "µg/m3";
+           variables.Add(varDos);
+           
+           Variable_Registrada varTres = new Variable_Registrada();
+           varTres.Variable = "Radiación Solar Global";
+           varTres.Unidades = "W/m2";
+           variables.Add(varTres);
         }
 
         public async void inicializarMunicipios()
@@ -938,126 +919,144 @@ namespace GUI
             string url = Base + consulta;
             string respuesta = await GetHttp(url);
             List<Municipio> municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'MEDELLÍN')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'CALI')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'BUCARAMANGA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'ITAGÜÍ')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'CALDAS')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'BARBOSA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'BELLO')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'FLORIDABLANCA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'SOGAMOSO')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'NOBSA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'ENVIGADO')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'GIRARDOTA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'SANTA MARTA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'SOLEDAD')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'BARRANQUILLA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'CIÉNAGA')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
 
             consulta = "'VILLAVICENCIO')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             municipio = JsonConvert.DeserializeObject<List<Municipio>>(respuesta);
-            municipio.First().Variables = variables_Set;
+            municipio.First().Variables = new List<Variable_Registrada>();
+            inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
         }
         
@@ -1067,17 +1066,37 @@ namespace GUI
          *
          * De no tener datos la consulta quedera con tamanio 0.
          */
-        public async void consultarDatos(string municipio, string variable, int year)
+        public void consultarDatos(string municipio, string variable, int year)
         {
-            string Base = URL + "$limit=1000&$select=Concentraci_n&$where=";
+            var client = new SodaClient("https://www.datos.gov.co", "8naPxF3oQIYI1NiilJm2JgR3q");
+            var dataset = client.GetResource<Dictionary<string,string>>("ysq6-ri4e");
+           
+            //string Base = "$limit=3&$select=Concentraci_n&$where=";
             string datoUno = "(nombre_del_municipio='" + municipio + "')AND";
-            string datoDos = "(variable='" + variable + "')AND";
-            string datoTres = "(fecha like '%25" + year.ToString() + "%25')";
-            
-            string url = Base + datoUno + datoDos + datoTres;
-            string respuesta = await GetHttp(url);
-            Consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
-            Console.WriteLine();
+            string datoDos = "(variable='" + variable + "')";
+            // string datoDos = "(variable='" + variable + "')AND";
+            // string datoTres = "(fecha like '%25" + year.ToString() + "%25')";
+           
+            //string url = Base + datoUno + datoDos + datoTres;
+
+            // var soql = new SoqlQuery().Limit(5).Select("Concentraci_n")
+            //    .Where(datoUno + datoDos + datoTres);
+
+            var soql = new SoqlQuery().Select("Concentraci_n")
+                .Where(datoUno + datoDos).Limit(3);
+           
+            var results = dataset.Query<Dictionary<string,string>>(soql);
+           
+            foreach (var VARIABLE in results)
+            {
+                Concentracion_Registro con = new Concentracion_Registro();
+                con.Concentraci_n = double.Parse(VARIABLE.First().Value);
+                consulta.Add(con);
+            }
+           
+            //string respuesta = await GetHttp(url);
+            // Consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
+            //  Console.WriteLine();
         }
 
         /*
@@ -1104,8 +1123,8 @@ namespace GUI
                         count += 1;
                         total += dato.Concentraci_n;
                     }
-
                     variable.Concentracion = total / count;
+                    consulta.Clear();
                 }
                 else
                 {
@@ -1132,7 +1151,7 @@ namespace GUI
         private void refreshStatisticsTab()
         {
             Statistics_Title_Label.Text = "Estadísticas Generales para " + municipioActual + " en " + yearActual;
-            GeneralStatisticCalculator gsc = new GeneralStatisticCalculator(variables_Set);
+            GeneralStatisticCalculator gsc = new GeneralStatisticCalculator(null);
             averageLabel.Text = "1- " + gsc.Average();
             maxLabel.Text = "2- " + gsc.Max();
             minLabel.Text = "3- " + gsc.Min();
