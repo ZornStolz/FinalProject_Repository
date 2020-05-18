@@ -56,20 +56,20 @@ namespace GUI
             this.gMapC = new GMap.NET.WindowsForms.GMapControl();
             this.tabPageStadistc = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.phLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.desvLabel = new System.Windows.Forms.Label();
             this.minLabel = new System.Windows.Forms.Label();
             this.maxLabel = new System.Windows.Forms.Label();
             this.averageLabel = new System.Windows.Forms.Label();
             this.Statistics_Title_Label = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.desvLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.phLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
             this.tabPageFilters.SuspendLayout();
             this.tabPageGmap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pB1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).BeginInit();
             this.tabPageStadistc.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -176,9 +176,7 @@ namespace GUI
             // 
             // fLP
             // 
-            this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.fLP.AutoScroll = true;
             this.fLP.Location = new System.Drawing.Point(806, 130);
             this.fLP.Margin = new System.Windows.Forms.Padding(4);
@@ -306,7 +304,7 @@ namespace GUI
             this.gMapC.RetryLoadTile = 0;
             this.gMapC.RoutesEnabled = true;
             this.gMapC.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int) (((byte) (33)))), ((int) (((byte) (65)))), ((int) (((byte) (105)))), ((int) (((byte) (225)))));
             this.gMapC.ShowTileGridLines = false;
             this.gMapC.Size = new System.Drawing.Size(1061, 631);
             this.gMapC.TabIndex = 0;
@@ -340,6 +338,32 @@ namespace GUI
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Valores";
             // 
+            // phLabel
+            // 
+            this.phLabel.AutoSize = true;
+            this.phLabel.Location = new System.Drawing.Point(9, 154);
+            this.phLabel.Name = "phLabel";
+            this.phLabel.Size = new System.Drawing.Size(0, 13);
+            this.phLabel.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 137);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Prueba de Hipótesis";
+            // 
+            // desvLabel
+            // 
+            this.desvLabel.AutoSize = true;
+            this.desvLabel.Location = new System.Drawing.Point(6, 111);
+            this.desvLabel.Name = "desvLabel";
+            this.desvLabel.Size = new System.Drawing.Size(19, 13);
+            this.desvLabel.TabIndex = 4;
+            this.desvLabel.Text = "4- ";
+            // 
             // minLabel
             // 
             this.minLabel.AutoSize = true;
@@ -370,7 +394,7 @@ namespace GUI
             // Statistics_Title_Label
             // 
             this.Statistics_Title_Label.AutoSize = true;
-            this.Statistics_Title_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Statistics_Title_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.Statistics_Title_Label.Location = new System.Drawing.Point(6, 16);
             this.Statistics_Title_Label.Name = "Statistics_Title_Label";
             this.Statistics_Title_Label.Size = new System.Drawing.Size(218, 17);
@@ -383,32 +407,6 @@ namespace GUI
             this.timer.Interval = 10;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // desvLabel
-            // 
-            this.desvLabel.AutoSize = true;
-            this.desvLabel.Location = new System.Drawing.Point(6, 111);
-            this.desvLabel.Name = "desvLabel";
-            this.desvLabel.Size = new System.Drawing.Size(19, 13);
-            this.desvLabel.TabIndex = 4;
-            this.desvLabel.Text = "4- ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Prueba de Hipótesis";
-            // 
-            // phLabel
-            // 
-            this.phLabel.AutoSize = true;
-            this.phLabel.Location = new System.Drawing.Point(9, 154);
-            this.phLabel.Name = "phLabel";
-            this.phLabel.Size = new System.Drawing.Size(0, 13);
-            this.phLabel.TabIndex = 6;
-            // 
             // blume
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,54 +416,54 @@ namespace GUI
             this.Name = "blume";
             this.Text = "BLUME";
             this.Load += new System.EventHandler(this.MainFrame_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).EndInit();
             this.tab.ResumeLayout(false);
             this.tabPageFilters.ResumeLayout(false);
             this.tabPageFilters.PerformLayout();
             this.tabPageGmap.ResumeLayout(false);
             this.tabPageGmap.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pB1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pB1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).EndInit();
             this.tabPageStadistc.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
-        #endregion
-        private System.Windows.Forms.DataGridView dtGrid;
+        private System.Windows.Forms.Label averageLabel;
+        private System.Windows.Forms.Button btCreateNewFilter;
+        private System.Windows.Forms.Button btFilter;
+        private System.Windows.Forms.Button btOriginal;
+        private System.Windows.Forms.Button btRelief;
+        private System.Windows.Forms.Button btSatelite;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label desvLabel;
+        private System.Windows.Forms.DataGridView dtGrid;
+        private System.Windows.Forms.FlowLayoutPanel fLP;
+        private GMap.NET.WindowsForms.GMapControl gMapC;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label maxLabel;
+        private System.Windows.Forms.Label minLabel;
+        private System.Windows.Forms.PictureBox pB1;
+        private System.Windows.Forms.Label phLabel;
+        private System.Windows.Forms.Label prueba;
+        private System.Windows.Forms.Label Statistics_Title_Label;
         private System.Windows.Forms.TabControl tab;
         private System.Windows.Forms.TabPage tabPageFilters;
-        private System.Windows.Forms.Label prueba;
-        private System.Windows.Forms.Button btCreateNewFilter;
-        private System.Windows.Forms.FlowLayoutPanel fLP;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btFilter;
-        private System.Windows.Forms.TextBox txURL;
         private System.Windows.Forms.TabPage tabPageGmap;
-        private GMap.NET.WindowsForms.GMapControl gMapC;
         private System.Windows.Forms.TabPage tabPageStadistc;
-        private System.Windows.Forms.Button btSatelite;
-        private System.Windows.Forms.TrackBar trackBarZoom;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btRelief;
-        private System.Windows.Forms.Button btOriginal;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.PictureBox pB1;
-        private System.Windows.Forms.Label Statistics_Title_Label;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label averageLabel;
-        private System.Windows.Forms.Label minLabel;
-        private System.Windows.Forms.Label maxLabel;
-        private System.Windows.Forms.Label desvLabel;
-        private System.Windows.Forms.Label phLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trackBarZoom;
+        private System.Windows.Forms.TextBox txURL;
+
+        #endregion
     }
 }
 

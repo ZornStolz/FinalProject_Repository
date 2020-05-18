@@ -9,11 +9,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using System.Windows.Media;
 using SODA;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
@@ -26,6 +23,7 @@ namespace GUI
         /// Count the click number of the button
         /// </summary>
         private int count_click;
+
         private List<Element> elements;
         private string[] columnsValues;
         private ComboBox cbFilterBy;
@@ -34,27 +32,27 @@ namespace GUI
          * source data to be consulted
          */
         private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
-        
+
         /*
          * variable para saber en que year estamos
          */
         private int yearActual;
-        
+
         /*
         * variable para saber a que municipio pertenencen todos los datos de la variable consulta
         */
         private string municipioActual;
-        
+
         /*
         * lista de todos los municipios a usar
         */
         private List<Municipio> municipios_Set;
-        
+
         /*
          * esta tendra 1000 registros. todos son concentraciones, registros, de una sola  variable para no saturar la ram.
          */
         private List<Concentracion_Registro> consulta;
-        
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,14 +61,17 @@ namespace GUI
         /// Nivel de contaminación de emergencia.
         /// </summary>
         public const string EMERGENCIA = "Emergencia";
+
         /// <summary>
         ///  Nivel de contaminación de alerta.
         /// </summary>
         public const string ALERTA = "Alerta";
+
         /// <summary>
         /// Nivel de contaminación de prevencion.
         /// </summary>
         public const string PREVENCION = "Prevencion";
+
         /// <summary>
         /// Nivel de contaminación permisible.
         /// </summary>
@@ -81,12 +82,12 @@ namespace GUI
             YearActual = 2011;
             MunicipiosSet = new List<Municipio>();
             Consulta = new List<Concentracion_Registro>();
-            
+
             inicializarMunicipios();
-            
-           // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
+
+            // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
             inicializarDatosMunicipios();
-            
+
             count_click = 0;
             InitializeComponent();
             columnsValues = new string[15];
@@ -95,13 +96,13 @@ namespace GUI
 
         public int YearActual
         {
-            get => yearActual; 
+            get => yearActual;
             set => yearActual = value;
         }
 
         public string MunicipioActual
         {
-            get => municipioActual; 
+            get => municipioActual;
             set => municipioActual = value;
         }
 
@@ -128,7 +129,6 @@ namespace GUI
         /// </summary>
         private void AddNameColumnToList()
         {
-
             columnsValues[0] = "fecha";
             columnsValues[1] = "autoridad_ambiental";
             columnsValues[2] = "nombre_de_la_estaci_n";
@@ -144,7 +144,6 @@ namespace GUI
             columnsValues[12] = "variable";
             columnsValues[13] = "unidades";
             columnsValues[14] = "concentraci_n";
-
         }
 
 
@@ -157,8 +156,7 @@ namespace GUI
             //dtGrid.DataSource = variales_Set;
             PollutionColor(lst);
         }
-
-
+        
         public async Task<string> GetHttp(string url)
         {
             WebRequest webRequest = WebRequest.Create(url);
@@ -169,11 +167,8 @@ namespace GUI
         }
 
 
-
-
         private void dtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         /**
@@ -293,8 +288,6 @@ namespace GUI
         }
 
             */
-
-
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -302,8 +295,6 @@ namespace GUI
         /// <param name="e"></param>
         private void btCreateNewFilter_Click(object sender, EventArgs e)
         {
-
-
             Label lbFilterBy = new Label();
             cbFilterBy = new ComboBox();
 
@@ -319,7 +310,6 @@ namespace GUI
             createControlsyToFilter(lbFilterBy, cbFilterBy, lbValueToFilter, txValueToFilter, btAdd, btClear);
             elements.Add(new Element(lbFilterBy, cbFilterBy, lbValueToFilter, txValueToFilter, btAdd, btClear));
 
-
             this.fLP.Controls.Add(elements[count_click].Label1);
             this.fLP.Controls.Add(elements[count_click].ComboBox);
             this.fLP.Controls.Add(elements[count_click].Label2);
@@ -331,24 +321,21 @@ namespace GUI
 
             refreshStatisticsTab();
         }
-
-
-
-
-
-
+        
         /// <summary>
         /// This method allows you to create the controllers responsible for filtering.
         /// </summary>
-        private void createControlsyToFilter(Label lbFilterBy, ComboBox cbFilterBy, Label lbValueToFilter, TextBox txValueToFilter, Button btAdd, Button btClear)
+        private void createControlsyToFilter(Label lbFilterBy, ComboBox cbFilterBy, Label lbValueToFilter,
+            TextBox txValueToFilter, Button btAdd, Button btClear)
         {
-
             //
             // lbFilterBy
             //
-            lbFilterBy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            lbFilterBy.Anchor =
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                                                         System.Windows.Forms.AnchorStyles.Bottom)
+                                                        | System.Windows.Forms.AnchorStyles.Left)
+                                                       | System.Windows.Forms.AnchorStyles.Right)));
             lbFilterBy.AutoSize = true;
             lbFilterBy.Location = new System.Drawing.Point(3, 0);
             lbFilterBy.Size = new System.Drawing.Size(53, 29);
@@ -371,9 +358,11 @@ namespace GUI
             //
             // lbvalueToFilter
             //
-            lbValueToFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
+            lbValueToFilter.Anchor =
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                                                         System.Windows.Forms.AnchorStyles.Bottom)
+                                                        | System.Windows.Forms.AnchorStyles.Left)
+                                                       | System.Windows.Forms.AnchorStyles.Right)));
             lbValueToFilter.AutoSize = true;
             lbValueToFilter.Location = new System.Drawing.Point(168, 0);
             lbValueToFilter.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -382,8 +371,7 @@ namespace GUI
             lbValueToFilter.Text = "Valor a filtrar :";
             lbValueToFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             txValueToFilter.Name = "tbValueToFilter" + count_click.ToString();
-
-
+            
             //
             // valueToFilter
             //
@@ -391,7 +379,6 @@ namespace GUI
             txValueToFilter.Size = new System.Drawing.Size(100, 20);
             txValueToFilter.TabIndex = 1;
             txValueToFilter.Name = "txValueToFilter" + count_click.ToString();
-
 
             //
             // btAdd
@@ -415,18 +402,8 @@ namespace GUI
             btClear.UseVisualStyleBackColor = true;
             btClear.Name = "btClear" + count_click.ToString();
             btClear.Click += new EventHandler(HandlerButtonAddAndClear);
-
-
-
-
-
-
         }
-
-
-
-
-
+        
         public void HandlerButtonAddAndClear(object sender, EventArgs e)
         {
             int i = 0;
@@ -437,7 +414,7 @@ namespace GUI
                 {
                     for (int j = 0; j < elements.Count(); j++)
                     {
-                        if (((Button)sender).Name == "btClear" + i.ToString())
+                        if (((Button) sender).Name == "btClear" + i.ToString())
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
@@ -454,8 +431,7 @@ namespace GUI
                             }
                         }
 
-
-                        if (((Button)sender).Name == "btAdd" + i.ToString())
+                        if (((Button) sender).Name == "btAdd" + i.ToString())
                         {
                             elements[j].ComboBox.Enabled = false;
                             found = true;
@@ -463,24 +439,14 @@ namespace GUI
 
                         fLP.Update();
                     }
-
-
-
-
-
-
                     i++;
                 }
             }
-
-
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////METODOS GMAPS/////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
         /// <summary>
         /// Este metodo permite añadirle colores a los marcadores y poligonos de acuerdo al nivel de contaminación que presentan.
@@ -509,7 +475,6 @@ namespace GUI
                     AddMarker(value, Color.FromArgb(50, Color.Green), GMarkerGoogleType.green);
                 }
             }
-
         }
 
         /// <summary>
@@ -530,7 +495,6 @@ namespace GUI
             if (variable.Equals("PM10"))
             {
                 pollutionLevel = PM10PollutionLevel(concentracion);
-
             }
             else if (variable.Equals("O3"))
             {
@@ -565,12 +529,10 @@ namespace GUI
             if (concentracion <= 100)
             {
                 pollutionLevel = PERMISIBLE;
-
             }
             else if (concentracion >= 155 && concentracion <= 254)
             {
                 pollutionLevel = PREVENCION;
-
             }
             else if (concentracion >= 255 && concentracion <= 354)
             {
@@ -583,7 +545,6 @@ namespace GUI
 
             return pollutionLevel;
         }
-
 
         /// <summary>
         /// Metodo auxiliar del metodo DefineContaminationLevel.
@@ -606,12 +567,10 @@ namespace GUI
             if (concentracion <= 100)
             {
                 pollutionLevel = PERMISIBLE;
-
             }
             else if (concentracion >= 139 && concentracion <= 167)
             {
                 pollutionLevel = PREVENCION;
-
             }
             else if (concentracion >= 168 && concentracion <= 207)
             {
@@ -623,7 +582,6 @@ namespace GUI
             }
 
             return pollutionLevel;
-
         }
 
         /// <summary>
@@ -640,12 +598,10 @@ namespace GUI
 
             //Casos.
 
-
             return pollutionLevel;
         }
-
-
-/**
+        
+        /**
         /// <summary>
         /// Permite eliminar la consulta que el usuario realizo.
         /// </summary>
@@ -662,7 +618,6 @@ namespace GUI
 
         }
         **/
-
         /// <summary>
         /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota.
         /// </summary>
@@ -693,34 +648,32 @@ namespace GUI
         /// <param name="markerColor"></param> Representa el color del marcador, el cual representa el nivel de contaminación de la zona.
         private void AddMarker(ViewModel value, Color polygonColor, GMarkerGoogleType markerColor)
         {
-
             var markerOverlay = new GMapOverlay("markers");
-            var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor); ;
+            var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor);
+            
             markerOverlay.Markers.Add(marker);
-
 
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
             marker.ToolTipText = String.Format("Fecha: " + value.Fecha + "\n"
-               + "Autoridad Ambiental: " + value.Autoridad_ambiental + "\n"
-               + "Nombre de la estación: " + value.Nombre_de_la_estaci_n + "\n"
-               + "Tecnologia: " + value.Tecnolog_a + "\n"
-               + "Latitud: " + value.Latitud + "\n"
-               + "Longitud: " + value.Longitud + "\n"
-               + "Codigo del departamento: " + value.C_digo_del_departamento + "\n"
-               + "Departamento: " + value.Departamento + "\n"
-               + "Codigo de municipio: " + value.C_digo_del_municipio + "\n"
-               + "Municipio: " + value.Nombre_del_municipio + "\n"
-               + "Tipo de estación: " + value.Tipo_de_estaci_n + "\n"
-               + "Tiempo de exposición: " + value.Tiempo_de_exposici_n + "\n"
-               + "Variable: " + value.Variable + "\n"
-               + "Unidades: " + value.Unidades + "\n"
-               + "Concentración: " + value.Concentraci_n
-                );
+                                               + "Autoridad Ambiental: " + value.Autoridad_ambiental + "\n"
+                                               + "Nombre de la estación: " + value.Nombre_de_la_estaci_n + "\n"
+                                               + "Tecnologia: " + value.Tecnolog_a + "\n"
+                                               + "Latitud: " + value.Latitud + "\n"
+                                               + "Longitud: " + value.Longitud + "\n"
+                                               + "Codigo del departamento: " + value.C_digo_del_departamento + "\n"
+                                               + "Departamento: " + value.Departamento + "\n"
+                                               + "Codigo de municipio: " + value.C_digo_del_municipio + "\n"
+                                               + "Municipio: " + value.Nombre_del_municipio + "\n"
+                                               + "Tipo de estación: " + value.Tipo_de_estaci_n + "\n"
+                                               + "Tiempo de exposición: " + value.Tiempo_de_exposici_n + "\n"
+                                               + "Variable: " + value.Variable + "\n"
+                                               + "Unidades: " + value.Unidades + "\n"
+                                               + "Concentración: " + value.Concentraci_n
+            );
 
-            // Añade una poligono como representación al nivel de contaminación.
+            // Añade un poligono como representación al nivel de contaminación.
             AddPolygon(value, polygonColor);
             gMapC.Overlays.Add(markerOverlay);
-
         }
 
         /// <summary>
@@ -742,11 +695,7 @@ namespace GUI
             gMapC.Overlays.Add(polygons);
             points.Clear();
         }
-
-
-
-
-
+        
         /// <summary>
         /// Metodo auxiliar del metodo AddPolygon,este metodo permite crear un cuadrado, a partir de coordenadas alrededor de un punto en especifico.
         /// </summary>
@@ -761,15 +710,10 @@ namespace GUI
             points.Add(new PointLatLng(x, y + d));
             points.Add(new PointLatLng(x - d, y));
             points.Add(new PointLatLng(x, y - d));
-
         }
-
-
-
 
         private void DistanceTwoPoint(double x, double y, List<PointLatLng> points)
         {
-
             double d = 0.5;
             double x1 = x;
             double y1 = y;
@@ -780,8 +724,6 @@ namespace GUI
             while (Distance(x1, y1, x2, y2) != d)
             {
                 y2 += d;
-
-
             }
 
             points.Add(new PointLatLng(x2, y2));
@@ -797,12 +739,12 @@ namespace GUI
 
             x2 = x;
 
-
             // Verificar parte inferior.
             while (Distance(x1, y1, x2, y2) != d)
             {
                 y2 -= d;
             }
+
             points.Add(new PointLatLng(x2, y2));
             y2 = y;
 
@@ -813,13 +755,10 @@ namespace GUI
             }
 
             points.Add(new PointLatLng(x2, y2));
-
         }
-
-
+        
         private double Distance(double x1, double y1, double x2, double y2)
         {
-
             double first = Math.Pow((x2 - x1), 2);
             double second = Math.Pow((y2 - y1), 2);
             double result = first + second;
@@ -827,8 +766,6 @@ namespace GUI
 
             return distance;
         }
-
-
 
         /// <summary>
         /// Cambia el tipo de mapa a satelite.
@@ -839,6 +776,7 @@ namespace GUI
         {
             gMapC.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
         }
+
         /// <summary>
         /// Cambia el tipo de mapa al diseño normal.
         /// </summary>
@@ -847,8 +785,8 @@ namespace GUI
         private void btOriginal_Click(object sender, EventArgs e)
         {
             gMapC.MapProvider = GMapProviders.GoogleMap;
-
         }
+
         /// <summary>
         /// Cambia el tipo de mapa a relieve.
         /// </summary>
@@ -878,13 +816,9 @@ namespace GUI
         {
             gMapC.Zoom = trackBarZoom.Value;
         }
-
-
-
-
+        
         private void Circle(object sender, MouseEventArgs e)
         {
-
             MessageBox.Show("hola");
             Graphics papel;
             papel = pB1.CreateGraphics();
@@ -895,25 +829,27 @@ namespace GUI
 
         public void inicializarVariables(List<Variable_Registrada> variables)
         {
-           Variable_Registrada varUno = new Variable_Registrada();
-           varUno.Variable = "PM10";
-           varUno.Unidades = "µg/m3";
-           variables.Add(varUno);
-           
-           Variable_Registrada varDos = new Variable_Registrada();
-           varDos.Variable = "O3";
-           varDos.Unidades = "µg/m3";
-           variables.Add(varDos);
-           
-           Variable_Registrada varTres = new Variable_Registrada();
-           varTres.Variable = "Radiación Solar Global";
-           varTres.Unidades = "W/m2";
-           variables.Add(varTres);
+            Variable_Registrada varUno = new Variable_Registrada();
+            varUno.Variable = "PM10";
+            varUno.Unidades = "µg/m3";
+            variables.Add(varUno);
+
+            Variable_Registrada varDos = new Variable_Registrada();
+            varDos.Variable = "O3";
+            varDos.Unidades = "µg/m3";
+            variables.Add(varDos);
+
+            Variable_Registrada varTres = new Variable_Registrada();
+            varTres.Variable = "Radiación Solar Global";
+            varTres.Unidades = "W/m2";
+            variables.Add(varTres);
         }
 
         public async void inicializarMunicipios()
         {
-            string Base = URL +  "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
+            string Base =
+                URL +
+                "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
 
             string consulta = "'BOGOTÁ. D.C.')";
             string url = Base + consulta;
@@ -1059,9 +995,9 @@ namespace GUI
             inicializarVariables(municipio.First().Variables);
             municipios_Set.Add(municipio.First());
         }
-        
+
         /*
-         * dado un municipio, un tipo de variable y un year especifico toma los primeros 1000 registros de la concentracion de
+         * Dado un municipio, un tipo de variable y un year especifico toma los primeros 1000 registros de la concentracion de
          * ese municipio. Los milregistros quedan en la variable consulta. La coleccion.
          *
          * De no tener datos la consulta quedera con tamanio 0.
@@ -1069,14 +1005,14 @@ namespace GUI
         public void consultarDatos(string municipio, string variable, int year, int limite)
         {
             var client = new SodaClient("https://www.datos.gov.co", "8naPxF3oQIYI1NiilJm2JgR3q");
-            var dataset = client.GetResource<Dictionary<string,string>>("ysq6-ri4e");
-           
+            var dataset = client.GetResource<Dictionary<string, string>>("ysq6-ri4e");
+
             //string Base = "$limit=3&$select=Concentraci_n&$where=";
             string datoUno = "(nombre_del_municipio='" + municipio + "')AND";
             string datoDos = "(variable='" + variable + "')";
             // string datoDos = "(variable='" + variable + "')AND";
             // string datoTres = "(fecha like '%25" + year.ToString() + "%25')";
-           
+
             //string url = Base + datoUno + datoDos + datoTres;
 
             // var soql = new SoqlQuery().Limit(5).Select("Concentraci_n")
@@ -1084,26 +1020,26 @@ namespace GUI
 
             var soql = new SoqlQuery().Select("Concentraci_n")
                 .Where(datoUno + datoDos).Limit(limite);
-           
-            var results = dataset.Query<Dictionary<string,string>>(soql);
-           
+
+            var results = dataset.Query<Dictionary<string, string>>(soql);
+
             foreach (var VARIABLE in results)
             {
                 Concentracion_Registro con = new Concentracion_Registro();
                 con.Concentraci_n = double.Parse(VARIABLE.First().Value);
                 consulta.Add(con);
             }
-           
+
             //string respuesta = await GetHttp(url);
             // Consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
             //  Console.WriteLine();
         }
 
         /*
-         * calcula el valor promedio de cada variable de un municipio
+         * Calcula el valor promedio de cada variable de un municipio
          * toma en cuenta el year actual
          *
-         * De ser -1 es  porque no existen registros para esa variable.
+         * De ser -1 es porque no existen registros para esa variable.
          */
         public void calcularDatosMunicipio(Municipio municipio)
         {
@@ -1118,12 +1054,13 @@ namespace GUI
                     // por si no hay 1000 registros
                     int count = 0;
                     double total = 0;
-                    
+
                     foreach (var dato in Consulta)
                     {
                         count += 1;
                         total += dato.Concentraci_n;
                     }
+
                     variable.Concentracion = total / count;
                     consulta.Clear();
                 }
@@ -1131,7 +1068,6 @@ namespace GUI
                 {
                     variable.Concentracion = -1;
                 }
-                
             }
         }
 

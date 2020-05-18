@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
 
 namespace GUI
 {
@@ -30,7 +27,7 @@ namespace GUI
             units = vars[0].Unidades;
             variable = vars[0].Variable;
             values = new List<double>();
-            for(int i = 0; i < variables_Set.Capacity; i++)
+            for (int i = 0; i < variables_Set.Capacity; i++)
             {
                 values[i] = variables_Set[i].Concentracion;
             }
@@ -38,15 +35,15 @@ namespace GUI
             av = values.Average();
             desv = desviation(values);
         }
-         
+
         public String Average()
         {
-            return "La media de " + variable + " es de " + av + " "+units;
+            return "La media de " + variable + " es de " + av + " " + units;
         }
 
         public String Max()
         {
-            return "Se encontró un valor máximo de " + values.Max() + " "+units;
+            return "Se encontró un valor máximo de " + values.Max() + " " + units;
         }
 
         public String Min()
@@ -65,7 +62,9 @@ namespace GUI
             if (variable.Equals("PM10"))
             {
                 return hProofPM10();
-            } else if (variable.Equals("O3")){
+            }
+            else if (variable.Equals("O3"))
+            {
                 return hProofO3();
             }
             else
@@ -77,10 +76,11 @@ namespace GUI
         private double desviation(List<double> vs)
         {
             double sumOfDerivation = 0;
-            foreach(double value in vs)
+            foreach (double value in vs)
             {
                 sumOfDerivation += value * value;
             }
+
             double sumOfDerivationAverage = sumOfDerivation / (vs.Count - 1);
             return Math.Sqrt(sumOfDerivationAverage - (av * av));
         }
@@ -91,7 +91,7 @@ namespace GUI
             double wishedVal = 100;
             //H0: U = wishedVal | H1: U > wishedVal
             double pVal = (av - wishedVal) / (desv / Math.Sqrt(values.Count));
-            if(pVal < -1.64) //No rechazo H0
+            if (pVal < -1.64) //No rechazo H0
             {
                 r += " el nivel de PM10 encontrado puede ser peligroso por fuera de las zonas del filtro.";
             }
@@ -99,6 +99,7 @@ namespace GUI
             {
                 r += " el nivel de PM10 puede ser aceptable por fuera de las zonas del filtro.";
             }
+
             return r;
         }
 
@@ -116,8 +117,10 @@ namespace GUI
             {
                 r += " el nivel de O3 puede ser aceptable por fuera de las zonas del filtro.";
             }
+
             return r;
         }
+
         private String hProofSolarRadiation()
         {
             String r = "A un nivel de error de 95%, se concluye que";
@@ -132,6 +135,7 @@ namespace GUI
             {
                 r += " el nivel de Radiación Solar puede ser aceptable por fuera de las zonas del filtro.";
             }
+
             return r;
         }
     }
