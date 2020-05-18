@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Extreme.Numerics, Version=7.0.12.0, Culture=neutral, PublicKeyToken=9e513770f58567b2">
+      <HintPath>..\packages\Extreme.Numerics.7.0.12\lib\net46\Extreme.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GMap.NET.Core, Version=1.7.5.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <HintPath>..\packages\GMap.NET.WindowsForms.1.7.5\lib\net40\GMap.NET.Core.dll</HintPath>
     </Reference>
