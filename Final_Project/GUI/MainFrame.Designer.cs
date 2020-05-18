@@ -32,6 +32,12 @@ namespace GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -64,6 +70,8 @@ namespace GUI
             this.averageLabel = new System.Windows.Forms.Label();
             this.Statistics_Title_Label = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timeSeries = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.arima = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
             this.tabPageFilters.SuspendLayout();
@@ -72,10 +80,9 @@ namespace GUI
             ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).BeginInit();
             this.tabPageStadistc.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.arima)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dtGrid
-            // 
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid.Location = new System.Drawing.Point(3, 6);
             this.dtGrid.Name = "dtGrid";
@@ -83,50 +90,32 @@ namespace GUI
             this.dtGrid.Size = new System.Drawing.Size(786, 630);
             this.dtGrid.TabIndex = 8;
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
-            // 
-            // button1
-            // 
             this.button1.Location = new System.Drawing.Point(563, 655);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
             this.button2.Location = new System.Drawing.Point(230, 655);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
             this.button3.Location = new System.Drawing.Point(308, 1);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
-            // 
-            // textBox2
-            // 
             this.textBox2.Location = new System.Drawing.Point(153, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 2;
-            // 
-            // tab
-            // 
             this.tab.Controls.Add(this.tabPageFilters);
             this.tab.Controls.Add(this.tabPageGmap);
             this.tab.Controls.Add(this.tabPageStadistc);
@@ -135,9 +124,6 @@ namespace GUI
             this.tab.SelectedIndex = 0;
             this.tab.Size = new System.Drawing.Size(1374, 752);
             this.tab.TabIndex = 16;
-            // 
-            // tabPageFilters
-            // 
             this.tabPageFilters.Controls.Add(this.prueba);
             this.tabPageFilters.Controls.Add(this.btCreateNewFilter);
             this.tabPageFilters.Controls.Add(this.fLP);
@@ -154,18 +140,12 @@ namespace GUI
             this.tabPageFilters.TabIndex = 0;
             this.tabPageFilters.Text = "Filtros";
             this.tabPageFilters.UseVisualStyleBackColor = true;
-            // 
-            // prueba
-            // 
             this.prueba.AutoSize = true;
             this.prueba.Location = new System.Drawing.Point(1125, 572);
             this.prueba.Name = "prueba";
             this.prueba.Size = new System.Drawing.Size(35, 13);
             this.prueba.TabIndex = 21;
             this.prueba.Text = "label2";
-            // 
-            // btCreateNewFilter
-            // 
             this.btCreateNewFilter.Location = new System.Drawing.Point(928, 88);
             this.btCreateNewFilter.Name = "btCreateNewFilter";
             this.btCreateNewFilter.Size = new System.Drawing.Size(211, 23);
@@ -173,9 +153,6 @@ namespace GUI
             this.btCreateNewFilter.Text = "Crear nuevo filtro";
             this.btCreateNewFilter.UseVisualStyleBackColor = true;
             this.btCreateNewFilter.Click += new System.EventHandler(this.btCreateNewFilter_Click);
-            // 
-            // fLP
-            // 
             this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.fLP.AutoScroll = true;
             this.fLP.Location = new System.Drawing.Point(806, 130);
@@ -183,34 +160,22 @@ namespace GUI
             this.fLP.Name = "fLP";
             this.fLP.Size = new System.Drawing.Size(458, 326);
             this.fLP.TabIndex = 19;
-            // 
-            // label1
-            // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(904, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "URL";
-            // 
-            // btFilter
-            // 
             this.btFilter.Location = new System.Drawing.Point(1007, 472);
             this.btFilter.Name = "btFilter";
             this.btFilter.Size = new System.Drawing.Size(75, 23);
             this.btFilter.TabIndex = 18;
             this.btFilter.Text = "Filtrar";
             this.btFilter.UseVisualStyleBackColor = true;
-            // 
-            // txURL
-            // 
             this.txURL.Location = new System.Drawing.Point(939, 36);
             this.txURL.Name = "txURL";
             this.txURL.Size = new System.Drawing.Size(100, 20);
             this.txURL.TabIndex = 16;
-            // 
-            // tabPageGmap
-            // 
             this.tabPageGmap.Controls.Add(this.pB1);
             this.tabPageGmap.Controls.Add(this.trackBarZoom);
             this.tabPageGmap.Controls.Add(this.label2);
@@ -225,17 +190,11 @@ namespace GUI
             this.tabPageGmap.TabIndex = 1;
             this.tabPageGmap.Text = "Gmap";
             this.tabPageGmap.UseVisualStyleBackColor = true;
-            // 
-            // pB1
-            // 
             this.pB1.Location = new System.Drawing.Point(1075, 6);
             this.pB1.Name = "pB1";
             this.pB1.Size = new System.Drawing.Size(102, 88);
             this.pB1.TabIndex = 0;
             this.pB1.TabStop = false;
-            // 
-            // trackBarZoom
-            // 
             this.trackBarZoom.LargeChange = 1;
             this.trackBarZoom.Location = new System.Drawing.Point(593, 643);
             this.trackBarZoom.Maximum = 20;
@@ -244,18 +203,12 @@ namespace GUI
             this.trackBarZoom.TabIndex = 5;
             this.trackBarZoom.Value = 6;
             this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
-            // 
-            // label2
-            // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(543, 654);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Zoom";
-            // 
-            // btRelief
-            // 
             this.btRelief.Location = new System.Drawing.Point(361, 649);
             this.btRelief.Name = "btRelief";
             this.btRelief.Size = new System.Drawing.Size(109, 23);
@@ -263,9 +216,6 @@ namespace GUI
             this.btRelief.Text = "Relieve";
             this.btRelief.UseVisualStyleBackColor = true;
             this.btRelief.Click += new System.EventHandler(this.btRelief_Click);
-            // 
-            // btOriginal
-            // 
             this.btOriginal.Location = new System.Drawing.Point(236, 649);
             this.btOriginal.Name = "btOriginal";
             this.btOriginal.Size = new System.Drawing.Size(109, 23);
@@ -273,9 +223,6 @@ namespace GUI
             this.btOriginal.Text = "Original";
             this.btOriginal.UseVisualStyleBackColor = true;
             this.btOriginal.Click += new System.EventHandler(this.btOriginal_Click);
-            // 
-            // btSatelite
-            // 
             this.btSatelite.Location = new System.Drawing.Point(112, 649);
             this.btSatelite.Name = "btSatelite";
             this.btSatelite.Size = new System.Drawing.Size(109, 23);
@@ -283,9 +230,6 @@ namespace GUI
             this.btSatelite.Text = "Satélite";
             this.btSatelite.UseVisualStyleBackColor = true;
             this.btSatelite.Click += new System.EventHandler(this.btSatelite_Click);
-            // 
-            // gMapC
-            // 
             this.gMapC.Bearing = 0F;
             this.gMapC.CanDragMap = true;
             this.gMapC.EmptyTileColor = System.Drawing.Color.Navy;
@@ -310,9 +254,8 @@ namespace GUI
             this.gMapC.TabIndex = 0;
             this.gMapC.Zoom = 0D;
             this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
-            // 
-            // tabPageStadistc
-            // 
+            this.tabPageStadistc.Controls.Add(this.arima);
+            this.tabPageStadistc.Controls.Add(this.timeSeries);
             this.tabPageStadistc.Controls.Add(this.groupBox1);
             this.tabPageStadistc.Location = new System.Drawing.Point(4, 22);
             this.tabPageStadistc.Name = "tabPageStadistc";
@@ -321,9 +264,6 @@ namespace GUI
             this.tabPageStadistc.TabIndex = 2;
             this.tabPageStadistc.Text = "Estadisticas";
             this.tabPageStadistc.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
             this.groupBox1.Controls.Add(this.phLabel);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.desvLabel);
@@ -337,62 +277,41 @@ namespace GUI
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Valores";
-            // 
-            // phLabel
-            // 
             this.phLabel.AutoSize = true;
             this.phLabel.Location = new System.Drawing.Point(9, 154);
             this.phLabel.Name = "phLabel";
             this.phLabel.Size = new System.Drawing.Size(0, 13);
             this.phLabel.TabIndex = 6;
-            // 
-            // label3
-            // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 137);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Prueba de Hipótesis";
-            // 
-            // desvLabel
-            // 
             this.desvLabel.AutoSize = true;
             this.desvLabel.Location = new System.Drawing.Point(6, 111);
             this.desvLabel.Name = "desvLabel";
             this.desvLabel.Size = new System.Drawing.Size(19, 13);
             this.desvLabel.TabIndex = 4;
             this.desvLabel.Text = "4- ";
-            // 
-            // minLabel
-            // 
             this.minLabel.AutoSize = true;
             this.minLabel.Location = new System.Drawing.Point(6, 89);
             this.minLabel.Name = "minLabel";
             this.minLabel.Size = new System.Drawing.Size(19, 13);
             this.minLabel.TabIndex = 3;
             this.minLabel.Text = "3- ";
-            // 
-            // maxLabel
-            // 
             this.maxLabel.AutoSize = true;
             this.maxLabel.Location = new System.Drawing.Point(6, 65);
             this.maxLabel.Name = "maxLabel";
             this.maxLabel.Size = new System.Drawing.Size(19, 13);
             this.maxLabel.TabIndex = 2;
             this.maxLabel.Text = "2- ";
-            // 
-            // averageLabel
-            // 
             this.averageLabel.AutoSize = true;
             this.averageLabel.Location = new System.Drawing.Point(6, 43);
             this.averageLabel.Name = "averageLabel";
             this.averageLabel.Size = new System.Drawing.Size(19, 13);
             this.averageLabel.TabIndex = 1;
             this.averageLabel.Text = "1- ";
-            // 
-            // Statistics_Title_Label
-            // 
             this.Statistics_Title_Label.AutoSize = true;
             this.Statistics_Title_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.Statistics_Title_Label.Location = new System.Drawing.Point(6, 16);
@@ -400,15 +319,35 @@ namespace GUI
             this.Statistics_Title_Label.Size = new System.Drawing.Size(218, 17);
             this.Statistics_Title_Label.TabIndex = 0;
             this.Statistics_Title_Label.Text = "Estadísticas Generales para ";
-            // 
-            // timer
-            // 
             this.timer.Enabled = true;
             this.timer.Interval = 10;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // blume
-            // 
+            chartArea2.Name = "ChartArea1";
+            this.timeSeries.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.timeSeries.Legends.Add(legend2);
+            this.timeSeries.Location = new System.Drawing.Point(350, 49);
+            this.timeSeries.Name = "timeSeries";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.timeSeries.Series.Add(series2);
+            this.timeSeries.Size = new System.Drawing.Size(300, 300);
+            this.timeSeries.TabIndex = 2;
+            this.timeSeries.Text = "chart1";
+            chartArea1.Name = "ChartArea1";
+            this.arima.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.arima.Legends.Add(legend1);
+            this.arima.Location = new System.Drawing.Point(711, 49);
+            this.arima.Name = "arima";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.arima.Series.Add(series1);
+            this.arima.Size = new System.Drawing.Size(300, 300);
+            this.arima.TabIndex = 3;
+            this.arima.Text = "chart2";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1192, 609);
@@ -427,9 +366,12 @@ namespace GUI
             this.tabPageStadistc.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.arima)).EndInit();
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.DataVisualization.Charting.Chart arima;
         private System.Windows.Forms.Label averageLabel;
         private System.Windows.Forms.Button btCreateNewFilter;
         private System.Windows.Forms.Button btFilter;
@@ -460,6 +402,7 @@ namespace GUI
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.DataVisualization.Charting.Chart timeSeries;
         private System.Windows.Forms.TrackBar trackBarZoom;
         private System.Windows.Forms.TextBox txURL;
 

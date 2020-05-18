@@ -6,7 +6,7 @@ namespace GUI
     public class DataAnalysis
     {
 
-        public double[] Arima()
+        public double[] Arima(int lag)
         {
             // The time series data is stored in a numerical variable:
             var sunspots = Vector.Create(100.8, 81.6, 66.5, 34.8, 30.6, 7, 19.8, 92.5,

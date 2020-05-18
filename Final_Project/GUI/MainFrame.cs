@@ -14,7 +14,6 @@ using System.Windows.Forms;
 using SODA;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
-using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GUI
@@ -91,6 +90,10 @@ namespace GUI
             inicializarDatosMunicipios();
 
             count_click = 0;
+            
+            //TimeSeries();
+            //Arima();
+
             InitializeComponent();
             columnsValues = new string[15];
             elements = new List<Element>();
@@ -1097,8 +1100,11 @@ namespace GUI
             desvLabel.Text = "4- " + gsc.desvit();
             phLabel.Text = gsc.hProof();
         }
-        private void Arima(){
-    DataAnalysis processor = new DataAnalysis();
+        private void Arima()
+        {
+            var forecast = 5;
+            DataAnalysis processor = new DataAnalysis();
+            arima.Series[0].Points.DataBindY(processor.Arima(forecast));
         }
 
         private void TimeSeries(){
