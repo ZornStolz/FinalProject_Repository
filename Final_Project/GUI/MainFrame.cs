@@ -343,7 +343,7 @@ namespace GUI
 
             count_click++;
 
-
+            refreshStatisticsTab();
         }
 
 
@@ -455,7 +455,6 @@ namespace GUI
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
-                                //ClearValuesToURL(elements[j].ComboBox.Text, elements[j].TextBox.Text);
                                 fLP.Controls.Remove(elements[j].Label1);
                                 fLP.Controls.Remove(elements[j].ComboBox);
                                 fLP.Controls.Remove(elements[j].Label2);
@@ -463,10 +462,9 @@ namespace GUI
                                 fLP.Controls.Remove(elements[j].ButtonAdd);
                                 fLP.Controls.Remove(elements[j].ButtonClear);
                                 elements.Remove(elements[j]);
-                                MessageBox.Show("Lo borre");
+                                MessageBox.Show("Se borró el filtro");
                                 found = true;
                                 count_click--;
-                                MessageBox.Show("Se presiono el boton" + i.ToString());
                             }
                         }
 
@@ -1126,6 +1124,20 @@ namespace GUI
             {
                 calcularDatosMunicipio(municipio);
             }
+        }
+
+        /// <summary>
+        /// This method is called each time the user filters the database, and displays the information on the statistics tab accordingly.
+        /// </summary>
+        private void refreshStatisticsTab()
+        {
+            Statistics_Title_Label.Text = "Estadísticas Generales para " + municipioActual + " en " + yearActual;
+            GeneralStatisticCalculator gsc = new GeneralStatisticCalculator(variables_Set);
+            averageLabel.Text = "1- " + gsc.Average();
+            maxLabel.Text = "2- " + gsc.Max();
+            minLabel.Text = "3- " + gsc.Min();
+            desvLabel.Text = "4- " + gsc.desvit();
+            phLabel.Text = gsc.hProof();
         }
     }
 }
