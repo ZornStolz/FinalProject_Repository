@@ -84,17 +84,18 @@ namespace GUI
             MunicipiosSet = new List<Municipio>();
             Consulta = new List<Concentracion_Registro>();
 
+            InitializeComponent();
+            
             inicializarMunicipios();
 
             // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
-            inicializarDatosMunicipios();
+            // inicializarDatosMunicipios();
 
             count_click = 0;
             
             TimeSeries();
             Arima();
-
-            InitializeComponent();
+            
             columnsValues = new string[15];
             elements = new List<Element>();
         }
@@ -1132,5 +1133,7 @@ namespace GUI
 
                 timeSeries.Series[0].Points.DataBindY(sunspots);
         }
+
+
     }
 }
