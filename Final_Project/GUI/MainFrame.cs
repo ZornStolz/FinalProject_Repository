@@ -1066,7 +1066,7 @@ namespace GUI
          *
          * De no tener datos la consulta quedera con tamanio 0.
          */
-        public void consultarDatos(string municipio, string variable, int year)
+        public void consultarDatos(string municipio, string variable, int year, int limite)
         {
             var client = new SodaClient("https://www.datos.gov.co", "8naPxF3oQIYI1NiilJm2JgR3q");
             var dataset = client.GetResource<Dictionary<string,string>>("ysq6-ri4e");
@@ -1083,7 +1083,7 @@ namespace GUI
             //    .Where(datoUno + datoDos + datoTres);
 
             var soql = new SoqlQuery().Select("Concentraci_n")
-                .Where(datoUno + datoDos).Limit(3);
+                .Where(datoUno + datoDos).Limit(limite);
            
             var results = dataset.Query<Dictionary<string,string>>(soql);
            
@@ -1110,7 +1110,8 @@ namespace GUI
             foreach (var variable in municipio.Variables)
             {
                 //con esto en la variable consulta tendre los datos
-                consultarDatos(municipio.Nombre_del_municipio, variable.Variable, yearActual);
+                // 3 el numero de filas para que cargue rapido
+                consultarDatos(municipio.Nombre_del_municipio, variable.Variable, yearActual, 3);
                 // verifico que hayan datos
                 if (Consulta.Count > 0)
                 {
