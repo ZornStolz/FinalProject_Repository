@@ -34,32 +34,32 @@ namespace GUI
          * source data to be consulted
          */
         private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
-
+        
         /*
          * variable para saber en que year estamos
          */
         private int yearActual;
-
+        
         /*
         * variable para saber a que municipio pertenencen todos los datos de la variable consulta
         */
         private string municipioActual;
-
+                
         /*
          * set de variales por default, se usa para tener connsultas con menor  cantidad de datos
          */
         private List<Variable_Registrada> variables_Set;
-
+        
         /*
         * lista de todos los municipios a usar
         */
         private List<Municipio> municipios_Set;
-
+        
         /*
          * esta tendra 1000 registros. todos son concentraciones, registros, de una sola  variable para no saturar la ram.
          */
         private List<Concentracion_Registro> consulta;
-
+        
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,14 +87,14 @@ namespace GUI
             VariablesSet = new List<Variable_Registrada>();
             MunicipiosSet = new List<Municipio>();
             Consulta = new List<Concentracion_Registro>();
-
+            
             inicializarVariables();
             inicializarMunicipios();
-
+            
             consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
-
-            // inicializarDatosMunicipios();
-
+            
+           // inicializarDatosMunicipios();
+            
             count_click = 0;
             InitializeComponent();
             columnsValues = new string[15];
@@ -103,13 +103,13 @@ namespace GUI
 
         public int YearActual
         {
-            get => yearActual;
+            get => yearActual; 
             set => yearActual = value;
         }
 
         public string MunicipioActual
         {
-            get => municipioActual;
+            get => municipioActual; 
             set => municipioActual = value;
         }
 
@@ -343,7 +343,7 @@ namespace GUI
 
             count_click++;
 
-
+            refreshStatisticsTab();
         }
 
 
@@ -455,7 +455,6 @@ namespace GUI
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
-                                //ClearValuesToURL(elements[j].ComboBox.Text, elements[j].TextBox.Text);
                                 fLP.Controls.Remove(elements[j].Label1);
                                 fLP.Controls.Remove(elements[j].ComboBox);
                                 fLP.Controls.Remove(elements[j].Label2);
@@ -463,10 +462,9 @@ namespace GUI
                                 fLP.Controls.Remove(elements[j].ButtonAdd);
                                 fLP.Controls.Remove(elements[j].ButtonClear);
                                 elements.Remove(elements[j]);
-                                MessageBox.Show("Lo borre");
+                                MessageBox.Show("Se borró el filtro");
                                 found = true;
                                 count_click--;
-                                MessageBox.Show("Se presiono el boton" + i.ToString());
                             }
                         }
 
@@ -661,23 +659,23 @@ namespace GUI
         }
 
 
-        /**
-                /// <summary>
-                /// Permite eliminar la consulta que el usuario realizo.
-                /// </summary>
-                /// <param name="columnName"></param> Nombre de la columna para eliminar la consulta.
-                /// <param name="valueToFilter"></param> Atributo de la columna columnName el cual se va a eliminar
-                private void ClearValuesToURL(string columnName, String valueToFilter)
-                {
+/**
+        /// <summary>
+        /// Permite eliminar la consulta que el usuario realizo.
+        /// </summary>
+        /// <param name="columnName"></param> Nombre de la columna para eliminar la consulta.
+        /// <param name="valueToFilter"></param> Atributo de la columna columnName el cual se va a eliminar
+        private void ClearValuesToURL(string columnName, String valueToFilter)
+        {
 
-                    String valueToClean = "&" + columnName + "=" + valueToFilter;
-                    //Borra un caracter o una cadena de caracter en el URL.
-                    string cadena = URL.Replace(valueToClean, "");
-                    URL = cadena;
-                    ViewGrid();
+            String valueToClean = "&" + columnName + "=" + valueToFilter;
+            //Borra un caracter o una cadena de caracter en el URL.
+            string cadena = URL.Replace(valueToClean, "");
+            URL = cadena;
+            ViewGrid();
 
-                }
-                **/
+        }
+        **/
 
         /// <summary>
         /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota.
@@ -918,13 +916,13 @@ namespace GUI
             string respuesta = await GetHttp(url);
             List<Variable_Registrada> variable = JsonConvert.DeserializeObject<List<Variable_Registrada>>(respuesta);
             variables_Set.Add(variable.First());
-
+            
             consulta = "'O3')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
             variable = JsonConvert.DeserializeObject<List<Variable_Registrada>>(respuesta);
             variables_Set.Add(variable.First());
-
+            
             consulta = "'Radiación Solar Global')";
             url = Base + consulta;
             respuesta = await GetHttp(url);
@@ -934,7 +932,7 @@ namespace GUI
 
         public async void inicializarMunicipios()
         {
-            string Base = URL + "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
+            string Base = URL +  "$limit=1&$select=latitud,longitud,departamento,nombre_del_municipio&$where=(nombre_del_municipio=";
 
             string consulta = "'BOGOTÁ. D.C.')";
             string url = Base + consulta;
@@ -1062,7 +1060,7 @@ namespace GUI
             municipio.First().Variables = variables_Set;
             municipios_Set.Add(municipio.First());
         }
-
+        
         /*
          * dado un municipio, un tipo de variable y un year especifico toma los primeros 1000 registros de la concentracion de
          * ese municipio. Los milregistros quedan en la variable consulta. La coleccion.
@@ -1075,7 +1073,7 @@ namespace GUI
             string datoUno = "(nombre_del_municipio='" + municipio + "')AND";
             string datoDos = "(variable='" + variable + "')AND";
             string datoTres = "(fecha like '%25" + year.ToString() + "%25')";
-
+            
             string url = Base + datoUno + datoDos + datoTres;
             string respuesta = await GetHttp(url);
             Consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
@@ -1100,7 +1098,7 @@ namespace GUI
                     // por si no hay 1000 registros
                     int count = 0;
                     double total = 0;
-
+                    
                     foreach (var dato in Consulta)
                     {
                         count += 1;
@@ -1113,7 +1111,7 @@ namespace GUI
                 {
                     variable.Concentracion = -1;
                 }
-
+                
             }
         }
 
@@ -1127,10 +1125,11 @@ namespace GUI
                 calcularDatosMunicipio(municipio);
             }
         }
-/// <summary>
-/// This method is called each time the user filters the database, and displays the information on the statistics tab accordingly.
-/// </summary>
-private void refreshStatisticsTab()
+
+        /// <summary>
+        /// This method is called each time the user filters the database, and displays the information on the statistics tab accordingly.
+        /// </summary>
+        private void refreshStatisticsTab()
         {
             Statistics_Title_Label.Text = "Estadísticas Generales para " + municipioActual + " en " + yearActual;
             GeneralStatisticCalculator gsc = new GeneralStatisticCalculator(variables_Set);
