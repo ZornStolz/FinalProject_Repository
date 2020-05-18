@@ -9,10 +9,14 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Media;
 using SODA;
+using Color = System.Drawing.Color;
+using Pen = System.Drawing.Pen;
 
 namespace GUI
 {
@@ -29,7 +33,7 @@ namespace GUI
         /*
          * source data to be consulted
          */
-        private string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
+        private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
         
         /*
          * variable para saber en que year estamos
@@ -88,6 +92,8 @@ namespace GUI
             inicializarMunicipios();
             
             consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
+            
+           // inicializarDatosMunicipios();
             
             count_click = 0;
             InitializeComponent();
@@ -167,7 +173,7 @@ namespace GUI
         }
 
 
-        public async Task<string> GetHttp(String url)
+        public async Task<string> GetHttp(string url)
         {
             WebRequest webRequest = WebRequest.Create(url);
             WebResponse webResponse = webRequest.GetResponse();
@@ -1060,6 +1066,8 @@ namespace GUI
         /*
          * dado un municipio, un tipo de variable y un year especifico toma los primeros 1000 registros de la concentracion de
          * ese municipio. Los milregistros quedan en la variable consulta. La coleccion.
+         *
+         * De no tener datos la consulta quedera con tamanio 0.
          */
         public async void consultarDatos(string municipio, string variable, int year)
         {
@@ -1070,8 +1078,54 @@ namespace GUI
             
             string url = Base + datoUno + datoDos + datoTres;
             string respuesta = await GetHttp(url);
+            Consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
+            Console.WriteLine();
+        }
 
-            consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
-        } 
+        /*
+         * calcula el valor promedio de cada variable de un municipio
+         * toma en cuenta el year actual
+         *
+         * De ser -1 es  porque no existen registros para esa variable.
+         */
+        public void calcularDatosMunicipio(Municipio municipio)
+        {
+            foreach (var variable in municipio.Variables)
+            {
+                //con esto en la variable consulta tendre los datos
+                consultarDatos(municipio.Nombre_del_municipio, variable.Variable, yearActual);
+                // verifico que hayan datos
+                if (Consulta.Count > 0)
+                {
+                    // por si no hay 1000 registros
+                    int count = 0;
+                    double total = 0;
+                    
+                    foreach (var dato in Consulta)
+                    {
+                        count += 1;
+                        total += dato.Concentraci_n;
+                    }
+
+                    variable.Concentracion = total / count;
+                }
+                else
+                {
+                    variable.Concentracion = -1;
+                }
+                
+            }
+        }
+
+        /*
+         * inicializa los datos de las variables de cada municipio
+         */
+        public void inicializarDatosMunicipios()
+        {
+            foreach (var municipio in MunicipiosSet)
+            {
+                calcularDatosMunicipio(municipio);
+            }
+        }
     }
 }
