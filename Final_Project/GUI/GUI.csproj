@@ -95,6 +95,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concentracion_Registro.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="GradientStop.cs" />
     <Compile Include="MainFrame.cs">

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using SODA;
 
 namespace GUI
@@ -25,13 +26,36 @@ namespace GUI
         private string[] columnsValues;
         private ComboBox cbFilterBy;
 
-        private int yearActual;
-        
         /*
          * source data to be consulted
          */
         private string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
-
+        
+        /*
+         * variable para saber en que year estamos
+         */
+        private int yearActual;
+        
+        /*
+        * variable para saber a que municipio pertenencen todos los datos de la variable consulta
+        */
+        private string municipioActual;
+                
+        /*
+         * set de variales por default, se usa para tener connsultas con menor  cantidad de datos
+         */
+        private List<Variable_Registrada> variables_Set;
+        
+        /*
+        * lista de todos los municipios a usar
+        */
+        private List<Municipio> municipios_Set;
+        
+        /*
+         * esta tendra 1000 registros. todos son concentraciones, registros, de una sola  variable para no saturar la ram.
+         */
+        private List<Concentracion_Registro> consulta;
+        
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////// Niveles de contaminación./////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,17 +79,52 @@ namespace GUI
 
         public blume()
         {
-            yearActual = 2011;
+            YearActual = 2011;
+            VariablesSet = new List<Variable_Registrada>();
+            MunicipiosSet = new List<Municipio>();
+            Consulta = new List<Concentracion_Registro>();
+            
             inicializarVariables();
             inicializarMunicipios();
+            
+            consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
+            
             count_click = 0;
             InitializeComponent();
             columnsValues = new string[15];
             elements = new List<Element>();
         }
 
-        public int YearActual { get => yearActual; set => yearActual = value; }
-        
+        public int YearActual
+        {
+            get => yearActual; 
+            set => yearActual = value;
+        }
+
+        public string MunicipioActual
+        {
+            get => municipioActual; 
+            set => municipioActual = value;
+        }
+
+        public List<Municipio> MunicipiosSet
+        {
+            get => municipios_Set;
+            set => municipios_Set = value;
+        }
+
+        public List<Variable_Registrada> VariablesSet
+        {
+            get => variables_Set;
+            set => variables_Set = value;
+        }
+
+        public List<Concentracion_Registro> Consulta
+        {
+            get => consulta;
+            set => consulta = value;
+        }
+
         private void MainFrame_Load(object sender, EventArgs e)
         {
             ViewGrid();
@@ -843,9 +902,6 @@ namespace GUI
             Pen lapiz = new Pen(myBrush);
             papel.FillRectangle(myBrush, 0, 0, pB1.Width, pB1.Height);
         }
-        
-        //set de variales por default
-        private List<Variable_Registrada> variables_Set = new List<Variable_Registrada>();
 
         public async void inicializarVariables()
         {
@@ -869,11 +925,6 @@ namespace GUI
             variable = JsonConvert.DeserializeObject<List<Variable_Registrada>>(respuesta);
             variables_Set.Add(variable.First());
         }
-
-        /*
-         * lista de todos los municipios a usar
-         */
-        private List<Municipio> municipios_Set = new List<Municipio>();
 
         public async void inicializarMunicipios()
         {
@@ -1005,5 +1056,22 @@ namespace GUI
             municipio.First().Variables = variables_Set;
             municipios_Set.Add(municipio.First());
         }
+        
+        /*
+         * dado un municipio, un tipo de variable y un year especifico toma los primeros 1000 registros de la concentracion de
+         * ese municipio. Los milregistros quedan en la variable consulta. La coleccion.
+         */
+        public async void consultarDatos(string municipio, string variable, int year)
+        {
+            string Base = URL + "$limit=1000&$select=Concentraci_n&$where=";
+            string datoUno = "(nombre_del_municipio='" + municipio + "')AND";
+            string datoDos = "(variable='" + variable + "')AND";
+            string datoTres = "(fecha like '%25" + year.ToString() + "%25')";
+            
+            string url = Base + datoUno + datoDos + datoTres;
+            string respuesta = await GetHttp(url);
+
+            consulta = JsonConvert.DeserializeObject<List<Concentracion_Registro>>(respuesta);
+        } 
     }
 }
