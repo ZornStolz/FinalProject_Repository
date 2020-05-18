@@ -91,8 +91,8 @@ namespace GUI
 
             count_click = 0;
             
-            //TimeSeries();
-            //Arima();
+            TimeSeries();
+            Arima();
 
             InitializeComponent();
             columnsValues = new string[15];
