@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GUI
 {
-
-
     class ViewModel
     {
         /**
-        * Atributes
+        * Attributes
         */
         private String fecha;
         private String autoridad_ambiental;
@@ -46,9 +39,4 @@ namespace GUI
         public string Unidades { get => unidades; set => unidades = value; }
         public double Concentraci_n { get => concentraci_n; set => concentraci_n = value; }
     }
-
-
-
-
-
 }
