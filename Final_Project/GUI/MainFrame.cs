@@ -1110,7 +1110,7 @@ namespace GUI
 
         private void Arima(string municipio, string variable)
         {
-            consultarDatos(municipio, variable, 2012, Convert.ToInt32(forecastTextBox.Text));
+            consultarDatos(municipio, variable, 2012, Convert.ToInt32(textBox3.Text));
             List<double> temp = new List<double>();
 
             foreach (var valor in consulta)
@@ -1137,6 +1137,7 @@ namespace GUI
             consulta.Clear();
 
             timeSeries.Series[0].Points.DataBindY(temp);
+            ciudadLabel.Text = municipioActual.Nombre_del_municipio;
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -8,7 +8,7 @@ namespace GUI
 {
     public class DataAnalysis
     {
-        public double[] Arima(int lag, double[] values)
+        public double[] Arima(int forecast, double[] values)
         {
             Vector<double> tempValues = Vector.Create(values);
 
@@ -37,7 +37,7 @@ namespace GUI
             model.Fit();
 
             //Predict a specified number of values:
-            var nextValues = model.Forecast(lag);
+            var nextValues = model.Forecast(forecast);
 
             //Cast to double[].
             var castedNextValues = new double[nextValues.Length];
