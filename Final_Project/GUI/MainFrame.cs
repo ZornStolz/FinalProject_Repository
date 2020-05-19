@@ -331,12 +331,14 @@ namespace GUI
         /// <summary>
         /// This method allows you to create the controllers responsible for filtering.
         /// </summary>
+
         private void createControlsyToFilter(Label lbFilterBy, ComboBox cbFilterBy, Label lbValueToFilter,
             TextBox txValueToFilter, Button btAdd, Button btClear)
         {
-            //
-            // lbFilterBy
-            //
+
+        private void createControlsyToFilter(Label lbFilterBy, ComboBox cbFilterBy, Label lbValueToFilter, TextBox txValueToFilter, Button btAdd, Button btClear)
+        { 
+
             lbFilterBy.Anchor =
                 ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
