@@ -38,6 +38,7 @@ namespace GUI
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,16 +62,12 @@ namespace GUI
             this.btSatelite = new System.Windows.Forms.Button();
             this.gMapC = new GMap.NET.WindowsForms.GMapControl();
             this.tabPageStadistc = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.forecastTextBox = new System.Windows.Forms.TextBox();
             this.arima = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timeSeries = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.phLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.desvLabel = new System.Windows.Forms.Label();
-            this.minLabel = new System.Windows.Forms.Label();
-            this.maxLabel = new System.Windows.Forms.Label();
-            this.averageLabel = new System.Windows.Forms.Label();
-            this.Statistics_Title_Label = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
@@ -81,7 +78,6 @@ namespace GUI
             this.tabPageStadistc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.arima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtGrid
@@ -323,9 +319,12 @@ namespace GUI
             // 
             // tabPageStadistc
             // 
+            this.tabPageStadistc.Controls.Add(this.label3);
+            this.tabPageStadistc.Controls.Add(this.button4);
+            this.tabPageStadistc.Controls.Add(this.label4);
+            this.tabPageStadistc.Controls.Add(this.forecastTextBox);
             this.tabPageStadistc.Controls.Add(this.arima);
             this.tabPageStadistc.Controls.Add(this.timeSeries);
-            this.tabPageStadistc.Controls.Add(this.groupBox1);
             this.tabPageStadistc.Location = new System.Drawing.Point(4, 22);
             this.tabPageStadistc.Name = "tabPageStadistc";
             this.tabPageStadistc.Padding = new System.Windows.Forms.Padding(3);
@@ -334,19 +333,52 @@ namespace GUI
             this.tabPageStadistc.Text = "Estadisticas";
             this.tabPageStadistc.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(57, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(90, 18);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Serie de Tiempo";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(672, 119);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "Ir";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(633, 61);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(149, 23);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Numero de valores a predecir";
+            // 
+            // forecastTextBox
+            // 
+            this.forecastTextBox.Location = new System.Drawing.Point(682, 87);
+            this.forecastTextBox.Name = "forecastTextBox";
+            this.forecastTextBox.Size = new System.Drawing.Size(55, 20);
+            this.forecastTextBox.TabIndex = 4;
+            // 
             // arima
             // 
             chartArea1.Name = "ChartArea1";
             this.arima.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.arima.Legends.Add(legend1);
-            this.arima.Location = new System.Drawing.Point(711, 49);
+            this.arima.Location = new System.Drawing.Point(458, 158);
             this.arima.Name = "arima";
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.arima.Series.Add(series1);
-            this.arima.Size = new System.Drawing.Size(300, 300);
+            this.arima.Size = new System.Drawing.Size(542, 324);
             this.arima.TabIndex = 3;
             this.arima.Text = "chart2";
             // 
@@ -356,94 +388,18 @@ namespace GUI
             this.timeSeries.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.timeSeries.Legends.Add(legend2);
-            this.timeSeries.Location = new System.Drawing.Point(347, 22);
+            this.timeSeries.Location = new System.Drawing.Point(39, 75);
             this.timeSeries.Name = "timeSeries";
             series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.timeSeries.Series.Add(series2);
-            this.timeSeries.Size = new System.Drawing.Size(300, 300);
+            this.timeSeries.Size = new System.Drawing.Size(375, 200);
             this.timeSeries.TabIndex = 2;
             this.timeSeries.Text = "chart1";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.phLabel);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.desvLabel);
-            this.groupBox1.Controls.Add(this.minLabel);
-            this.groupBox1.Controls.Add(this.maxLabel);
-            this.groupBox1.Controls.Add(this.averageLabel);
-            this.groupBox1.Controls.Add(this.Statistics_Title_Label);
-            this.groupBox1.Location = new System.Drawing.Point(8, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 200);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Valores";
-            // 
-            // phLabel
-            // 
-            this.phLabel.AutoSize = true;
-            this.phLabel.Location = new System.Drawing.Point(9, 154);
-            this.phLabel.Name = "phLabel";
-            this.phLabel.Size = new System.Drawing.Size(0, 13);
-            this.phLabel.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Prueba de Hipótesis";
-            // 
-            // desvLabel
-            // 
-            this.desvLabel.AutoSize = true;
-            this.desvLabel.Location = new System.Drawing.Point(6, 111);
-            this.desvLabel.Name = "desvLabel";
-            this.desvLabel.Size = new System.Drawing.Size(19, 13);
-            this.desvLabel.TabIndex = 4;
-            this.desvLabel.Text = "4- ";
-            // 
-            // minLabel
-            // 
-            this.minLabel.AutoSize = true;
-            this.minLabel.Location = new System.Drawing.Point(6, 89);
-            this.minLabel.Name = "minLabel";
-            this.minLabel.Size = new System.Drawing.Size(19, 13);
-            this.minLabel.TabIndex = 3;
-            this.minLabel.Text = "3- ";
-            // 
-            // maxLabel
-            // 
-            this.maxLabel.AutoSize = true;
-            this.maxLabel.Location = new System.Drawing.Point(6, 65);
-            this.maxLabel.Name = "maxLabel";
-            this.maxLabel.Size = new System.Drawing.Size(19, 13);
-            this.maxLabel.TabIndex = 2;
-            this.maxLabel.Text = "2- ";
-            // 
-            // averageLabel
-            // 
-            this.averageLabel.AutoSize = true;
-            this.averageLabel.Location = new System.Drawing.Point(6, 43);
-            this.averageLabel.Name = "averageLabel";
-            this.averageLabel.Size = new System.Drawing.Size(19, 13);
-            this.averageLabel.TabIndex = 1;
-            this.averageLabel.Text = "1- ";
-            // 
-            // Statistics_Title_Label
-            // 
-            this.Statistics_Title_Label.AutoSize = true;
-            this.Statistics_Title_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.Statistics_Title_Label.Location = new System.Drawing.Point(6, 16);
-            this.Statistics_Title_Label.Name = "Statistics_Title_Label";
-            this.Statistics_Title_Label.Size = new System.Drawing.Size(218, 17);
-            this.Statistics_Title_Label.TabIndex = 0;
-            this.Statistics_Title_Label.Text = "Estadísticas Generales para ";
+            title1.Name = "Serie de Tiempo";
+            this.timeSeries.Titles.Add(title1);
             // 
             // timer
             // 
@@ -469,15 +425,13 @@ namespace GUI
             ((System.ComponentModel.ISupportInitialize) (this.pB1)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).EndInit();
             this.tabPageStadistc.ResumeLayout(false);
+            this.tabPageStadistc.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) (this.arima)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
         }
 
         private System.Windows.Forms.DataVisualization.Charting.Chart arima;
-        private System.Windows.Forms.Label averageLabel;
         private System.Windows.Forms.Button btCreateNewFilter;
         private System.Windows.Forms.Button btFilter;
         private System.Windows.Forms.Button btOriginal;
@@ -486,20 +440,17 @@ namespace GUI
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label desvLabel;
+        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dtGrid;
         private System.Windows.Forms.FlowLayoutPanel fLP;
+        private System.Windows.Forms.TextBox forecastTextBox;
         private GMap.NET.WindowsForms.GMapControl gMapC;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label maxLabel;
-        private System.Windows.Forms.Label minLabel;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pB1;
-        private System.Windows.Forms.Label phLabel;
         private System.Windows.Forms.Label prueba;
-        private System.Windows.Forms.Label Statistics_Title_Label;
         private System.Windows.Forms.TabControl tab;
         private System.Windows.Forms.TabPage tabPageFilters;
         private System.Windows.Forms.TabPage tabPageGmap;

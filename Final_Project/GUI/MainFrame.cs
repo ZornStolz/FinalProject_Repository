@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SODA;
@@ -85,17 +86,17 @@ namespace GUI
             Consulta = new List<Concentracion_Registro>();
 
             InitializeComponent();
-            
+
             inicializarMunicipios();
 
-            // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
             // inicializarDatosMunicipios();
+            // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
 
             count_click = 0;
-            
+
             TimeSeries();
             Arima();
-            
+
             columnsValues = new string[15];
             elements = new List<Element>();
         }
@@ -162,7 +163,7 @@ namespace GUI
             //dtGrid.DataSource = variales_Set;
             PollutionColor(lst);
         }
-        
+
         public async Task<string> GetHttp(string url)
         {
             WebRequest webRequest = WebRequest.Create(url);
@@ -324,10 +325,10 @@ namespace GUI
             this.fLP.Controls.Add(elements[count_click].ButtonClear);
 
             count_click++;
-
-            refreshStatisticsTab();
+//TODO
+            // refreshStatisticsTab();
         }
-        
+
         /// <summary>
         /// This method allows you to create the controllers responsible for filtering.
         /// </summary>
@@ -377,7 +378,7 @@ namespace GUI
             lbValueToFilter.Text = "Valor a filtrar :";
             lbValueToFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             txValueToFilter.Name = "tbValueToFilter" + count_click.ToString();
-            
+
             //
             // valueToFilter
             //
@@ -409,7 +410,7 @@ namespace GUI
             btClear.Name = "btClear" + count_click.ToString();
             btClear.Click += new EventHandler(HandlerButtonAddAndClear);
         }
-        
+
         public void HandlerButtonAddAndClear(object sender, EventArgs e)
         {
             int i = 0;
@@ -445,6 +446,7 @@ namespace GUI
 
                         fLP.Update();
                     }
+
                     i++;
                 }
             }
@@ -606,7 +608,7 @@ namespace GUI
 
             return pollutionLevel;
         }
-        
+
         /**
         /// <summary>
         /// Permite eliminar la consulta que el usuario realizo.
@@ -656,7 +658,7 @@ namespace GUI
         {
             var markerOverlay = new GMapOverlay("markers");
             var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor);
-            
+
             markerOverlay.Markers.Add(marker);
 
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
@@ -701,7 +703,7 @@ namespace GUI
             gMapC.Overlays.Add(polygons);
             points.Clear();
         }
-        
+
         /// <summary>
         /// Metodo auxiliar del metodo AddPolygon,este metodo permite crear un cuadrado, a partir de coordenadas alrededor de un punto en especifico.
         /// </summary>
@@ -762,7 +764,7 @@ namespace GUI
 
             points.Add(new PointLatLng(x2, y2));
         }
-        
+
         private double Distance(double x1, double y1, double x2, double y2)
         {
             double first = Math.Pow((x2 - x1), 2);
@@ -822,7 +824,7 @@ namespace GUI
         {
             gMapC.Zoom = trackBarZoom.Value;
         }
-        
+
         private void Circle(object sender, MouseEventArgs e)
         {
             MessageBox.Show("hola");
@@ -1015,7 +1017,8 @@ namespace GUI
 
             //string Base = "$limit=3&$select=Concentraci_n&$where=";
             string datoUno = "(nombre_del_municipio='" + municipio + "')AND";
-            string datoDos = "(variable='" + variable + "')";
+            string datoDos = "(variable='" + variable + "')AND";
+            string datoTres = "(Concentraci_n>0)";
             // string datoDos = "(variable='" + variable + "')AND";
             // string datoTres = "(fecha like '%25" + year.ToString() + "%25')";
 
@@ -1025,15 +1028,18 @@ namespace GUI
             //    .Where(datoUno + datoDos + datoTres);
 
             var soql = new SoqlQuery().Select("Concentraci_n")
-                .Where(datoUno + datoDos).Limit(limite);
+                .Where(datoUno + datoDos + datoTres).Limit(limite).Offset(0);
 
             var results = dataset.Query<Dictionary<string, string>>(soql);
-
-            foreach (var VARIABLE in results)
+            
+            foreach (Dictionary<string, string> VARIABLE in results)
             {
                 Concentracion_Registro con = new Concentracion_Registro();
-                con.Concentraci_n = double.Parse(VARIABLE.First().Value);
-                consulta.Add(con);
+                if (VARIABLE.Count > 0)
+                {
+                    con.Concentraci_n = double.Parse(VARIABLE.First().Value);
+                    consulta.Add(con);
+                }
             }
 
             //string respuesta = await GetHttp(url);
@@ -1088,52 +1094,57 @@ namespace GUI
             }
         }
 
-        /// <summary>
-        /// This method is called each time the user filters the database, and displays the information on the statistics tab accordingly.
-        /// </summary>
-        private void refreshStatisticsTab()
-        {
-            Statistics_Title_Label.Text = "Estadísticas Generales para " + municipioActual + " en " + yearActual;
-            GeneralStatisticCalculator gsc = new GeneralStatisticCalculator(null);
-            averageLabel.Text = "1- " + gsc.Average();
-            maxLabel.Text = "2- " + gsc.Max();
-            minLabel.Text = "3- " + gsc.Min();
-            desvLabel.Text = "4- " + gsc.desvit();
-            phLabel.Text = gsc.hProof();
-        }
+        // /// <summary>
+        // /// This method is called each time the user filters the database, and displays the information on the statistics tab accordingly.
+        // /// </summary>
+        // private void refreshStatisticsTab()
+        // {
+        //     Statistics_Title_Label.Text = "Estadísticas Generales para " + municipioActual + " en " + yearActual;
+        //     GeneralStatisticCalculator gsc = new GeneralStatisticCalculator(null);
+        //     averageLabel.Text = "1- " + gsc.Average();
+        //     maxLabel.Text = "2- " + gsc.Max();
+        //     minLabel.Text = "3- " + gsc.Min();
+        //     desvLabel.Text = "4- " + gsc.desvit();
+        //     phLabel.Text = gsc.hProof();
+        // }
+
         private void Arima()
         {
-            var forecast = 5;
+            consultarDatos("BOGOTÁ. D.C.", "PM10", 2012, 1000);
+            List<double> temp = new List<double>();
+
+            foreach (var valor in consulta)
+            {
+                temp.Add(valor.Concentraci_n);
+            }
+            consulta.Clear();
+
+            var forecast = forecastTextBox.Text;
             DataAnalysis processor = new DataAnalysis();
-            arima.Series[0].Points.DataBindY(processor.Arima(forecast));
+            double[] arimaforecast = processor.Arima(Convert.ToInt32(forecast), temp.ToArray());
+            arima.Series[0].Points.DataBindY(arimaforecast);
         }
 
-        private void TimeSeries(){
-                double[] sunspots =
-                {
-                    100.8, 81.6, 66.5, 34.8, 30.6, 7, 19.8, 92.5,
-                    154.4, 125.9, 84.8, 68.1, 38.5, 22.8, 10.2, 24.1, 82.9,
-                    132, 130.9, 118.1, 89.9, 66.6, 60, 46.9, 41, 21.3, 16,
-                    6.4, 4.1, 6.8, 14.5, 34, 45, 43.1, 47.5, 42.2, 28.1, 10.1,
-                    8.1, 2.5, 0, 1.4, 5, 12.2, 13.9, 35.4, 45.8, 41.1, 30.4,
-                    23.9, 15.7, 6.6, 4, 1.8, 8.5, 16.6, 36.3, 49.7, 62.5, 67,
-                    71, 47.8, 27.5, 8.5, 13.2, 56.9, 121.5, 138.3, 103.2,
-                    85.8, 63.2, 36.8, 24.2, 10.7, 15, 40.1, 61.5, 98.5, 124.3,
-                    95.9, 66.5, 64.5, 54.2, 39, 20.6, 6.7, 4.3, 22.8, 54.8,
-                    93.8, 95.7, 77.2, 59.1, 44, 47, 30.5, 16.3, 7.3, 37.3,
-                    73.9
-                };
+        private void TimeSeries()
+        {
+            consultarDatos("BOGOTÁ. D.C.", "PM10", 2012, 1000);
+            List<double> temp = new List<double>();
 
-                Series series = new Series();
-                for (int i = 0; i < sunspots.Length; i++)
-                {
-                    DataPoint dataPoint = new DataPoint(i, sunspots[i]);
-                    series.Points.Add(dataPoint);
-                }
+            foreach (var valor in consulta)
+            {
+                temp.Add(valor.Concentraci_n);
+            }
 
-                timeSeries.Series[0].Points.DataBindY(sunspots);
+            consulta.Clear();
+            
+            // Series series = new Series();
+            // for (int i = 0; i < sunspots.Length; i++)
+            // {
+            //     DataPoint dataPoint = new DataPoint(i, sunspots[i]);
+            //     series.Points.Add(dataPoint);
+            // }
+
+            timeSeries.Series[0].Points.DataBindY(temp);
         }
-
-
     }
 }
