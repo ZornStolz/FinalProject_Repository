@@ -1,4 +1,5 @@
 ﻿using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
 using Microsoft.Win32;
 
 namespace GUI
@@ -581,6 +582,11 @@ namespace GUI
         private System.Windows.Forms.ComboBox variableCB;
 
         #endregion
+
+        private System.Windows.Forms.PictureBox pB4;
+        private System.Windows.Forms.PictureBox pB3;
+        private System.Windows.Forms.PictureBox pB2;
+        private System.Windows.Forms.Button btShowPollutionColor;
     }
 }
 
