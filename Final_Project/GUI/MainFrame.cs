@@ -3,19 +3,18 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using Newtonsoft.Json;
+using SODA;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SODA;
+using Tulpep.NotificationWindow;
 using Color = System.Drawing.Color;
 using Pen = System.Drawing.Pen;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GUI
 {
@@ -92,10 +91,10 @@ namespace GUI
             // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
 
             count_click = 0;
-            
+
             columnsValues = new string[15];
             elements = new List<Element>();
-            
+
             variableCB.Items.AddRange(new object[] {"PM10",
                 "O3",
                 "Radiación Solar Global"});
@@ -129,6 +128,7 @@ namespace GUI
         {
             ViewGrid();
             AddNameColumnToList();
+            PollutionColor();
         }
 
         /// <summary>
@@ -161,7 +161,6 @@ namespace GUI
             dtGrid.DataSource = lst;
             //dtGrid.DataSource = municipios_Set;
             //dtGrid.DataSource = variales_Set;
-            PollutionColor(lst);
         }
 
         public async Task<string> GetHttp(string url)
@@ -325,7 +324,7 @@ namespace GUI
             this.fLP.Controls.Add(elements[count_click].ButtonClear);
 
             count_click++;
-//TODO
+            //TODO
             // refreshStatisticsTab();
         }
 
@@ -339,7 +338,7 @@ namespace GUI
             // lbFilterBy
             //
             lbFilterBy.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -366,7 +365,7 @@ namespace GUI
             // lbvalueToFilter
             //
             lbValueToFilter.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -421,7 +420,7 @@ namespace GUI
                 {
                     for (int j = 0; j < elements.Count(); j++)
                     {
-                        if (((Button) sender).Name == "btClear" + i.ToString())
+                        if (((Button)sender).Name == "btClear" + i.ToString())
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
@@ -438,7 +437,7 @@ namespace GUI
                             }
                         }
 
-                        if (((Button) sender).Name == "btAdd" + i.ToString())
+                        if (((Button)sender).Name == "btAdd" + i.ToString())
                         {
                             elements[j].ComboBox.Enabled = false;
                             found = true;
@@ -460,29 +459,34 @@ namespace GUI
         /// Este metodo permite añadirle colores a los marcadores y poligonos de acuerdo al nivel de contaminación que presentan.
         /// </summary>
         /// <param name="lst"></param> Lista con los elementos que se encuentran en la base de datos.
-        private void PollutionColor(List<ViewModel> lst)
+        private void PollutionColor()
         {
-            foreach (var value in lst)
+            foreach (var value in municipios_Set)
             {
-                string pollutionLevel = DefineContaminationLevel(value.Variable, value.Concentraci_n);
+                foreach (var variable in value.Variables)
+                {
 
-                if (pollutionLevel.Equals(EMERGENCIA))
-                {
-                    AddMarker(value, Color.FromArgb(50, Color.Red), GMarkerGoogleType.red);
-                }
-                else if (pollutionLevel.Equals(ALERTA))
-                {
-                    AddMarker(value, Color.FromArgb(50, Color.OrangeRed), GMarkerGoogleType.orange);
-                }
-                else if (pollutionLevel.Equals(PREVENCION))
-                {
-                    AddMarker(value, Color.FromArgb(50, Color.Yellow), GMarkerGoogleType.yellow);
-                }
-                else
-                {
-                    AddMarker(value, Color.FromArgb(50, Color.Green), GMarkerGoogleType.green);
+                    string pollutionLevel = DefineContaminationLevel(variable.Variable, variable.Concentracion);
+
+                    if (pollutionLevel.Equals(EMERGENCIA))
+                    {
+                        AddMarker(value, variable, Color.FromArgb(50, Color.Red), GMarkerGoogleType.red);
+                    }
+                    else if (pollutionLevel.Equals(ALERTA))
+                    {
+                        AddMarker(value, variable, Color.FromArgb(50, Color.OrangeRed), GMarkerGoogleType.orange);
+                    }
+                    else if (pollutionLevel.Equals(PREVENCION))
+                    {
+                        AddMarker(value, variable, Color.FromArgb(50, Color.Yellow), GMarkerGoogleType.yellow);
+                    }
+                    else
+                    {
+                        AddMarker(value, variable, Color.FromArgb(50, Color.Green), GMarkerGoogleType.green);
+                    }
                 }
             }
+
         }
 
         /// <summary>
@@ -626,6 +630,8 @@ namespace GUI
 
         }
         **/
+
+
         /// <summary>
         /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota.
         /// </summary>
@@ -654,35 +660,41 @@ namespace GUI
         /// <param name="value"></param> Representa un elemento de la base de datos.
         /// <param name="polygonColor"></param> Representa el color que rellena el poligono, de esta forma representar el nivel de contaminación de la zona.
         /// <param name="markerColor"></param> Representa el color del marcador, el cual representa el nivel de contaminación de la zona.
-        private void AddMarker(ViewModel value, Color polygonColor, GMarkerGoogleType markerColor)
+        private void AddMarker(Municipio value, Variable_Registrada variable, Color polygonColor, GMarkerGoogleType markerColor)
         {
-            var markerOverlay = new GMapOverlay("markers");
-            var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor);
 
+
+
+            var markerOverlay = new GMapOverlay(value.Nombre_del_municipio);
+            var marker = new GMarkerGoogle(new PointLatLng(value.Latitud, value.Longitud), markerColor);
+            marker.Tag = value.Nombre_del_municipio;
             markerOverlay.Markers.Add(marker);
 
-            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
-            marker.ToolTipText = String.Format("Fecha: " + value.Fecha + "\n"
-                                               + "Autoridad Ambiental: " + value.Autoridad_ambiental + "\n"
-                                               + "Nombre de la estación: " + value.Nombre_de_la_estaci_n + "\n"
-                                               + "Tecnologia: " + value.Tecnolog_a + "\n"
-                                               + "Latitud: " + value.Latitud + "\n"
-                                               + "Longitud: " + value.Longitud + "\n"
-                                               + "Codigo del departamento: " + value.C_digo_del_departamento + "\n"
-                                               + "Departamento: " + value.Departamento + "\n"
-                                               + "Codigo de municipio: " + value.C_digo_del_municipio + "\n"
-                                               + "Municipio: " + value.Nombre_del_municipio + "\n"
-                                               + "Tipo de estación: " + value.Tipo_de_estaci_n + "\n"
-                                               + "Tiempo de exposición: " + value.Tiempo_de_exposici_n + "\n"
-                                               + "Variable: " + value.Variable + "\n"
-                                               + "Unidades: " + value.Unidades + "\n"
-                                               + "Concentración: " + value.Concentraci_n
-            );
 
-            // Añade un poligono como representación al nivel de contaminación.
+            marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
+            marker.ToolTipText = String.Format("Latitud: " + value.Latitud + "\n"
+               + "Longitud: " + value.Longitud + "\n"
+               + "Departamento: " + value.Departamento + "\n"
+               + "Municipio " + value.Nombre_del_municipio + "\n"
+               + "Variable " + variable.Variable + "\n"
+
+                );
+
             AddPolygon(value, polygonColor);
             gMapC.Overlays.Add(markerOverlay);
+
         }
+
+        private void Marker_Click(GMapMarker item, MouseEventArgs e)
+        {
+
+            MessageBox.Show("" + item.Tag);
+
+
+        }
+
+
+
 
         /// <summary>
         /// Este metodo permite crear un poligono alrededor de las coordenadas donde se realizo la prueba y de
@@ -690,7 +702,7 @@ namespace GUI
         /// </summary>
         /// <param name="value"></param> Representa a un elemnento de la base de datos
         /// <param name="polygonColor"></param> Representa el color que rellena el poligono, de esta forma representar el nivel de contaminación de la zona.
-        private void AddPolygon(ViewModel value, Color polygonColor)
+        private void AddPolygon(Municipio value, Color polygonColor)
         {
             GMapOverlay polygons = new GMapOverlay("Polygons");
             List<PointLatLng> points = new List<PointLatLng>();
@@ -703,6 +715,7 @@ namespace GUI
             gMapC.Overlays.Add(polygons);
             points.Clear();
         }
+
 
         /// <summary>
         /// Metodo auxiliar del metodo AddPolygon,este metodo permite crear un cuadrado, a partir de coordenadas alrededor de un punto en especifico.
@@ -825,14 +838,124 @@ namespace GUI
             gMapC.Zoom = trackBarZoom.Value;
         }
 
-        private void Circle(object sender, MouseEventArgs e)
+        private void btShowPollutionColor_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("hola");
+
+            Circle(pB1, Color.Red);
+            Circle(pB2, Color.OrangeRed);
+            Circle(pB3, Color.Yellow);
+            Circle(pB4, Color.Green);
+
+      
+            // 
+            // label9
+            // 
+            Label label9 = new Label();
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(1211, 95);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(63, 13);
+            label9.TabIndex = 10;
+            label9.Text = "Emergencia";
+            label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label10
+            // 
+            Label label10 = new Label();
+
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(1211, 187);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(63, 13);
+            label10.TabIndex = 11;
+            label10.Text = "Alerta";
+            label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label11
+            // 
+            Label label11 = new Label();
+
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(1211, 289);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(63, 13);
+            label11.TabIndex = 12;
+            label11.Text = "Prevencion";
+            label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+
+            // 
+            // label12
+            // 
+            Label label12 = new Label();
+
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(1211, 386);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(63, 13);
+            label12.TabIndex = 13;
+            label12.Text = "Permisible";
+            label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+        }
+
+
+        private void Circle(PictureBox pictureBox, Color color)
+        {
+
             Graphics papel;
-            papel = pB1.CreateGraphics();
-            SolidBrush myBrush = new SolidBrush(Color.Red);
+            papel = pictureBox.CreateGraphics();
+            SolidBrush myBrush = new SolidBrush(color);
             Pen lapiz = new Pen(myBrush);
-            papel.FillRectangle(myBrush, 0, 0, pB1.Width, pB1.Height);
+            papel.FillRectangle(myBrush, 0, 0, pictureBox.Width, pictureBox.Height);
+
+            papel.Dispose();
+            lapiz.Dispose();
+            myBrush.Dispose();
+        }
+
+
+        private void MouseOver(object sender, EventArgs e)
+        {
+            string title = "";
+            string text = "";
+            if (sender.Equals(pB1))
+            {
+                title = EMERGENCIA + "Dañina para la salud";
+                text = "Todos los individuos pueden comenzar a experimentar efectos " +
+                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." + "\n" + "\n"
+                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
+
+                auxiliarPopup(title, text, Color.Red);
+
+            }
+            else if (sender.Equals(pB2))
+            {
+
+            }
+            else if (sender.Equals(pB3))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+
+        private void auxiliarPopup(string title, string text, Color color)
+        {
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.TitleText = title;
+            popup.ContentText = text;
+            popup.TitleFont = SystemFonts.CaptionFont;
+            popup.BorderColor = SystemColors.WindowFrame;
+            popup.ContentFont = SystemFonts.StatusFont;
+            popup.BorderColor = Color.Transparent;
+            popup.Delay = 5000;
+            popup.Scroll = true;
+            popup.BodyColor = Color.FromArgb(50, color);
+            popup.Popup();
         }
 
         public void inicializarVariables(List<Variable_Registrada> variables)
@@ -1031,7 +1154,7 @@ namespace GUI
                 .Where(datoUno + datoDos + datoTres).Limit(limite).Offset(0);
 
             var results = dataset.Query<Dictionary<string, string>>(soql);
-            
+
             foreach (Dictionary<string, string> VARIABLE in results)
             {
                 Concentracion_Registro con = new Concentracion_Registro();
@@ -1155,7 +1278,7 @@ namespace GUI
 
         private void PieChart()
         {
-            
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1170,5 +1293,7 @@ namespace GUI
             }
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
         }
+
+
     }
 }
