@@ -38,6 +38,9 @@ namespace GUI
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
@@ -62,6 +65,14 @@ namespace GUI
             this.btSatelite = new System.Windows.Forms.Button();
             this.gMapC = new GMap.NET.WindowsForms.GMapControl();
             this.tabPageStadistc = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.variableCB = new System.Windows.Forms.ComboBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pieChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label3 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -76,6 +87,7 @@ namespace GUI
             ((System.ComponentModel.ISupportInitialize) (this.pB1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).BeginInit();
             this.tabPageStadistc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.pieChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.arima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).BeginInit();
             this.SuspendLayout();
@@ -319,6 +331,14 @@ namespace GUI
             // 
             // tabPageStadistc
             // 
+            this.tabPageStadistc.Controls.Add(this.label8);
+            this.tabPageStadistc.Controls.Add(this.variableCB);
+            this.tabPageStadistc.Controls.Add(this.button5);
+            this.tabPageStadistc.Controls.Add(this.textBox3);
+            this.tabPageStadistc.Controls.Add(this.label7);
+            this.tabPageStadistc.Controls.Add(this.label6);
+            this.tabPageStadistc.Controls.Add(this.label5);
+            this.tabPageStadistc.Controls.Add(this.pieChart);
             this.tabPageStadistc.Controls.Add(this.label3);
             this.tabPageStadistc.Controls.Add(this.button4);
             this.tabPageStadistc.Controls.Add(this.label4);
@@ -333,9 +353,83 @@ namespace GUI
             this.tabPageStadistc.Text = "Estadisticas";
             this.tabPageStadistc.UseVisualStyleBackColor = true;
             // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(372, 133);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 23);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Variable a analizar";
+            // 
+            // variableCB
+            // 
+            this.variableCB.FormattingEnabled = true;
+            this.variableCB.Location = new System.Drawing.Point(351, 159);
+            this.variableCB.Name = "variableCB";
+            this.variableCB.Size = new System.Drawing.Size(121, 21);
+            this.variableCB.TabIndex = 14;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(372, 195);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(73, 24);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "Ir";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(443, 66);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(55, 20);
+            this.textBox3.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(372, 69);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 23);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "No. Valores";
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(49, 288);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 23);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Diagrama de Pastel";
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(732, 172);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 23);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Predicción ARIMA";
+            // 
+            // pieChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.pieChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.pieChart.Legends.Add(legend1);
+            this.pieChart.Location = new System.Drawing.Point(48, 323);
+            this.pieChart.Name = "pieChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.pieChart.Series.Add(series1);
+            this.pieChart.Size = new System.Drawing.Size(222, 213);
+            this.pieChart.TabIndex = 8;
+            this.pieChart.Text = "chart1";
+            // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(57, 49);
+            this.label3.Location = new System.Drawing.Point(33, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 18);
             this.label3.TabIndex = 7;
@@ -343,16 +437,17 @@ namespace GUI
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(672, 119);
+            this.button4.Location = new System.Drawing.Point(814, 101);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 6;
             this.button4.Text = "Ir";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(633, 61);
+            this.label4.Location = new System.Drawing.Point(775, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(149, 23);
             this.label4.TabIndex = 5;
@@ -360,41 +455,43 @@ namespace GUI
             // 
             // forecastTextBox
             // 
-            this.forecastTextBox.Location = new System.Drawing.Point(682, 87);
+            this.forecastTextBox.Location = new System.Drawing.Point(824, 69);
             this.forecastTextBox.Name = "forecastTextBox";
             this.forecastTextBox.Size = new System.Drawing.Size(55, 20);
             this.forecastTextBox.TabIndex = 4;
             // 
             // arima
             // 
-            chartArea1.Name = "ChartArea1";
-            this.arima.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.arima.Legends.Add(legend1);
-            this.arima.Location = new System.Drawing.Point(458, 158);
+            chartArea2.Name = "ChartArea1";
+            this.arima.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.arima.Legends.Add(legend2);
+            this.arima.Location = new System.Drawing.Point(692, 195);
             this.arima.Name = "arima";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.arima.Series.Add(series1);
-            this.arima.Size = new System.Drawing.Size(542, 324);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Legend = "Legend1";
+            series2.MarkerSize = 10;
+            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star4;
+            series2.Name = "Series1";
+            this.arima.Series.Add(series2);
+            this.arima.Size = new System.Drawing.Size(366, 238);
             this.arima.TabIndex = 3;
             this.arima.Text = "chart2";
             // 
             // timeSeries
             // 
-            chartArea2.Name = "ChartArea1";
-            this.timeSeries.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.timeSeries.Legends.Add(legend2);
-            this.timeSeries.Location = new System.Drawing.Point(39, 75);
+            chartArea3.Name = "ChartArea1";
+            this.timeSeries.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.timeSeries.Legends.Add(legend3);
+            this.timeSeries.Location = new System.Drawing.Point(8, 43);
             this.timeSeries.Name = "timeSeries";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.timeSeries.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.timeSeries.Series.Add(series3);
             this.timeSeries.Size = new System.Drawing.Size(375, 200);
             this.timeSeries.TabIndex = 2;
             this.timeSeries.Text = "chart1";
@@ -426,6 +523,7 @@ namespace GUI
             ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).EndInit();
             this.tabPageStadistc.ResumeLayout(false);
             this.tabPageStadistc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.pieChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.arima)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).EndInit();
             this.ResumeLayout(false);
@@ -441,6 +539,7 @@ namespace GUI
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridView dtGrid;
         private System.Windows.Forms.FlowLayoutPanel fLP;
         private System.Windows.Forms.TextBox forecastTextBox;
@@ -449,7 +548,12 @@ namespace GUI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pB1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart pieChart;
         private System.Windows.Forms.Label prueba;
         private System.Windows.Forms.TabControl tab;
         private System.Windows.Forms.TabPage tabPageFilters;
@@ -457,10 +561,12 @@ namespace GUI
         private System.Windows.Forms.TabPage tabPageStadistc;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.DataVisualization.Charting.Chart timeSeries;
         private System.Windows.Forms.TrackBar trackBarZoom;
         private System.Windows.Forms.TextBox txURL;
+        private System.Windows.Forms.ComboBox variableCB;
 
         #endregion
     }

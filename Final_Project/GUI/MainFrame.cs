@@ -43,7 +43,7 @@ namespace GUI
         /*
         * variable para saber a que municipio pertenencen todos los datos de la variable consulta
         */
-        private string municipioActual;
+        private Municipio municipioActual;
 
         /*
         * lista de todos los municipios a usar
@@ -86,19 +86,19 @@ namespace GUI
             Consulta = new List<Concentracion_Registro>();
 
             InitializeComponent();
-
             inicializarMunicipios();
-
+            MunicipioActual = MunicipiosSet.First();
             // inicializarDatosMunicipios();
             // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
 
             count_click = 0;
-
-            TimeSeries();
-            Arima();
-
+            
             columnsValues = new string[15];
             elements = new List<Element>();
+            
+            variableCB.Items.AddRange(new object[] {"PM10",
+                "O3",
+                "Radiación Solar Global"});
         }
 
         public int YearActual
@@ -107,7 +107,7 @@ namespace GUI
             set => yearActual = value;
         }
 
-        public string MunicipioActual
+        public Municipio MunicipioActual
         {
             get => municipioActual;
             set => municipioActual = value;
@@ -1108,9 +1108,9 @@ namespace GUI
         //     phLabel.Text = gsc.hProof();
         // }
 
-        private void Arima()
+        private void Arima(string municipio, string variable)
         {
-            consultarDatos("BOGOTÁ. D.C.", "PM10", 2012, 1000);
+            consultarDatos(municipio, variable, 2012, Convert.ToInt32(forecastTextBox.Text));
             List<double> temp = new List<double>();
 
             foreach (var valor in consulta)
@@ -1125,26 +1125,49 @@ namespace GUI
             arima.Series[0].Points.DataBindY(arimaforecast);
         }
 
-        private void TimeSeries()
+        private void TimeSeries(string municipio, string variable)
         {
-            consultarDatos("BOGOTÁ. D.C.", "PM10", 2012, 1000);
+            consultarDatos(municipio, variable, 2012, Convert.ToInt32(textBox3.Text));
             List<double> temp = new List<double>();
 
             foreach (var valor in consulta)
             {
                 temp.Add(valor.Concentraci_n);
             }
-
             consulta.Clear();
-            
-            // Series series = new Series();
-            // for (int i = 0; i < sunspots.Length; i++)
-            // {
-            //     DataPoint dataPoint = new DataPoint(i, sunspots[i]);
-            //     series.Points.Add(dataPoint);
-            // }
 
             timeSeries.Series[0].Points.DataBindY(temp);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string variable = null;
+            foreach (var variableAComparar in municipioActual.Variables)
+            {
+                if (variableAComparar.Variable.Equals(variableCB.SelectedItem.ToString()))
+                {
+                    variable = variableCB.SelectedItem.ToString();
+                }
+            }
+            Arima(MunicipioActual.Nombre_del_municipio, variable);
+        }
+
+        private void PieChart()
+        {
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string variable = null;
+            foreach (var variableAComparar in municipioActual.Variables)
+            {
+                if (variableAComparar.Variable.Equals(variableCB.SelectedItem.ToString()))
+                {
+                    variable = variableCB.SelectedItem.ToString();
+                }
+            }
+            TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
         }
     }
 }
