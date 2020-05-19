@@ -19,7 +19,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GUI
 {
-    public partial class blume : Form
+    public partial class Blume : Form
     {
         /// <summary>
         /// Count the click number of the button
@@ -79,7 +79,7 @@ namespace GUI
         /// </summary>
         public const string PERMISIBLE = "Permisible";
 
-        public blume()
+        public Blume()
         {
             YearActual = 2011;
             MunicipiosSet = new List<Municipio>();
@@ -88,7 +88,7 @@ namespace GUI
             InitializeComponent();
             inicializarMunicipios();
             MunicipioActual = MunicipiosSet.First();
-            // inicializarDatosMunicipios();
+            inicializarDatosMunicipios();
             // consultarDatos(municipios_Set.First().Nombre_del_municipio, variables_Set.First().Variable, yearActual);
 
             count_click = 0;
@@ -1059,7 +1059,7 @@ namespace GUI
             {
                 //con esto en la variable consulta tendre los datos
                 // 3 el numero de filas para que cargue rapido
-                consultarDatos(municipio.Nombre_del_municipio, variable.Variable, yearActual, 3);
+                consultarDatos(municipio.Nombre_del_municipio, variable.Variable, yearActual, 5);
                 // verifico que hayan datos
                 if (Consulta.Count > 0)
                 {
@@ -1155,7 +1155,15 @@ namespace GUI
 
         private void PieChart()
         {
+            // List<double> data = new List<double>();
+            foreach (var variable in municipioActual.Variables)
+            {
+                // data.Add(variable.Concentracion);
+                pieChart.Series[0].Points.AddXY(variable.Variable, variable.Concentracion);
+            }
             
+            pieChart.Legends[0].Enabled = true;
+            pieChart.Series[0].IsValueShownAsLabel = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1169,6 +1177,7 @@ namespace GUI
                 }
             }
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
+            PieChart();
         }
     }
 }
