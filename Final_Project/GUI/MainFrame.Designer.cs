@@ -58,6 +58,8 @@ namespace GUI
             this.btFilter = new System.Windows.Forms.Button();
             this.txURL = new System.Windows.Forms.TextBox();
             this.tabPageGmap = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.variableGmaps = new System.Windows.Forms.ComboBox();
             this.pB1 = new System.Windows.Forms.PictureBox();
             this.trackBarZoom = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -231,6 +233,8 @@ namespace GUI
             // 
             // tabPageGmap
             // 
+            this.tabPageGmap.Controls.Add(this.label9);
+            this.tabPageGmap.Controls.Add(this.variableGmaps);
             this.tabPageGmap.Controls.Add(this.pB1);
             this.tabPageGmap.Controls.Add(this.trackBarZoom);
             this.tabPageGmap.Controls.Add(this.label2);
@@ -246,6 +250,23 @@ namespace GUI
             this.tabPageGmap.Text = "Gmap";
             this.tabPageGmap.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(467, 647);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 23);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Variable:";
+            // 
+            // variableGmaps
+            // 
+            this.variableGmaps.FormattingEnabled = true;
+            this.variableGmaps.Location = new System.Drawing.Point(446, 673);
+            this.variableGmaps.Name = "variableGmaps";
+            this.variableGmaps.Size = new System.Drawing.Size(121, 21);
+            this.variableGmaps.TabIndex = 6;
+            this.variableGmaps.SelectedIndexChanged += new System.EventHandler(this.variableGmaps_SelectedIndexChanged);
+            // 
             // pB1
             // 
             this.pB1.Location = new System.Drawing.Point(1075, 6);
@@ -257,10 +278,10 @@ namespace GUI
             // trackBarZoom
             // 
             this.trackBarZoom.LargeChange = 1;
-            this.trackBarZoom.Location = new System.Drawing.Point(593, 643);
+            this.trackBarZoom.Location = new System.Drawing.Point(672, 643);
             this.trackBarZoom.Maximum = 20;
             this.trackBarZoom.Name = "trackBarZoom";
-            this.trackBarZoom.Size = new System.Drawing.Size(476, 45);
+            this.trackBarZoom.Size = new System.Drawing.Size(397, 45);
             this.trackBarZoom.TabIndex = 5;
             this.trackBarZoom.Value = 6;
             this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
@@ -268,7 +289,7 @@ namespace GUI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(543, 654);
+            this.label2.Location = new System.Drawing.Point(632, 655);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 4;
@@ -276,7 +297,7 @@ namespace GUI
             // 
             // btRelief
             // 
-            this.btRelief.Location = new System.Drawing.Point(361, 649);
+            this.btRelief.Location = new System.Drawing.Point(273, 665);
             this.btRelief.Name = "btRelief";
             this.btRelief.Size = new System.Drawing.Size(109, 23);
             this.btRelief.TabIndex = 3;
@@ -286,7 +307,7 @@ namespace GUI
             // 
             // btOriginal
             // 
-            this.btOriginal.Location = new System.Drawing.Point(236, 649);
+            this.btOriginal.Location = new System.Drawing.Point(148, 665);
             this.btOriginal.Name = "btOriginal";
             this.btOriginal.Size = new System.Drawing.Size(109, 23);
             this.btOriginal.TabIndex = 2;
@@ -296,7 +317,7 @@ namespace GUI
             // 
             // btSatelite
             // 
-            this.btSatelite.Location = new System.Drawing.Point(112, 649);
+            this.btSatelite.Location = new System.Drawing.Point(24, 665);
             this.btSatelite.Name = "btSatelite";
             this.btSatelite.Size = new System.Drawing.Size(109, 23);
             this.btSatelite.TabIndex = 1;
@@ -521,7 +542,7 @@ namespace GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 609);
+            this.ClientSize = new System.Drawing.Size(1200, 738);
             this.Controls.Add(this.tab);
             this.Name = "Blume";
             this.Text = "BLUME";
@@ -566,6 +587,7 @@ namespace GUI
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pB1;
         private System.Windows.Forms.DataVisualization.Charting.Chart pieChart;
         private System.Windows.Forms.Label prueba;
@@ -581,6 +603,7 @@ namespace GUI
         private System.Windows.Forms.TrackBar trackBarZoom;
         private System.Windows.Forms.TextBox txURL;
         private System.Windows.Forms.ComboBox variableCB;
+        private System.Windows.Forms.ComboBox variableGmaps;
 
         #endregion
 

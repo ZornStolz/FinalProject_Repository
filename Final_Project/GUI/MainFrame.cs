@@ -101,6 +101,14 @@ namespace GUI
                 "O3",
                 "Radiación Solar Global"
             });
+
+            variableGmaps.Items.AddRange(new object[]
+            {
+                "PM10",
+                "O3",
+                "Radiación Solar Global"
+            });
+            variableGmaps.Text = "PM10";
         }
 
         public int YearActual
@@ -131,7 +139,7 @@ namespace GUI
         {
             ViewGrid();
             AddNameColumnToList();
-            PollutionColor();
+            //PollutionColor();
         }
 
         /// <summary>
@@ -461,29 +469,39 @@ namespace GUI
         /// <param name="lst"></param> Lista con los elementos que se encuentran en la base de datos.
         private void PollutionColor()
         {
+            //Limpia los marcadores actuales
+            gMapC.Overlays.Clear();
+
             foreach (var value in municipios_Set)
             {
-                foreach (var variable in value.Variables)
-                {
-                    string pollutionLevel = DefineContaminationLevel(variable.Variable, variable.Concentracion);
+                var selectedVariable = variableGmaps.SelectedItem.ToString();
 
-                    if (pollutionLevel.Equals(EMERGENCIA))
-                    {
-                        AddMarker(value, variable, Color.FromArgb(50, Color.Red), GMarkerGoogleType.red);
-                    }
-                    else if (pollutionLevel.Equals(ALERTA))
-                    {
-                        AddMarker(value, variable, Color.FromArgb(50, Color.OrangeRed), GMarkerGoogleType.orange);
-                    }
-                    else if (pollutionLevel.Equals(PREVENCION))
-                    {
-                        AddMarker(value, variable, Color.FromArgb(50, Color.Yellow), GMarkerGoogleType.yellow);
-                    }
-                    else
-                    {
-                        AddMarker(value, variable, Color.FromArgb(50, Color.Green), GMarkerGoogleType.green);
-                    }
+                //Busca el valor elegido en el ComboBox entre las variables de 'value' y lo asigna a 'variableActual'
+                Variable_Registrada variableActual = value.Variables.Find(x => x.Variable.Equals(selectedVariable));
+
+                string pollutionLevel = DefineContaminationLevel(variableActual.Variable, variableActual.Concentracion);
+
+                if (pollutionLevel.Equals(EMERGENCIA))
+                {
+                    AddMarker(value, variableActual, Color.FromArgb(50, Color.Red), GMarkerGoogleType.red);
                 }
+                else if (pollutionLevel.Equals(ALERTA))
+                {
+                    AddMarker(value, variableActual, Color.FromArgb(50, Color.OrangeRed), GMarkerGoogleType.orange);
+                }
+                else if (pollutionLevel.Equals(PREVENCION))
+                {
+                    AddMarker(value, variableActual, Color.FromArgb(50, Color.Yellow), GMarkerGoogleType.yellow);
+                }
+                else
+                {
+                    AddMarker(value, variableActual, Color.FromArgb(50, Color.Green), GMarkerGoogleType.green);
+                }
+
+                //Para actualizar la ubicacion de los marcadores en el mapa
+                var temp = trackBarZoom.Value;
+                gMapC.Zoom = temp + 1;
+                gMapC.Zoom = temp;
             }
         }
 
@@ -1299,6 +1317,11 @@ namespace GUI
 
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
             PieChart();
+        }
+
+        private void variableGmaps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PollutionColor();
         }
     }
 }
