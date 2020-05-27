@@ -605,7 +605,7 @@ namespace GUI
         private string SolarRadiationPollutionLevel(double concentracion)
         {
             string pollutionLevel = "";
-            
+
             //Casos.
             if (concentracion <= 200)
             {
@@ -619,6 +619,7 @@ namespace GUI
             {
                 pollutionLevel = EMERGENCIA;
             }
+
             return pollutionLevel;
         }
 
@@ -1274,6 +1275,8 @@ namespace GUI
 
         private void PieChart()
         {
+            pieChart.Series[0].Points.Clear();
+
             foreach (var variable in municipioActual.Variables)
             {
                 pieChart.Series[0].Points.AddXY(variable.Variable, variable.Concentracion);

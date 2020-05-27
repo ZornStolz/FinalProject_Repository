@@ -329,8 +329,8 @@ namespace GUI
             this.gMapC.Size = new System.Drawing.Size(1061, 631);
             this.gMapC.TabIndex = 0;
             this.gMapC.Zoom = 0D;
-            this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
             this.gMapC.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.Marker_Click);
+            this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
             // 
             // tabPageStadistc
             // 
