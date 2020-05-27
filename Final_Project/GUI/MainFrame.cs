@@ -193,13 +193,10 @@ namespace GUI
         {
             if (elements != null)
             {
-
                 foreach (var values in elements)
                 {
                     if (values.ComboBox.Enabled == true)
                     {
-
-
                         values.ComboBox.Enabled = false;
 
                         string columnName = values.ComboBox.Text;
@@ -285,26 +282,17 @@ namespace GUI
                             URL += "" + columnName + "=" + valueToFilter + "&";
 
                         }
-
                     }
-
-
-
-
                 }
-
-
-
-
-
                 ViewGrid();
 
                 // dtGrid.Refresh();
                 //dtGrid.Update();
             }
         }
-
             */
+        
+        
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -751,51 +739,6 @@ namespace GUI
             points.Add(new PointLatLng(x, y - d));
         }
 
-        private void DistanceTwoPoint(double x, double y, List<PointLatLng> points)
-        {
-            double d = 0.5;
-            double x1 = x;
-            double y1 = y;
-            double x2 = x;
-            double y2 = y;
-
-            // Verificar parte superior.
-            while (Distance(x1, y1, x2, y2) != d)
-            {
-                y2 += d;
-            }
-
-            points.Add(new PointLatLng(x2, y2));
-            y2 = y;
-
-            // Verificar parte  derecha.
-            while (Distance(x1, y1, x2, y2) != d)
-            {
-                x2 += d;
-            }
-
-            points.Add(new PointLatLng(x2, y2));
-
-            x2 = x;
-
-            // Verificar parte inferior.
-            while (Distance(x1, y1, x2, y2) != d)
-            {
-                y2 -= d;
-            }
-
-            points.Add(new PointLatLng(x2, y2));
-            y2 = y;
-
-            // Verificar parte  izquierda.
-            while (Distance(x1, y1, x2, y2) != d)
-            {
-                x2 -= d;
-            }
-
-            points.Add(new PointLatLng(x2, y2));
-        }
-
         private double Distance(double x1, double y1, double x2, double y2)
         {
             double first = Math.Pow((x2 - x1), 2);
@@ -858,11 +801,10 @@ namespace GUI
 
         private void btShowPollutionColor_Click(object sender, EventArgs e)
         {
-            Circle(pB1, Color.Red);
-            Circle(pB2, Color.OrangeRed);
-            Circle(pB3, Color.Yellow);
-            Circle(pB4, Color.Green);
-
+            // Circle(pB1, Color.Red);
+            // Circle(pB2, Color.OrangeRed);
+            // Circle(pB3, Color.Yellow);
+            // Circle(pB4, Color.Green);
 
             // 
             // label9
@@ -914,7 +856,6 @@ namespace GUI
             label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
         }
 
-
         private void Circle(PictureBox pictureBox, Color color)
         {
             Graphics papel;
@@ -937,7 +878,7 @@ namespace GUI
             {
                 title = EMERGENCIA + "Dañina para la salud";
                 text = "Todos los individuos pueden comenzar a experimentar efectos " +
-                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
+                       "sobre la salud. Los grupos sensibles pueden experimentar efectos más graves que la salud." +
                        "\n" + "\n"
                        + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
 
@@ -945,16 +886,36 @@ namespace GUI
             }
             else if (sender.Equals(pB2))
             {
+                title = ALERTA + "Dañina para la salud";
+                text = "Todos los individuos pueden comenzar a experimentar efectos " +
+                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
+                       "\n" + "\n"
+                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
+
+                auxiliarPopup(title, text, Color.OrangeRed);
             }
             else if (sender.Equals(pB3))
             {
+                title = PREVENCION + "Dañina para la salud";
+                text = "Todos los individuos pueden comenzar a experimentar efectos " +
+                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
+                       "\n" + "\n"
+                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
+
+                auxiliarPopup(title, text, Color.Yellow);
             }
             else
             {
+                title = PERMISIBLE + "Dañina para la salud";
+                text = "Todos los individuos pueden comenzar a experimentar efectos " +
+                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
+                       "\n" + "\n"
+                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
+
+                auxiliarPopup(title, text, Color.Green);
             }
         }
-
-
+        
         private void auxiliarPopup(string title, string text, Color color)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -965,7 +926,7 @@ namespace GUI
             popup.ContentFont = SystemFonts.StatusFont;
             popup.BorderColor = Color.Transparent;
             popup.Delay = 5000;
-            popup.Scroll = true;
+            popup.Scroll = false;
             popup.BodyColor = Color.FromArgb(50, color);
             popup.Popup();
         }
@@ -1294,7 +1255,7 @@ namespace GUI
         private void PieChart()
         {
             pieChart.Series[0].Points.Clear();
-
+            
             foreach (var variable in municipioActual.Variables)
             {
                 pieChart.Series[0].Points.AddXY(variable.Variable, variable.Concentracion);
@@ -1314,7 +1275,6 @@ namespace GUI
                     variable = variableCB.SelectedItem.ToString();
                 }
             }
-
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
             PieChart();
         }
@@ -1323,7 +1283,13 @@ namespace GUI
         {
             PollutionColor();
         }
-
-     
+        
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Circle(pB1, Color.Red);
+            Circle(pB2, Color.OrangeRed);
+            Circle(pB3, Color.Yellow);
+            Circle(pB4, Color.Green);
+        }
     }
 }
