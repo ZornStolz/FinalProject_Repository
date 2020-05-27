@@ -346,7 +346,7 @@ namespace GUI
             TextBox txValueToFilter, Button btAdd, Button btClear)
         {
             lbFilterBy.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -373,7 +373,7 @@ namespace GUI
             // lbvalueToFilter
             //
             lbValueToFilter.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -428,7 +428,7 @@ namespace GUI
                 {
                     for (int j = 0; j < elements.Count(); j++)
                     {
-                        if (((Button) sender).Name == "btClear" + i.ToString())
+                        if (((Button)sender).Name == "btClear" + i.ToString())
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
@@ -445,7 +445,7 @@ namespace GUI
                             }
                         }
 
-                        if (((Button) sender).Name == "btAdd" + i.ToString())
+                        if (((Button)sender).Name == "btAdd" + i.ToString())
                         {
                             elements[j].ComboBox.Enabled = false;
                             found = true;
@@ -552,7 +552,7 @@ namespace GUI
         private string PM10PollutionLevel(double concentracion)
         {
             string pollutionLevel = "";
-//154,155,254,255,354,355
+            //154,155,254,255,354,355
             //Casos.
             if (concentracion <= 10)
             {
@@ -590,7 +590,7 @@ namespace GUI
         private string O3PollutionLevel(double concentracion)
         {
             string pollutionLevel = "";
-//138,139,167,168,207,208
+            //138,139,167,168,207,208
             //Casos.
             if (concentracion <= 10)
             {
@@ -1323,5 +1323,7 @@ namespace GUI
         {
             PollutionColor();
         }
+
+     
     }
 }
