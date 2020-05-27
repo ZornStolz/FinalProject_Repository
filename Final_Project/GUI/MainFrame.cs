@@ -534,21 +534,21 @@ namespace GUI
         private string PM10PollutionLevel(double concentracion)
         {
             string pollutionLevel = "";
-
+//154,155,254,255,354,355
             //Casos.
-            if (concentracion <= 100)
+            if (concentracion <= 10)
             {
                 pollutionLevel = PERMISIBLE;
             }
-            else if (concentracion >= 155 && concentracion <= 254)
+            else if (concentracion >= 11 && concentracion <= 20)
             {
                 pollutionLevel = PREVENCION;
             }
-            else if (concentracion >= 255 && concentracion <= 354)
+            else if (concentracion >= 21 && concentracion <= 30)
             {
                 pollutionLevel = ALERTA;
             }
-            else if (concentracion >= 355)
+            else if (concentracion >= 31)
             {
                 pollutionLevel = EMERGENCIA;
             }
@@ -572,21 +572,21 @@ namespace GUI
         private string O3PollutionLevel(double concentracion)
         {
             string pollutionLevel = "";
-
-            // Casos.
-            if (concentracion <= 100)
+//138,139,167,168,207,208
+            //Casos.
+            if (concentracion <= 10)
             {
                 pollutionLevel = PERMISIBLE;
             }
-            else if (concentracion >= 139 && concentracion <= 167)
+            else if (concentracion >= 11 && concentracion <= 20)
             {
                 pollutionLevel = PREVENCION;
             }
-            else if (concentracion >= 168 && concentracion <= 207)
+            else if (concentracion >= 21 && concentracion <= 30)
             {
                 pollutionLevel = ALERTA;
             }
-            else if (concentracion >= 208)
+            else if (concentracion >= 31)
             {
                 pollutionLevel = EMERGENCIA;
             }
@@ -604,10 +604,21 @@ namespace GUI
         /// <returns></returns>
         private string SolarRadiationPollutionLevel(double concentracion)
         {
-            string pollutionLevel = PERMISIBLE;
-
+            string pollutionLevel = "";
+            
             //Casos.
-
+            if (concentracion <= 200)
+            {
+                pollutionLevel = PERMISIBLE;
+            }
+            else if (concentracion >= 201 && concentracion <= 250)
+            {
+                pollutionLevel = ALERTA;
+            }
+            else if (concentracion >= 251)
+            {
+                pollutionLevel = EMERGENCIA;
+            }
             return pollutionLevel;
         }
 
@@ -680,6 +691,7 @@ namespace GUI
         private void Marker_Click(GMapMarker item, MouseEventArgs e)
         {
             MessageBox.Show("" + item.Tag);
+            municipioActual.Nombre_del_municipio = item.Tag.ToString();
         }
 
 
