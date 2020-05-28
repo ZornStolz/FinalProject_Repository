@@ -292,6 +292,7 @@ namespace GUI
             }
         }
             */
+
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -526,10 +527,10 @@ namespace GUI
         /// Metodo auxiliar del metodo DefineContaminationLevel.
         /// Establece el nivel de contaminación de la variable PM10.
         /// Este nivel de contaminación ( ug/m^3 ) se evaluara en un tiempo de exposición de 24 horas como:
-        /// Permisible: 100
-        /// Prevencion: 155 - 254
-        /// Alerta:  255 - 354
-        /// Emergencia: >= 355
+        /// Permisible: <= 10
+        /// Prevencion: 11 - 20
+        /// Alerta:  21 - 30
+        /// Emergencia: >= 31
         /// Estos niveles de contaminación son establecidos de acuerdo al Ministerio de Ambiente y Desarrollo sostenible.
         /// https://www.minambiente.gov.co/images/normativa/app/resoluciones/96-res%202254%20de%202017.pdf#page=5&zoom=auto,-99,744
         /// </summary>
@@ -564,11 +565,11 @@ namespace GUI
         /// <summary>
         /// Metodo auxiliar del metodo DefineContaminationLevel.
         /// Establece el nivel de contaminación de la variable O3.
-        /// Este nivel de contaminación ( ug/m^3 ) se evaluara en un tiempo de exposición de 8 horas como:
-        /// Permisible: 100
-        /// Prevencion: 139 - 167
-        /// Alerta:  168 - 207
-        /// Emergencia: >= 208
+        /// Este nivel de contaminación O3 ( ug/m^3 ) se evaluara como:
+        /// Permisible: <= 8
+        /// Prevencion: 9 - 10
+        /// Alerta:  11 - 27
+        /// Emergencia: >= 28
         /// Estos niveles de contaminación son establecidos de acuerdo al Ministerio de Ambiente y Desarrollo sostenible.
         /// https://www.minambiente.gov.co/images/normativa/app/resoluciones/96-res%202254%20de%202017.pdf#page=5&zoom=auto,-99,744
         /// </summary>
@@ -603,8 +604,11 @@ namespace GUI
         /// <summary>
         /// Metodo auxiliar del metodo DefineContaminationLevel.
         /// Establece el nivel de contaminación de la variable Radiación Solar Global.
-        /// Este nivel de contaminación se evaluara como:
-        /// Permisible,Prevencion, Alerta, Emergencia.
+        /// Este nivel de contaminación de la radiación solar se evaluara como:
+        /// Permisible: <= 200
+        /// Prevencion: 201 - 210
+        /// Alerta:  211 - 250
+        /// Emergencia: >= 251
         /// </summary>
         /// <param name="concentracion"></param> Nivel de concentración de la variable Radiación Solar Global.
         /// <returns></returns>
@@ -617,7 +621,11 @@ namespace GUI
             {
                 pollutionLevel = PERMISIBLE;
             }
-            else if (concentracion >= 201 && concentracion <= 250)
+            else if (concentracion >= 201 && concentracion <= 210)
+            {
+                pollutionLevel = PREVENCION;
+            }
+            else if (concentracion >= 211 && concentracion <= 250)
             {
                 pollutionLevel = ALERTA;
             }
@@ -625,6 +633,7 @@ namespace GUI
             {
                 pollutionLevel = EMERGENCIA;
             }
+
 
             return pollutionLevel;
         }
@@ -801,59 +810,7 @@ namespace GUI
 
         private void btShowPollutionColor_Click(object sender, EventArgs e)
         {
-            // Circle(pB1, Color.Red);
-            // Circle(pB2, Color.OrangeRed);
-            // Circle(pB3, Color.Yellow);
-            // Circle(pB4, Color.Green);
 
-            // 
-            // label9
-            // 
-            Label label9 = new Label();
-            label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(1211, 95);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(63, 13);
-            label9.TabIndex = 10;
-            label9.Text = "Emergencia";
-            label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label10
-            // 
-            Label label10 = new Label();
-
-            label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(1211, 187);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(63, 13);
-            label10.TabIndex = 11;
-            label10.Text = "Alerta";
-            label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label11
-            // 
-            Label label11 = new Label();
-
-            label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(1211, 289);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(63, 13);
-            label11.TabIndex = 12;
-            label11.Text = "Prevencion";
-            label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-
-            // 
-            // label12
-            // 
-            Label label12 = new Label();
-
-            label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(1211, 386);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(63, 13);
-            label12.TabIndex = 13;
-            label12.Text = "Permisible";
-            label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
         }
 
         private void Circle(PictureBox pictureBox, Color color)
@@ -870,6 +827,7 @@ namespace GUI
         }
 
 
+
         private void MouseOver(object sender, EventArgs e)
         {
             string title = "";
@@ -879,54 +837,78 @@ namespace GUI
                 title = EMERGENCIA + "Dañina para la salud";
                 text = "Todos los individuos pueden comenzar a experimentar efectos " +
                        "sobre la salud. Los grupos sensibles pueden experimentar efectos más graves que la salud." +
-                       "\n" + "\n"
-                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
-
+                       "\n" + "\n" + RangeValues();
                 auxiliarPopup(title, text, Color.Red);
             }
             else if (sender.Equals(pB2))
             {
-                title = ALERTA + "Dañina para la salud";
-                text = "Todos los individuos pueden comenzar a experimentar efectos " +
-                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
-                       "\n" + "\n"
-                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
+                title = ALERTA + "Dañina a la salud de grupos sencibles";
+                text = "1) Ozono Troposférico: La personas con enfermedades pulmonares,niños,adultos mayores y las que " +
+                    "constantemente realizan actividad fisica al aire libre, deben reducir su exposición a los contaminantes del aire" + " más graves que la salud." +
+                       "\n" +
+                       "2): Material Particulado: Las personas con enfermedad cardiaca o pulmonar, los adultos mayores y los niños " +
+                       "se conseideran sensibles y por lo tanto en mayor riesgo"
+                       + RangeValues();
+
 
                 auxiliarPopup(title, text, Color.OrangeRed);
             }
             else if (sender.Equals(pB3))
             {
-                title = PREVENCION + "Dañina para la salud";
-                text = "Todos los individuos pueden comenzar a experimentar efectos " +
-                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
-                       "\n" + "\n"
-                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
-
-                auxiliarPopup(title, text, Color.Yellow);
+                title = PREVENCION + "Aceptable";
+                text = "Posibles síntomas respiratorios en grupos de poblaciones sensibles"
+                    + RangeValues();
             }
             else
             {
-                title = PERMISIBLE + "Dañina para la salud";
-                text = "Todos los individuos pueden comenzar a experimentar efectos " +
-                       "sobre la salud. Los grupos sencibles pueden experimentar efectos más graves que la salud." +
-                       "\n" + "\n"
-                       + "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n" + "Alerta: 255 - 245";
+                title = PERMISIBLE + "Buena";
+                text = "La contaminación atmosférica supone un riesgo bajo para la salud"
+                    + RangeValues();
 
                 auxiliarPopup(title, text, Color.Green);
             }
+        }
+
+        private string RangeValues()
+        {
+            string text = "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n"
+                       + "Permisible: <= 10" + "\n"
+                       + "Prevencion: 11 - 20" + "\n"
+                       + "Alerta:  21 - 30" + "\n"
+                       + "Emergencia: >= 31" + "\n"
+                       + "\n" + "\n"
+                       + "Este nivel de contaminación O3 ( ug/m^3 ) se evaluara como:" + "\n" + "\n"
+                       + "Permisible: <= 8" + "\n"
+                       + "Prevencion: 9 - 10" + "\n"
+                       + "Alerta:  11 - 27" + "\n"
+                       + "Emergencia: >= 28" + "\n"
+                       + "\n" + "\n"
+                       + "Este nivel de contaminación de la radiación solar se evaluara como:" + "\n" + "\n"
+                       + "Permisible: <= 200" + "\n"
+                       + "Prevencion: 201 - 210" + "\n"
+                       + "Alerta:  211 - 250" + "\n"
+                       + "Emergencia: >= 251"; ;
+
+
+            return text;
+
         }
 
         private void auxiliarPopup(string title, string text, Color color)
         {
             PopupNotifier popup = new PopupNotifier();
             popup.TitleText = title;
+            popup.TitleFont = new Font("Times New Roman", 20.0f);
             popup.ContentText = text;
+            Font font = new Font("Times New Roman", 12.0f);
+            popup.ContentFont = font;
+            popup.Size = new Size(300, 500);
             popup.TitleFont = SystemFonts.CaptionFont;
             popup.BorderColor = SystemColors.WindowFrame;
             popup.ContentFont = SystemFonts.StatusFont;
             popup.BorderColor = Color.Transparent;
-            popup.Delay = 5000;
-            popup.Scroll = false;
+            popup.Delay = 2000;
+            popup.Scroll = true;
             popup.BodyColor = Color.FromArgb(50, color);
             popup.Popup();
         }
