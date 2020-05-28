@@ -171,9 +171,6 @@ namespace GUI
             string respuesta = await GetHttp(URL_Filter);
             List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
             dtGrid.DataSource = lst;
-            
-            
-          
         }
 
         public async Task<string> GetHttp(string url)
@@ -184,7 +181,6 @@ namespace GUI
 
             return await sr.ReadToEndAsync();
         }
-
 
 
         private void btFilter_Click(object sender, EventArgs e)
@@ -208,80 +204,66 @@ namespace GUI
                         else if (columnName.Equals(columnsValues[1]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[2]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[3]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[4]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[5]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[6]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[7]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[8]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[9]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[10]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[11]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[12]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[13]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[14]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                         else if (columnName.Equals(columnsValues[15]))
                         {
                             URL_Filter += "" + columnName + "=" + valueToFilter + "&";
-
                         }
                     }
                 }
+
                 ViewGrid();
             }
         }
@@ -326,7 +308,7 @@ namespace GUI
             TextBox txValueToFilter, Button btAdd, Button btClear)
         {
             lbFilterBy.Anchor =
-                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -353,7 +335,7 @@ namespace GUI
             // lbvalueToFilter
             //
             lbValueToFilter.Anchor =
-                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -408,7 +390,7 @@ namespace GUI
                 {
                     for (int j = 0; j < elements.Count(); j++)
                     {
-                        if (((Button)sender).Name == "btClear" + i.ToString())
+                        if (((Button) sender).Name == "btClear" + i.ToString())
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
@@ -428,7 +410,7 @@ namespace GUI
                         }
 
 
-                        if (((Button)sender).Name == "btAdd" + i.ToString())
+                        if (((Button) sender).Name == "btAdd" + i.ToString())
                         {
                             elements[j].ComboBox.Enabled = false;
                             found = true;
@@ -436,11 +418,10 @@ namespace GUI
 
                         fLP.Update();
                     }
+
                     i++;
                 }
             }
-
-
         }
 
 
@@ -451,13 +432,11 @@ namespace GUI
         /// <param name="valueToFilter"></param> Atributo de la columna columnName el cual se va a eliminar
         private void ClearValuesToURL(string columnName, String valueToFilter)
         {
-
             String valueToClean = "&" + columnName + "=" + valueToFilter;
             //Borra un caracter o una cadena de caracter en el URL.
             string cadena = URL_Filter.Replace(valueToClean, "");
             URL_Filter = cadena;
             ViewGrid();
-
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -841,7 +820,6 @@ namespace GUI
         }
 
 
-
         private void MouseOver(object sender, EventArgs e)
         {
             string title = "";
@@ -857,12 +835,14 @@ namespace GUI
             else if (sender.Equals(pB2))
             {
                 title = ALERTA + "Dañina a la salud de grupos sencibles";
-                text = "1) Ozono Troposférico: La personas con enfermedades pulmonares,niños,adultos mayores y las que " +
-                    "constantemente realizan actividad fisica al aire libre, deben reducir su exposición a los contaminantes del aire" + " más graves que la salud." +
-                       "\n" +
-                       "2): Material Particulado: Las personas con enfermedad cardiaca o pulmonar, los adultos mayores y los niños " +
-                       "se conseideran sensibles y por lo tanto en mayor riesgo"
-                       + RangeValues();
+                text =
+                    "1) Ozono Troposférico: La personas con enfermedades pulmonares,niños,adultos mayores y las que " +
+                    "constantemente realizan actividad fisica al aire libre, deben reducir su exposición a los contaminantes del aire" +
+                    " más graves que la salud." +
+                    "\n" +
+                    "2): Material Particulado: Las personas con enfermedad cardiaca o pulmonar, los adultos mayores y los niños " +
+                    "se conseideran sensibles y por lo tanto en mayor riesgo"
+                    + RangeValues();
 
 
                 auxiliarPopup(title, text, Color.OrangeRed);
@@ -871,7 +851,7 @@ namespace GUI
             {
                 title = PREVENCION + "Aceptable";
                 text = "Posibles síntomas respiratorios en grupos de poblaciones sensibles"
-                    + RangeValues();
+                       + RangeValues();
 
                 auxiliarPopup(title, text, Color.Yellow);
             }
@@ -879,7 +859,7 @@ namespace GUI
             {
                 title = PERMISIBLE + "Buena";
                 text = "La contaminación atmosférica supone un riesgo bajo para la salud"
-                    + RangeValues();
+                       + RangeValues();
 
                 auxiliarPopup(title, text, Color.Green);
             }
@@ -888,26 +868,26 @@ namespace GUI
         private string RangeValues()
         {
             string text = "El nivel de contaminación del PM10 ug/ m ^ 3 :" + "\n" + "\n"
-                       + "Permisible: <= 10" + "\n"
-                       + "Prevencion: 11 - 20" + "\n"
-                       + "Alerta:  21 - 30" + "\n"
-                       + "Emergencia: >= 31" + "\n"
-                       + "\n" + "\n"
-                       + "Este nivel de contaminación O3 ( ug/m^3 ) se evaluara como:" + "\n" + "\n"
-                       + "Permisible: <= 8" + "\n"
-                       + "Prevencion: 9 - 10" + "\n"
-                       + "Alerta:  11 - 27" + "\n"
-                       + "Emergencia: >= 28" + "\n"
-                       + "\n" + "\n"
-                       + "Este nivel de contaminación de la radiación solar se evaluara como:" + "\n" + "\n"
-                       + "Permisible: <= 200" + "\n"
-                       + "Prevencion: 201 - 210" + "\n"
-                       + "Alerta:  211 - 250" + "\n"
-                       + "Emergencia: >= 251"; ;
+                          + "Permisible: <= 10" + "\n"
+                          + "Prevencion: 11 - 20" + "\n"
+                          + "Alerta:  21 - 30" + "\n"
+                          + "Emergencia: >= 31" + "\n"
+                          + "\n" + "\n"
+                          + "Este nivel de contaminación O3 ( ug/m^3 ) se evaluara como:" + "\n" + "\n"
+                          + "Permisible: <= 8" + "\n"
+                          + "Prevencion: 9 - 10" + "\n"
+                          + "Alerta:  11 - 27" + "\n"
+                          + "Emergencia: >= 28" + "\n"
+                          + "\n" + "\n"
+                          + "Este nivel de contaminación de la radiación solar se evaluara como:" + "\n" + "\n"
+                          + "Permisible: <= 200" + "\n"
+                          + "Prevencion: 201 - 210" + "\n"
+                          + "Alerta:  211 - 250" + "\n"
+                          + "Emergencia: >= 251";
+            ;
 
 
             return text;
-
         }
 
         private void auxiliarPopup(string title, string text, Color color)
@@ -1211,6 +1191,7 @@ namespace GUI
             {
                 temp.Add(valor.Concentraci_n);
             }
+
             consulta.Clear();
 
             var forecast = forecastTextBox.Text;
@@ -1228,6 +1209,7 @@ namespace GUI
             {
                 temp.Add(valor.Concentraci_n);
             }
+
             consulta.Clear();
 
             timeSeries.Series[0].Points.DataBindY(temp);
@@ -1244,6 +1226,7 @@ namespace GUI
                     variable = variableCB.SelectedItem.ToString();
                 }
             }
+
             Arima(MunicipioActual.Nombre_del_municipio, variable);
         }
 
@@ -1251,18 +1234,19 @@ namespace GUI
         {
             List<string> variables = new List<string>();
             List<double> concentraciones = new List<double>();
-        
+
             foreach (var variable in municipioActual.Variables)
             {
                 variables.Add(variable.Variable);
                 concentraciones.Add(variable.Concentracion);
             }
+
             pieChart.Series[0].Points.DataBindXY(variables, concentraciones);
             pieChart.Legends[0].Enabled = true;
             pieChart.Series[0].IsValueShownAsLabel = true;
             pieChart.Update();
         }
-        
+
         private void button5_Click(object sender, EventArgs e)
         {
             string variable = null;
@@ -1273,13 +1257,13 @@ namespace GUI
                     variable = variableCB.SelectedItem.ToString();
                 }
             }
+
             labelVariableActual.Text = variable;
-        
+
             PieChart();
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
         }
         
-
         private void variableGmaps_SelectedIndexChanged(object sender, EventArgs e)
         {
             PollutionColor();
