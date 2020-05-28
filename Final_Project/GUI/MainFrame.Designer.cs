@@ -165,6 +165,7 @@ namespace GUI
             this.tab.SelectedIndex = 0;
             this.tab.Size = new System.Drawing.Size(1299, 751);
             this.tab.TabIndex = 16;
+            this.tab.Enter += new System.EventHandler(this.tab_Enter);
             // 
             // tabPageFilters
             // 
@@ -463,6 +464,7 @@ namespace GUI
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(55, 20);
             this.textBox3.TabIndex = 12;
+            this.textBox3.Text = "50";
             // 
             // label7
             // 
@@ -532,6 +534,7 @@ namespace GUI
             this.forecastTextBox.Name = "forecastTextBox";
             this.forecastTextBox.Size = new System.Drawing.Size(55, 20);
             this.forecastTextBox.TabIndex = 4;
+            this.forecastTextBox.Text = "5";
             // 
             // arima
             // 

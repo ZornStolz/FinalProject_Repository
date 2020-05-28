@@ -109,6 +109,7 @@ namespace GUI
                 "Radiación Solar Global"
             });
             variableGmaps.Text = "PM10";
+            variableCB.Text = "PM10";
         }
 
         public int YearActual
@@ -291,8 +292,6 @@ namespace GUI
             }
         }
             */
-        
-        
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -323,7 +322,6 @@ namespace GUI
             this.fLP.Controls.Add(elements[count_click].ButtonClear);
 
             count_click++;
-            //TODO
             // refreshStatisticsTab();
         }
 
@@ -334,7 +332,7 @@ namespace GUI
             TextBox txValueToFilter, Button btAdd, Button btClear)
         {
             lbFilterBy.Anchor =
-                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -361,7 +359,7 @@ namespace GUI
             // lbvalueToFilter
             //
             lbValueToFilter.Anchor =
-                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -416,7 +414,7 @@ namespace GUI
                 {
                     for (int j = 0; j < elements.Count(); j++)
                     {
-                        if (((Button)sender).Name == "btClear" + i.ToString())
+                        if (((Button) sender).Name == "btClear" + i.ToString())
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
@@ -433,7 +431,7 @@ namespace GUI
                             }
                         }
 
-                        if (((Button)sender).Name == "btAdd" + i.ToString())
+                        if (((Button) sender).Name == "btAdd" + i.ToString())
                         {
                             elements[j].ComboBox.Enabled = false;
                             found = true;
@@ -541,6 +539,7 @@ namespace GUI
         {
             string pollutionLevel = "";
             //154,155,254,255,354,355
+
             //Casos.
             if (concentracion <= 10)
             {
@@ -579,6 +578,7 @@ namespace GUI
         {
             string pollutionLevel = "";
             //138,139,167,168,207,208
+
             //Casos.
             if (concentracion <= 10)
             {
@@ -647,7 +647,7 @@ namespace GUI
             }
             **/
         /// <summary>
-        /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia,Bogota.
+        /// Permite cargar el mapa de google en pantalla y posicionarlo en el país de Colombia, Bogota.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -682,7 +682,6 @@ namespace GUI
             marker.Tag = value.Nombre_del_municipio;
             markerOverlay.Markers.Add(marker);
 
-
             marker.ToolTipMode = MarkerTooltipMode.OnMouseOver;
             marker.ToolTipText = String.Format("Latitud: " + value.Latitud + "\n"
                                                + "Longitud: " + value.Longitud + "\n"
@@ -712,7 +711,7 @@ namespace GUI
         {
             GMapOverlay polygons = new GMapOverlay("Polygons");
             List<PointLatLng> points = new List<PointLatLng>();
-            // Crea un cuadrado a partir de coordenas especificas.
+            //Crea un cuadrado a partir de coordenas especificas.
             PointAdd(value.Latitud, value.Longitud, points);
             GMapPolygon polygon = new GMapPolygon(points, value.Nombre_del_municipio);
             polygon.Stroke = new Pen(Color.Transparent, 10);
@@ -915,7 +914,7 @@ namespace GUI
                 auxiliarPopup(title, text, Color.Green);
             }
         }
-        
+
         private void auxiliarPopup(string title, string text, Color color)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -1255,7 +1254,7 @@ namespace GUI
         private void PieChart()
         {
             pieChart.Series[0].Points.Clear();
-            
+
             foreach (var variable in municipioActual.Variables)
             {
                 pieChart.Series[0].Points.AddXY(variable.Variable, variable.Concentracion);
@@ -1275,6 +1274,7 @@ namespace GUI
                     variable = variableCB.SelectedItem.ToString();
                 }
             }
+
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
             PieChart();
         }
@@ -1283,13 +1283,22 @@ namespace GUI
         {
             PollutionColor();
         }
-        
+
         protected override void OnPaint(PaintEventArgs e)
         {
             Circle(pB1, Color.Red);
             Circle(pB2, Color.OrangeRed);
             Circle(pB3, Color.Yellow);
             Circle(pB4, Color.Green);
+        }
+
+        private void tab_Enter(object sender, EventArgs e)
+        {
+            // var nombreMunicipio = "BOGOTÁ. D.C.";
+            // //Carga por defecto la información sobre Bogotá y predice 5 datos con ARIMA.
+            // TimeSeries(nombreMunicipio, MunicipioActual.Variables.First().ToString());
+            // PieChart();
+            // Arima(nombreMunicipio, MunicipioActual.Variables.First().ToString());
         }
     }
 }
