@@ -1281,7 +1281,7 @@ namespace GUI
 
         private void tab_Enter(object sender, EventArgs e)
         {
-            // var nombreMunicipio = "BOGOTÁ. D.C.";
+            // var nombreMunvicipio = "BOGOTÁ. D.C.";
             // //Carga por defecto la información sobre Bogotá y predice 5 datos con ARIMA.
             // TimeSeries(nombreMunicipio, MunicipioActual.Variables.First().ToString());
             // PieChart();
