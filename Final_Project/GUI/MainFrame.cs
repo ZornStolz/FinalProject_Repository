@@ -1211,7 +1211,6 @@ namespace GUI
             {
                 temp.Add(valor.Concentraci_n);
             }
-
             consulta.Clear();
 
             var forecast = forecastTextBox.Text;
@@ -1229,7 +1228,6 @@ namespace GUI
             {
                 temp.Add(valor.Concentraci_n);
             }
-
             consulta.Clear();
 
             timeSeries.Series[0].Points.DataBindY(temp);
@@ -1246,7 +1244,6 @@ namespace GUI
                     variable = variableCB.SelectedItem.ToString();
                 }
             }
-
             Arima(MunicipioActual.Nombre_del_municipio, variable);
         }
 
@@ -1254,7 +1251,7 @@ namespace GUI
         {
             List<string> variables = new List<string>();
             List<double> concentraciones = new List<double>();
-
+        
             foreach (var variable in municipioActual.Variables)
             {
                 variables.Add(variable.Variable);
@@ -1265,7 +1262,7 @@ namespace GUI
             pieChart.Series[0].IsValueShownAsLabel = true;
             pieChart.Update();
         }
-
+        
         private void button5_Click(object sender, EventArgs e)
         {
             string variable = null;
@@ -1276,12 +1273,12 @@ namespace GUI
                     variable = variableCB.SelectedItem.ToString();
                 }
             }
-
             labelVariableActual.Text = variable;
-
+        
             PieChart();
             TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
         }
+        
 
         private void variableGmaps_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1295,16 +1292,5 @@ namespace GUI
             Circle(pB3, Color.Yellow);
             Circle(pB4, Color.Green);
         }
-
-        private void tab_Enter(object sender, EventArgs e)
-        {
-            // var nombreMunicipio = "BOGOTÁ. D.C.";
-            // //Carga por defecto la información sobre Bogotá y predice 5 datos con ARIMA.
-            // TimeSeries(nombreMunicipio, MunicipioActual.Variables.First().ToString());
-            // PieChart();
-            // Arima(nombreMunicipio, MunicipioActual.Variables.First().ToString());
-        }
-
-      
     }
 }

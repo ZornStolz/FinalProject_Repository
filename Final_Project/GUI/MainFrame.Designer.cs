@@ -170,7 +170,6 @@ namespace GUI
             this.tab.SelectedIndex = 0;
             this.tab.Size = new System.Drawing.Size(1299, 751);
             this.tab.TabIndex = 16;
-            this.tab.Enter += new System.EventHandler(this.tab_Enter);
             // 
             // tabPageGmap
             // 
