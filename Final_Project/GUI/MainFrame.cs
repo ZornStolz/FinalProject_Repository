@@ -11,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web.UI.DataVisualization.Charting;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
 using Color = System.Drawing.Color;
@@ -34,7 +33,7 @@ namespace GUI
          * source data to be consulted
          */
         private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
-        private string URL_Filter = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
+        private string URL_Filter = "https://www.datos.gov.co/resource/ysq6-ri4e.json?&";
 
         /*
          * variable para saber en que year estamos
@@ -142,7 +141,6 @@ namespace GUI
         {
             ViewGrid();
             AddNameColumnToList();
-            //PollutionColor();
         }
 
         /// <summary>
@@ -173,8 +171,9 @@ namespace GUI
             string respuesta = await GetHttp(URL_Filter);
             List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
             dtGrid.DataSource = lst;
-            //dtGrid.DataSource = municipios_Set;
-            //dtGrid.DataSource = variales_Set;
+            
+            
+          
         }
 
         public async Task<string> GetHttp(string url)
@@ -284,12 +283,9 @@ namespace GUI
                     }
                 }
                 ViewGrid();
-
-                // dtGrid.Refresh();
-                //dtGrid.Update();
             }
         }
-         
+
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -330,7 +326,7 @@ namespace GUI
             TextBox txValueToFilter, Button btAdd, Button btClear)
         {
             lbFilterBy.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -357,7 +353,7 @@ namespace GUI
             // lbvalueToFilter
             //
             lbValueToFilter.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top |
+                ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top |
                                                          System.Windows.Forms.AnchorStyles.Bottom)
                                                         | System.Windows.Forms.AnchorStyles.Left)
                                                        | System.Windows.Forms.AnchorStyles.Right)));
@@ -412,10 +408,11 @@ namespace GUI
                 {
                     for (int j = 0; j < elements.Count(); j++)
                     {
-                        if (((Button) sender).Name == "btClear" + i.ToString())
+                        if (((Button)sender).Name == "btClear" + i.ToString())
                         {
                             if (elements[j].ButtonAdd.Name == "btAdd" + i.ToString())
                             {
+                                ClearValuesToURL(elements[j].ComboBox.Text, elements[j].TextBox.Text);
                                 fLP.Controls.Remove(elements[j].Label1);
                                 fLP.Controls.Remove(elements[j].ComboBox);
                                 fLP.Controls.Remove(elements[j].Label2);
@@ -423,13 +420,15 @@ namespace GUI
                                 fLP.Controls.Remove(elements[j].ButtonAdd);
                                 fLP.Controls.Remove(elements[j].ButtonClear);
                                 elements.Remove(elements[j]);
-                                MessageBox.Show("Se borró el filtro");
+                                MessageBox.Show("Lo borre");
                                 found = true;
                                 count_click--;
+                                MessageBox.Show("Se presiono el boton" + i.ToString());
                             }
                         }
 
-                        if (((Button) sender).Name == "btAdd" + i.ToString())
+
+                        if (((Button)sender).Name == "btAdd" + i.ToString())
                         {
                             elements[j].ComboBox.Enabled = false;
                             found = true;
@@ -437,10 +436,28 @@ namespace GUI
 
                         fLP.Update();
                     }
-
                     i++;
                 }
             }
+
+
+        }
+
+
+        /// <summary>
+        /// Permite eliminar la consulta que el usuario realizo.
+        /// </summary>
+        /// <param name="columnName"></param> Nombre de la columna para eliminar la consulta.
+        /// <param name="valueToFilter"></param> Atributo de la columna columnName el cual se va a eliminar
+        private void ClearValuesToURL(string columnName, String valueToFilter)
+        {
+
+            String valueToClean = "&" + columnName + "=" + valueToFilter;
+            //Borra un caracter o una cadena de caracter en el URL.
+            string cadena = URL_Filter.Replace(valueToClean, "");
+            URL_Filter = cadena;
+            ViewGrid();
+
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -855,7 +872,7 @@ namespace GUI
                 title = PREVENCION + "Aceptable";
                 text = "Posibles síntomas respiratorios en grupos de poblaciones sensibles"
                     + RangeValues();
-                
+
                 auxiliarPopup(title, text, Color.Yellow);
             }
             else
@@ -1240,8 +1257,8 @@ namespace GUI
 
             foreach (var variable in municipioActual.Variables)
             {
-               variables.Add(variable.Variable);
-               concentraciones.Add(variable.Concentracion);
+                variables.Add(variable.Variable);
+                concentraciones.Add(variable.Concentracion);
             }
             pieChart.Series[0].Points.DataBindXY(variables, concentraciones);
             pieChart.Legends[0].Enabled = true;
@@ -1288,6 +1305,6 @@ namespace GUI
             // Arima(nombreMunicipio, MunicipioActual.Variables.First().ToString());
         }
 
-       
+      
     }
 }

@@ -34,16 +34,16 @@ namespace GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -52,6 +52,7 @@ namespace GUI
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tab = new System.Windows.Forms.TabControl();
             this.tabPageGmap = new System.Windows.Forms.TabPage();
+            this.lbBlume = new System.Windows.Forms.Label();
             this.municipioActualLabel = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.pB4 = new System.Windows.Forms.PictureBox();
@@ -93,7 +94,6 @@ namespace GUI
             this.btCreateNewFilter = new System.Windows.Forms.Button();
             this.fLP = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.txURL = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
@@ -125,7 +125,7 @@ namespace GUI
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
+            this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -134,7 +134,7 @@ namespace GUI
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
-            this.button2.Text = "button2";
+            this.button2.Text = "<<";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -174,6 +174,7 @@ namespace GUI
             // 
             // tabPageGmap
             // 
+            this.tabPageGmap.Controls.Add(this.lbBlume);
             this.tabPageGmap.Controls.Add(this.municipioActualLabel);
             this.tabPageGmap.Controls.Add(this.label10);
             this.tabPageGmap.Controls.Add(this.pB4);
@@ -197,10 +198,24 @@ namespace GUI
             this.tabPageGmap.Text = "Gmap";
             this.tabPageGmap.UseVisualStyleBackColor = true;
             // 
+            // lbBlume
+            // 
+            this.lbBlume.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbBlume.AutoSize = true;
+            this.lbBlume.BackColor = System.Drawing.Color.Transparent;
+            this.lbBlume.Location = new System.Drawing.Point(1154, 55);
+            this.lbBlume.Name = "lbBlume";
+            this.lbBlume.Size = new System.Drawing.Size(53, 13);
+            this.lbBlume.TabIndex = 14;
+            this.lbBlume.Text = "BLUMME";
+            this.lbBlume.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // municipioActualLabel
             // 
             this.municipioActualLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.municipioActualLabel.Location = new System.Drawing.Point(1112, 546);
+            this.municipioActualLabel.Location = new System.Drawing.Point(1115, 636);
             this.municipioActualLabel.Name = "municipioActualLabel";
             this.municipioActualLabel.Size = new System.Drawing.Size(154, 28);
             this.municipioActualLabel.TabIndex = 13;
@@ -209,7 +224,7 @@ namespace GUI
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(1102, 514);
+            this.label10.Location = new System.Drawing.Point(1105, 604);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(157, 23);
             this.label10.TabIndex = 12;
@@ -217,7 +232,7 @@ namespace GUI
             // 
             // pB4
             // 
-            this.pB4.Location = new System.Drawing.Point(1075, 383);
+            this.pB4.Location = new System.Drawing.Point(1078, 473);
             this.pB4.Name = "pB4";
             this.pB4.Size = new System.Drawing.Size(210, 85);
             this.pB4.TabIndex = 11;
@@ -226,7 +241,7 @@ namespace GUI
             // 
             // pB3
             // 
-            this.pB3.Location = new System.Drawing.Point(1075, 292);
+            this.pB3.Location = new System.Drawing.Point(1078, 382);
             this.pB3.Name = "pB3";
             this.pB3.Size = new System.Drawing.Size(210, 85);
             this.pB3.TabIndex = 10;
@@ -235,7 +250,7 @@ namespace GUI
             // 
             // pB2
             // 
-            this.pB2.Location = new System.Drawing.Point(1075, 201);
+            this.pB2.Location = new System.Drawing.Point(1078, 291);
             this.pB2.Name = "pB2";
             this.pB2.Size = new System.Drawing.Size(210, 85);
             this.pB2.TabIndex = 9;
@@ -245,7 +260,7 @@ namespace GUI
             // btShowPollutionColor
             // 
             this.btShowPollutionColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btShowPollutionColor.Location = new System.Drawing.Point(1075, 6);
+            this.btShowPollutionColor.Location = new System.Drawing.Point(1078, 96);
             this.btShowPollutionColor.Name = "btShowPollutionColor";
             this.btShowPollutionColor.Size = new System.Drawing.Size(210, 85);
             this.btShowPollutionColor.TabIndex = 8;
@@ -272,7 +287,7 @@ namespace GUI
             // 
             // pB1
             // 
-            this.pB1.Location = new System.Drawing.Point(1075, 110);
+            this.pB1.Location = new System.Drawing.Point(1078, 200);
             this.pB1.Name = "pB1";
             this.pB1.Size = new System.Drawing.Size(210, 85);
             this.pB1.TabIndex = 0;
@@ -494,17 +509,17 @@ namespace GUI
             // 
             // pieChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.pieChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "PM10";
-            this.pieChart.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.pieChart.ChartAreas.Add(chartArea4);
+            legend4.Name = "PM10";
+            this.pieChart.Legends.Add(legend4);
             this.pieChart.Location = new System.Drawing.Point(339, 356);
             this.pieChart.Name = "pieChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Legend = "PM10";
-            series1.Name = "Series1";
-            this.pieChart.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series4.Legend = "PM10";
+            series4.Name = "Series1";
+            this.pieChart.Series.Add(series4);
             this.pieChart.Size = new System.Drawing.Size(253, 229);
             this.pieChart.TabIndex = 8;
             // 
@@ -544,39 +559,39 @@ namespace GUI
             // 
             // arima
             // 
-            chartArea2.Name = "ChartArea1";
-            this.arima.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.arima.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.arima.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.arima.Legends.Add(legend5);
             this.arima.Location = new System.Drawing.Point(695, 270);
             this.arima.Name = "arima";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.Legend = "Legend1";
-            series2.MarkerSize = 10;
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star4;
-            series2.Name = "Series1";
-            this.arima.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series5.Legend = "Legend1";
+            series5.MarkerSize = 10;
+            series5.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star4;
+            series5.Name = "Series1";
+            this.arima.Series.Add(series5);
             this.arima.Size = new System.Drawing.Size(366, 238);
             this.arima.TabIndex = 3;
             // 
             // timeSeries
             // 
-            chartArea3.Name = "ChartArea1";
-            this.timeSeries.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.timeSeries.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.timeSeries.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.timeSeries.Legends.Add(legend6);
             this.timeSeries.Location = new System.Drawing.Point(6, 116);
             this.timeSeries.Name = "timeSeries";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.timeSeries.Series.Add(series3);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.timeSeries.Series.Add(series6);
             this.timeSeries.Size = new System.Drawing.Size(375, 200);
             this.timeSeries.TabIndex = 2;
-            title1.Name = "Serie de Tiempo";
-            this.timeSeries.Titles.Add(title1);
+            title2.Name = "Serie de Tiempo";
+            this.timeSeries.Titles.Add(title2);
             // 
             // tabPageFilters
             // 
@@ -585,7 +600,6 @@ namespace GUI
             this.tabPageFilters.Controls.Add(this.btCreateNewFilter);
             this.tabPageFilters.Controls.Add(this.fLP);
             this.tabPageFilters.Controls.Add(this.label1);
-            this.tabPageFilters.Controls.Add(this.txURL);
             this.tabPageFilters.Controls.Add(this.dtGrid);
             this.tabPageFilters.Controls.Add(this.button2);
             this.tabPageFilters.Controls.Add(this.button1);
@@ -599,9 +613,9 @@ namespace GUI
             // 
             // btFilter
             // 
-            this.btFilter.Location = new System.Drawing.Point(820, 572);
+            this.btFilter.Location = new System.Drawing.Point(808, 572);
             this.btFilter.Name = "btFilter";
-            this.btFilter.Size = new System.Drawing.Size(399, 63);
+            this.btFilter.Size = new System.Drawing.Size(476, 63);
             this.btFilter.TabIndex = 22;
             this.btFilter.Text = "Filtrar";
             this.btFilter.UseVisualStyleBackColor = true;
@@ -617,9 +631,9 @@ namespace GUI
             // 
             // btCreateNewFilter
             // 
-            this.btCreateNewFilter.Location = new System.Drawing.Point(904, 93);
+            this.btCreateNewFilter.Location = new System.Drawing.Point(808, 111);
             this.btCreateNewFilter.Name = "btCreateNewFilter";
-            this.btCreateNewFilter.Size = new System.Drawing.Size(211, 23);
+            this.btCreateNewFilter.Size = new System.Drawing.Size(476, 43);
             this.btCreateNewFilter.TabIndex = 20;
             this.btCreateNewFilter.Text = "Crear nuevo filtro";
             this.btCreateNewFilter.UseVisualStyleBackColor = true;
@@ -644,13 +658,6 @@ namespace GUI
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 17;
-            // 
-            // txURL
-            // 
-            this.txURL.Location = new System.Drawing.Point(930, 53);
-            this.txURL.Name = "txURL";
-            this.txURL.Size = new System.Drawing.Size(100, 20);
-            this.txURL.TabIndex = 16;
             // 
             // timer
             // 
@@ -734,13 +741,13 @@ namespace GUI
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.DataVisualization.Charting.Chart timeSeries;
         private System.Windows.Forms.TrackBar trackBarZoom;
-        private System.Windows.Forms.TextBox txURL;
         private System.Windows.Forms.ComboBox variableCB;
         private System.Windows.Forms.ComboBox variableGmaps;
 
         #endregion
 
         private System.Windows.Forms.Button btFilter;
+        private System.Windows.Forms.Label lbBlume;
     }
 }
 
