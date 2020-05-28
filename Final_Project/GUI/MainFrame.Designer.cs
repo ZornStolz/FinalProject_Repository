@@ -34,16 +34,16 @@ namespace GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -89,19 +89,19 @@ namespace GUI
             this.arima = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timeSeries = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
             this.tabPageFilters.SuspendLayout();
             this.tabPageGmap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pB4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
             this.tabPageStadistc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pieChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.arima)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pieChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.arima)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeSeries)).BeginInit();
             this.SuspendLayout();
             // 
             // dtGrid
@@ -157,9 +157,9 @@ namespace GUI
             // 
             // tab
             // 
-            this.tab.Controls.Add(this.tabPageFilters);
             this.tab.Controls.Add(this.tabPageGmap);
             this.tab.Controls.Add(this.tabPageStadistc);
+            this.tab.Controls.Add(this.tabPageFilters);
             this.tab.Location = new System.Drawing.Point(12, 12);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
@@ -205,7 +205,9 @@ namespace GUI
             // 
             // fLP
             // 
-            this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.fLP.AutoScroll = true;
             this.fLP.Location = new System.Drawing.Point(870, 160);
             this.fLP.Margin = new System.Windows.Forms.Padding(4);
@@ -289,7 +291,7 @@ namespace GUI
             // 
             // btShowPollutionColor
             // 
-            this.btShowPollutionColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btShowPollutionColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btShowPollutionColor.Location = new System.Drawing.Point(1075, 6);
             this.btShowPollutionColor.Name = "btShowPollutionColor";
             this.btShowPollutionColor.Size = new System.Drawing.Size(210, 85);
@@ -300,15 +302,16 @@ namespace GUI
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(467, 647);
+            this.label9.Location = new System.Drawing.Point(625, 655);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 23);
-            this.label9.TabIndex = 7;
+            this.label9.Size = new System.Drawing.Size(41, 21);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Zoom";
             // 
             // variableGmaps
             // 
             this.variableGmaps.FormattingEnabled = true;
-            this.variableGmaps.Location = new System.Drawing.Point(446, 673);
+            this.variableGmaps.Location = new System.Drawing.Point(432, 649);
             this.variableGmaps.Name = "variableGmaps";
             this.variableGmaps.Size = new System.Drawing.Size(121, 21);
             this.variableGmaps.TabIndex = 6;
@@ -326,7 +329,7 @@ namespace GUI
             // trackBarZoom
             // 
             this.trackBarZoom.LargeChange = 1;
-            this.trackBarZoom.Location = new System.Drawing.Point(672, 665);
+            this.trackBarZoom.Location = new System.Drawing.Point(672, 647);
             this.trackBarZoom.Maximum = 20;
             this.trackBarZoom.Name = "trackBarZoom";
             this.trackBarZoom.Size = new System.Drawing.Size(397, 45);
@@ -344,7 +347,7 @@ namespace GUI
             // 
             // btRelief
             // 
-            this.btRelief.Location = new System.Drawing.Point(273, 665);
+            this.btRelief.Location = new System.Drawing.Point(272, 647);
             this.btRelief.Name = "btRelief";
             this.btRelief.Size = new System.Drawing.Size(109, 23);
             this.btRelief.TabIndex = 3;
@@ -354,7 +357,7 @@ namespace GUI
             // 
             // btOriginal
             // 
-            this.btOriginal.Location = new System.Drawing.Point(148, 665);
+            this.btOriginal.Location = new System.Drawing.Point(157, 647);
             this.btOriginal.Name = "btOriginal";
             this.btOriginal.Size = new System.Drawing.Size(109, 23);
             this.btOriginal.TabIndex = 2;
@@ -364,7 +367,7 @@ namespace GUI
             // 
             // btSatelite
             // 
-            this.btSatelite.Location = new System.Drawing.Point(24, 665);
+            this.btSatelite.Location = new System.Drawing.Point(42, 647);
             this.btSatelite.Name = "btSatelite";
             this.btSatelite.Size = new System.Drawing.Size(109, 23);
             this.btSatelite.TabIndex = 1;
@@ -392,7 +395,7 @@ namespace GUI
             this.gMapC.RetryLoadTile = 0;
             this.gMapC.RoutesEnabled = true;
             this.gMapC.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int) (((byte) (33)))), ((int) (((byte) (65)))), ((int) (((byte) (105)))), ((int) (((byte) (225)))));
+            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapC.ShowTileGridLines = false;
             this.gMapC.Size = new System.Drawing.Size(1061, 631);
             this.gMapC.TabIndex = 0;
@@ -487,23 +490,23 @@ namespace GUI
             // 
             // pieChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.pieChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "PM10";
-            this.pieChart.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.pieChart.ChartAreas.Add(chartArea4);
+            legend4.Name = "PM10";
+            this.pieChart.Legends.Add(legend4);
             this.pieChart.Location = new System.Drawing.Point(48, 323);
             this.pieChart.Name = "pieChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Legend = "PM10";
-            series1.Name = "Series1";
-            this.pieChart.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series4.Legend = "PM10";
+            series4.Name = "Series1";
+            this.pieChart.Series.Add(series4);
             this.pieChart.Size = new System.Drawing.Size(222, 213);
             this.pieChart.TabIndex = 8;
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(33, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 18);
@@ -535,39 +538,39 @@ namespace GUI
             // 
             // arima
             // 
-            chartArea2.Name = "ChartArea1";
-            this.arima.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.arima.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.arima.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.arima.Legends.Add(legend5);
             this.arima.Location = new System.Drawing.Point(692, 195);
             this.arima.Name = "arima";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.Legend = "Legend1";
-            series2.MarkerSize = 10;
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star4;
-            series2.Name = "Series1";
-            this.arima.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series5.Legend = "Legend1";
+            series5.MarkerSize = 10;
+            series5.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star4;
+            series5.Name = "Series1";
+            this.arima.Series.Add(series5);
             this.arima.Size = new System.Drawing.Size(366, 238);
             this.arima.TabIndex = 3;
             // 
             // timeSeries
             // 
-            chartArea3.Name = "ChartArea1";
-            this.timeSeries.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.timeSeries.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.timeSeries.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.timeSeries.Legends.Add(legend6);
             this.timeSeries.Location = new System.Drawing.Point(8, 43);
             this.timeSeries.Name = "timeSeries";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.timeSeries.Series.Add(series3);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.timeSeries.Series.Add(series6);
             this.timeSeries.Size = new System.Drawing.Size(375, 200);
             this.timeSeries.TabIndex = 2;
-            title1.Name = "Serie de Tiempo";
-            this.timeSeries.Titles.Add(title1);
+            title2.Name = "Serie de Tiempo";
+            this.timeSeries.Titles.Add(title2);
             // 
             // timer
             // 
@@ -579,28 +582,29 @@ namespace GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1323, 775);
+            this.ClientSize = new System.Drawing.Size(1323, 749);
             this.Controls.Add(this.tab);
             this.Location = new System.Drawing.Point(15, 15);
             this.Name = "Blume";
             this.Load += new System.EventHandler(this.MainFrame_Load);
-            ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
             this.tab.ResumeLayout(false);
             this.tabPageFilters.ResumeLayout(false);
             this.tabPageFilters.PerformLayout();
             this.tabPageGmap.ResumeLayout(false);
             this.tabPageGmap.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pB4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
             this.tabPageStadistc.ResumeLayout(false);
             this.tabPageStadistc.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pieChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.arima)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pieChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.arima)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeSeries)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.DataVisualization.Charting.Chart arima;
