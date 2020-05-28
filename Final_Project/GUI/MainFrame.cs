@@ -34,6 +34,7 @@ namespace GUI
          * source data to be consulted
          */
         private const string URL = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
+        private string URL_Filter = "https://www.datos.gov.co/resource/ysq6-ri4e.json?";
 
         /*
          * variable para saber en que year estamos
@@ -169,7 +170,7 @@ namespace GUI
 
         private async void ViewGrid()
         {
-            string respuesta = await GetHttp(URL);
+            string respuesta = await GetHttp(URL_Filter);
             List<ViewModel> lst = JsonConvert.DeserializeObject<List<ViewModel>>(respuesta);
             dtGrid.DataSource = lst;
             //dtGrid.DataSource = municipios_Set;
@@ -186,11 +187,7 @@ namespace GUI
         }
 
 
-        private void dtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
 
-        /**
         private void btFilter_Click(object sender, EventArgs e)
         {
             if (elements != null)
@@ -207,81 +204,81 @@ namespace GUI
 
                         if (columnName.Equals(columnsValues[0]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
                         }
                         else if (columnName.Equals(columnsValues[1]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[2]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[3]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[4]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[5]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[6]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[7]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[8]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[9]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[10]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[11]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[12]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[13]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[14]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                         else if (columnName.Equals(columnsValues[15]))
                         {
-                            URL += "" + columnName + "=" + valueToFilter + "&";
+                            URL_Filter += "" + columnName + "=" + valueToFilter + "&";
 
                         }
                     }
@@ -292,8 +289,7 @@ namespace GUI
                 //dtGrid.Update();
             }
         }
-            */
-
+         
         /// <summary>
         /// This method allows creating a new filter according to the database.
         /// </summary>
@@ -1292,5 +1288,6 @@ namespace GUI
             // Arima(nombreMunicipio, MunicipioActual.Variables.First().ToString());
         }
 
+       
     }
 }

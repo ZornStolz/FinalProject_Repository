@@ -88,25 +88,25 @@ namespace GUI
             this.arima = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timeSeries = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPageFilters = new System.Windows.Forms.TabPage();
+            this.btFilter = new System.Windows.Forms.Button();
             this.prueba = new System.Windows.Forms.Label();
             this.btCreateNewFilter = new System.Windows.Forms.Button();
             this.fLP = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btFilter = new System.Windows.Forms.Button();
             this.txURL = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
             this.tabPageGmap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pB4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
             this.tabPageStadistc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pieChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.arima)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pieChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.arima)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeSeries)).BeginInit();
             this.tabPageFilters.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,7 +118,6 @@ namespace GUI
             this.dtGrid.RowHeadersWidth = 51;
             this.dtGrid.Size = new System.Drawing.Size(786, 630);
             this.dtGrid.TabIndex = 8;
-            this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
             // 
             // button1
             // 
@@ -200,7 +199,7 @@ namespace GUI
             // 
             // municipioActualLabel
             // 
-            this.municipioActualLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.municipioActualLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.municipioActualLabel.Location = new System.Drawing.Point(1112, 546);
             this.municipioActualLabel.Name = "municipioActualLabel";
             this.municipioActualLabel.Size = new System.Drawing.Size(154, 28);
@@ -209,7 +208,7 @@ namespace GUI
             // 
             // label10
             // 
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(1102, 514);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(157, 23);
@@ -245,7 +244,7 @@ namespace GUI
             // 
             // btShowPollutionColor
             // 
-            this.btShowPollutionColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.btShowPollutionColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btShowPollutionColor.Location = new System.Drawing.Point(1075, 6);
             this.btShowPollutionColor.Name = "btShowPollutionColor";
             this.btShowPollutionColor.Size = new System.Drawing.Size(210, 85);
@@ -349,7 +348,7 @@ namespace GUI
             this.gMapC.RetryLoadTile = 0;
             this.gMapC.RoutesEnabled = true;
             this.gMapC.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int) (((byte) (33)))), ((int) (((byte) (65)))), ((int) (((byte) (105)))), ((int) (((byte) (225)))));
+            this.gMapC.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapC.ShowTileGridLines = false;
             this.gMapC.Size = new System.Drawing.Size(1061, 631);
             this.gMapC.TabIndex = 0;
@@ -388,7 +387,7 @@ namespace GUI
             // 
             // labelVariableActual
             // 
-            this.labelVariableActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.labelVariableActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVariableActual.Location = new System.Drawing.Point(65, 86);
             this.labelVariableActual.Name = "labelVariableActual";
             this.labelVariableActual.Size = new System.Drawing.Size(193, 24);
@@ -398,7 +397,7 @@ namespace GUI
             // 
             // label14
             // 
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(84, 40);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(138, 23);
@@ -407,7 +406,7 @@ namespace GUI
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(324, 319);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(292, 23);
@@ -416,7 +415,7 @@ namespace GUI
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(743, 215);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(185, 23);
@@ -425,7 +424,7 @@ namespace GUI
             // 
             // label13
             // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(420, 131);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(88, 23);
@@ -434,7 +433,7 @@ namespace GUI
             // 
             // label12
             // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(394, 43);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(142, 23);
@@ -443,7 +442,7 @@ namespace GUI
             // 
             // label11
             // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(775, 38);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(149, 23);
@@ -452,7 +451,7 @@ namespace GUI
             // 
             // ciudadLabel
             // 
-            this.ciudadLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.ciudadLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ciudadLabel.Location = new System.Drawing.Point(65, 63);
             this.ciudadLabel.Name = "ciudadLabel";
             this.ciudadLabel.Size = new System.Drawing.Size(193, 23);
@@ -469,7 +468,7 @@ namespace GUI
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Location = new System.Drawing.Point(421, 210);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(73, 33);
@@ -511,7 +510,7 @@ namespace GUI
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(33, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 18);
@@ -519,7 +518,7 @@ namespace GUI
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(803, 113);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(91, 26);
@@ -581,11 +580,11 @@ namespace GUI
             // 
             // tabPageFilters
             // 
+            this.tabPageFilters.Controls.Add(this.btFilter);
             this.tabPageFilters.Controls.Add(this.prueba);
             this.tabPageFilters.Controls.Add(this.btCreateNewFilter);
             this.tabPageFilters.Controls.Add(this.fLP);
             this.tabPageFilters.Controls.Add(this.label1);
-            this.tabPageFilters.Controls.Add(this.btFilter);
             this.tabPageFilters.Controls.Add(this.txURL);
             this.tabPageFilters.Controls.Add(this.dtGrid);
             this.tabPageFilters.Controls.Add(this.button2);
@@ -597,6 +596,16 @@ namespace GUI
             this.tabPageFilters.TabIndex = 0;
             this.tabPageFilters.Text = "Filtros";
             this.tabPageFilters.UseVisualStyleBackColor = true;
+            // 
+            // btFilter
+            // 
+            this.btFilter.Location = new System.Drawing.Point(820, 572);
+            this.btFilter.Name = "btFilter";
+            this.btFilter.Size = new System.Drawing.Size(399, 63);
+            this.btFilter.TabIndex = 22;
+            this.btFilter.Text = "Filtrar";
+            this.btFilter.UseVisualStyleBackColor = true;
+            this.btFilter.Click += new System.EventHandler(this.btFilter_Click);
             // 
             // prueba
             // 
@@ -618,12 +627,14 @@ namespace GUI
             // 
             // fLP
             // 
-            this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.fLP.AutoScroll = true;
-            this.fLP.Location = new System.Drawing.Point(870, 160);
+            this.fLP.Location = new System.Drawing.Point(808, 161);
             this.fLP.Margin = new System.Windows.Forms.Padding(4);
             this.fLP.Name = "fLP";
-            this.fLP.Size = new System.Drawing.Size(322, 405);
+            this.fLP.Size = new System.Drawing.Size(476, 405);
             this.fLP.TabIndex = 19;
             // 
             // label1
@@ -633,15 +644,6 @@ namespace GUI
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 17;
-            // 
-            // btFilter
-            // 
-            this.btFilter.Location = new System.Drawing.Point(1007, 472);
-            this.btFilter.Name = "btFilter";
-            this.btFilter.Size = new System.Drawing.Size(75, 23);
-            this.btFilter.TabIndex = 18;
-            this.btFilter.Text = "Filtrar";
-            this.btFilter.UseVisualStyleBackColor = true;
             // 
             // txURL
             // 
@@ -665,28 +667,28 @@ namespace GUI
             this.Location = new System.Drawing.Point(15, 15);
             this.Name = "Blume";
             this.Load += new System.EventHandler(this.MainFrame_Load);
-            ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
             this.tab.ResumeLayout(false);
             this.tabPageGmap.ResumeLayout(false);
             this.tabPageGmap.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pB4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pB1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pB1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
             this.tabPageStadistc.ResumeLayout(false);
             this.tabPageStadistc.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pieChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.arima)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pieChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.arima)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeSeries)).EndInit();
             this.tabPageFilters.ResumeLayout(false);
             this.tabPageFilters.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.DataVisualization.Charting.Chart arima;
         private System.Windows.Forms.Button btCreateNewFilter;
-        private System.Windows.Forms.Button btFilter;
         private System.Windows.Forms.Button btOriginal;
         private System.Windows.Forms.Button btRelief;
         private System.Windows.Forms.Button btSatelite;
@@ -737,6 +739,8 @@ namespace GUI
         private System.Windows.Forms.ComboBox variableGmaps;
 
         #endregion
+
+        private System.Windows.Forms.Button btFilter;
     }
 }
 
