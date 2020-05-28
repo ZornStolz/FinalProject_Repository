@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web.UI.DataVisualization.Charting;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
 using Color = System.Drawing.Color;
@@ -810,7 +811,7 @@ namespace GUI
 
         private void btShowPollutionColor_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Coloque el Mouse sobre uno de los cuatro colores para desplegar la información de estos");
         }
 
         private void Circle(PictureBox pictureBox, Color color)
@@ -858,6 +859,8 @@ namespace GUI
                 title = PREVENCION + "Aceptable";
                 text = "Posibles síntomas respiratorios en grupos de poblaciones sensibles"
                     + RangeValues();
+                
+                auxiliarPopup(title, text, Color.Yellow);
             }
             else
             {
@@ -907,7 +910,7 @@ namespace GUI
             popup.BorderColor = SystemColors.WindowFrame;
             popup.ContentFont = SystemFonts.StatusFont;
             popup.BorderColor = Color.Transparent;
-            popup.Delay = 2000;
+            popup.Delay = 30000;
             popup.Scroll = true;
             popup.BodyColor = Color.FromArgb(50, color);
             popup.Popup();
@@ -1236,15 +1239,18 @@ namespace GUI
 
         private void PieChart()
         {
-            pieChart.Series[0].Points.Clear();
+            List<string> variables = new List<string>();
+            List<double> concentraciones = new List<double>();
 
             foreach (var variable in municipioActual.Variables)
             {
-                pieChart.Series[0].Points.AddXY(variable.Variable, variable.Concentracion);
+               variables.Add(variable.Variable);
+               concentraciones.Add(variable.Concentracion);
             }
-
+            pieChart.Series[0].Points.DataBindXY(variables, concentraciones);
             pieChart.Legends[0].Enabled = true;
             pieChart.Series[0].IsValueShownAsLabel = true;
+            pieChart.Update();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1258,8 +1264,10 @@ namespace GUI
                 }
             }
 
-            TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
+            labelVariableActual.Text = variable;
+
             PieChart();
+            TimeSeries(MunicipioActual.Nombre_del_municipio, variable);
         }
 
         private void variableGmaps_SelectedIndexChanged(object sender, EventArgs e)
