@@ -75,6 +75,12 @@ namespace GUI
             this.btSatelite = new System.Windows.Forms.Button();
             this.gMapC = new GMap.NET.WindowsForms.GMapControl();
             this.tabPageStadistc = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.ciudadLabel = new System.Windows.Forms.Label();
             this.variableCB = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -89,12 +95,6 @@ namespace GUI
             this.arima = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timeSeries = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize) (this.dtGrid)).BeginInit();
             this.tab.SuspendLayout();
             this.tabPageFilters.SuspendLayout();
@@ -109,6 +109,9 @@ namespace GUI
             ((System.ComponentModel.ISupportInitialize) (this.arima)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.timeSeries)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dtGrid
+            // 
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid.Location = new System.Drawing.Point(3, 6);
             this.dtGrid.Name = "dtGrid";
@@ -116,32 +119,50 @@ namespace GUI
             this.dtGrid.Size = new System.Drawing.Size(786, 630);
             this.dtGrid.TabIndex = 8;
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
+            // 
+            // button1
+            // 
             this.button1.Location = new System.Drawing.Point(563, 655);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
             this.button2.Location = new System.Drawing.Point(230, 655);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
             this.button3.Location = new System.Drawing.Point(308, 1);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
+            // 
+            // textBox2
+            // 
             this.textBox2.Location = new System.Drawing.Point(153, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 2;
+            // 
+            // tab
+            // 
             this.tab.Controls.Add(this.tabPageFilters);
             this.tab.Controls.Add(this.tabPageGmap);
             this.tab.Controls.Add(this.tabPageStadistc);
@@ -151,6 +172,9 @@ namespace GUI
             this.tab.Size = new System.Drawing.Size(1299, 751);
             this.tab.TabIndex = 16;
             this.tab.Enter += new System.EventHandler(this.tab_Enter);
+            // 
+            // tabPageFilters
+            // 
             this.tabPageFilters.Controls.Add(this.prueba);
             this.tabPageFilters.Controls.Add(this.btCreateNewFilter);
             this.tabPageFilters.Controls.Add(this.fLP);
@@ -167,11 +191,17 @@ namespace GUI
             this.tabPageFilters.TabIndex = 0;
             this.tabPageFilters.Text = "Filtros";
             this.tabPageFilters.UseVisualStyleBackColor = true;
+            // 
+            // prueba
+            // 
             this.prueba.AutoSize = true;
             this.prueba.Location = new System.Drawing.Point(1125, 572);
             this.prueba.Name = "prueba";
             this.prueba.Size = new System.Drawing.Size(0, 13);
             this.prueba.TabIndex = 21;
+            // 
+            // btCreateNewFilter
+            // 
             this.btCreateNewFilter.Location = new System.Drawing.Point(904, 93);
             this.btCreateNewFilter.Name = "btCreateNewFilter";
             this.btCreateNewFilter.Size = new System.Drawing.Size(211, 23);
@@ -179,6 +209,9 @@ namespace GUI
             this.btCreateNewFilter.Text = "Crear nuevo filtro";
             this.btCreateNewFilter.UseVisualStyleBackColor = true;
             this.btCreateNewFilter.Click += new System.EventHandler(this.btCreateNewFilter_Click);
+            // 
+            // fLP
+            // 
             this.fLP.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.fLP.AutoScroll = true;
             this.fLP.Location = new System.Drawing.Point(870, 160);
@@ -186,21 +219,33 @@ namespace GUI
             this.fLP.Name = "fLP";
             this.fLP.Size = new System.Drawing.Size(322, 405);
             this.fLP.TabIndex = 19;
+            // 
+            // label1
+            // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(904, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 17;
+            // 
+            // btFilter
+            // 
             this.btFilter.Location = new System.Drawing.Point(1007, 472);
             this.btFilter.Name = "btFilter";
             this.btFilter.Size = new System.Drawing.Size(75, 23);
             this.btFilter.TabIndex = 18;
             this.btFilter.Text = "Filtrar";
             this.btFilter.UseVisualStyleBackColor = true;
+            // 
+            // txURL
+            // 
             this.txURL.Location = new System.Drawing.Point(930, 53);
             this.txURL.Name = "txURL";
             this.txURL.Size = new System.Drawing.Size(100, 20);
             this.txURL.TabIndex = 16;
+            // 
+            // tabPageGmap
+            // 
             this.tabPageGmap.Controls.Add(this.municipioActualLabel);
             this.tabPageGmap.Controls.Add(this.label10);
             this.tabPageGmap.Controls.Add(this.pB4);
@@ -223,36 +268,54 @@ namespace GUI
             this.tabPageGmap.TabIndex = 1;
             this.tabPageGmap.Text = "Gmap";
             this.tabPageGmap.UseVisualStyleBackColor = true;
+            // 
+            // municipioActualLabel
+            // 
             this.municipioActualLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.municipioActualLabel.Location = new System.Drawing.Point(1112, 546);
             this.municipioActualLabel.Name = "municipioActualLabel";
             this.municipioActualLabel.Size = new System.Drawing.Size(154, 28);
             this.municipioActualLabel.TabIndex = 13;
             this.municipioActualLabel.Text = "Ninguno";
+            // 
+            // label10
+            // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label10.Location = new System.Drawing.Point(1102, 514);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(157, 23);
             this.label10.TabIndex = 12;
             this.label10.Text = "Municipio actual:";
+            // 
+            // pB4
+            // 
             this.pB4.Location = new System.Drawing.Point(1075, 383);
             this.pB4.Name = "pB4";
             this.pB4.Size = new System.Drawing.Size(210, 85);
             this.pB4.TabIndex = 11;
             this.pB4.TabStop = false;
             this.pB4.MouseHover += new System.EventHandler(this.MouseOver);
+            // 
+            // pB3
+            // 
             this.pB3.Location = new System.Drawing.Point(1075, 292);
             this.pB3.Name = "pB3";
             this.pB3.Size = new System.Drawing.Size(210, 85);
             this.pB3.TabIndex = 10;
             this.pB3.TabStop = false;
             this.pB3.MouseHover += new System.EventHandler(this.MouseOver);
+            // 
+            // pB2
+            // 
             this.pB2.Location = new System.Drawing.Point(1075, 201);
             this.pB2.Name = "pB2";
             this.pB2.Size = new System.Drawing.Size(210, 85);
             this.pB2.TabIndex = 9;
             this.pB2.TabStop = false;
             this.pB2.MouseHover += new System.EventHandler(this.MouseOver);
+            // 
+            // btShowPollutionColor
+            // 
             this.btShowPollutionColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btShowPollutionColor.Location = new System.Drawing.Point(1075, 6);
             this.btShowPollutionColor.Name = "btShowPollutionColor";
@@ -261,22 +324,34 @@ namespace GUI
             this.btShowPollutionColor.Text = "¿Qué significa cada color?";
             this.btShowPollutionColor.UseVisualStyleBackColor = true;
             this.btShowPollutionColor.Click += new System.EventHandler(this.btShowPollutionColor_Click);
+            // 
+            // label9
+            // 
             this.label9.Location = new System.Drawing.Point(467, 647);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 23);
             this.label9.TabIndex = 7;
+            // 
+            // variableGmaps
+            // 
             this.variableGmaps.FormattingEnabled = true;
             this.variableGmaps.Location = new System.Drawing.Point(446, 673);
             this.variableGmaps.Name = "variableGmaps";
             this.variableGmaps.Size = new System.Drawing.Size(121, 21);
             this.variableGmaps.TabIndex = 6;
             this.variableGmaps.SelectedIndexChanged += new System.EventHandler(this.variableGmaps_SelectedIndexChanged);
+            // 
+            // pB1
+            // 
             this.pB1.Location = new System.Drawing.Point(1075, 110);
             this.pB1.Name = "pB1";
             this.pB1.Size = new System.Drawing.Size(210, 85);
             this.pB1.TabIndex = 0;
             this.pB1.TabStop = false;
             this.pB1.MouseHover += new System.EventHandler(this.MouseOver);
+            // 
+            // trackBarZoom
+            // 
             this.trackBarZoom.LargeChange = 1;
             this.trackBarZoom.Location = new System.Drawing.Point(672, 665);
             this.trackBarZoom.Maximum = 20;
@@ -285,11 +360,17 @@ namespace GUI
             this.trackBarZoom.TabIndex = 5;
             this.trackBarZoom.Value = 6;
             this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
+            // 
+            // label2
+            // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(632, 655);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 4;
+            // 
+            // btRelief
+            // 
             this.btRelief.Location = new System.Drawing.Point(273, 665);
             this.btRelief.Name = "btRelief";
             this.btRelief.Size = new System.Drawing.Size(109, 23);
@@ -297,6 +378,9 @@ namespace GUI
             this.btRelief.Text = "Relieve";
             this.btRelief.UseVisualStyleBackColor = true;
             this.btRelief.Click += new System.EventHandler(this.btRelief_Click);
+            // 
+            // btOriginal
+            // 
             this.btOriginal.Location = new System.Drawing.Point(148, 665);
             this.btOriginal.Name = "btOriginal";
             this.btOriginal.Size = new System.Drawing.Size(109, 23);
@@ -304,6 +388,9 @@ namespace GUI
             this.btOriginal.Text = "Original";
             this.btOriginal.UseVisualStyleBackColor = true;
             this.btOriginal.Click += new System.EventHandler(this.btOriginal_Click);
+            // 
+            // btSatelite
+            // 
             this.btSatelite.Location = new System.Drawing.Point(24, 665);
             this.btSatelite.Name = "btSatelite";
             this.btSatelite.Size = new System.Drawing.Size(109, 23);
@@ -311,6 +398,9 @@ namespace GUI
             this.btSatelite.Text = "Satélite";
             this.btSatelite.UseVisualStyleBackColor = true;
             this.btSatelite.Click += new System.EventHandler(this.btSatelite_Click);
+            // 
+            // gMapC
+            // 
             this.gMapC.Bearing = 0F;
             this.gMapC.CanDragMap = true;
             this.gMapC.EmptyTileColor = System.Drawing.Color.Navy;
@@ -336,6 +426,9 @@ namespace GUI
             this.gMapC.Zoom = 0D;
             this.gMapC.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.Marker_Click);
             this.gMapC.Load += new System.EventHandler(this.gMapC_Load);
+            // 
+            // tabPageStadistc
+            // 
             this.tabPageStadistc.Controls.Add(this.label14);
             this.tabPageStadistc.Controls.Add(this.label7);
             this.tabPageStadistc.Controls.Add(this.label8);
@@ -362,15 +455,78 @@ namespace GUI
             this.tabPageStadistc.TabIndex = 2;
             this.tabPageStadistc.Text = "Estadisticas";
             this.tabPageStadistc.UseVisualStyleBackColor = true;
-            this.ciudadLabel.Location = new System.Drawing.Point(60, 111);
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label14.Location = new System.Drawing.Point(84, 40);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(138, 23);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Serie de tiempo";
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label7.Location = new System.Drawing.Point(153, 325);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(292, 23);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Contribución de los contaminantes";
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label8.Location = new System.Drawing.Point(743, 215);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(185, 23);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Predicciones ARIMA";
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label13.Location = new System.Drawing.Point(420, 131);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 23);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Variable";
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label12.Location = new System.Drawing.Point(394, 43);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(142, 23);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Datos a mostrar de la serie";
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label11.Location = new System.Drawing.Point(775, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(149, 23);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Datos a predecir";
+            // 
+            // ciudadLabel
+            // 
+            this.ciudadLabel.Location = new System.Drawing.Point(60, 79);
             this.ciudadLabel.Name = "ciudadLabel";
             this.ciudadLabel.Size = new System.Drawing.Size(100, 23);
             this.ciudadLabel.TabIndex = 16;
+            // 
+            // variableCB
+            // 
             this.variableCB.FormattingEnabled = true;
             this.variableCB.Location = new System.Drawing.Point(408, 157);
             this.variableCB.Name = "variableCB";
             this.variableCB.Size = new System.Drawing.Size(100, 21);
             this.variableCB.TabIndex = 14;
+            // 
+            // button5
+            // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.button5.Location = new System.Drawing.Point(421, 210);
             this.button5.Name = "button5";
@@ -379,24 +535,36 @@ namespace GUI
             this.button5.Text = "Ir";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox3
+            // 
             this.textBox3.Location = new System.Drawing.Point(439, 72);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(55, 20);
             this.textBox3.TabIndex = 12;
             this.textBox3.Text = "50";
+            // 
+            // label6
+            // 
             this.label6.Location = new System.Drawing.Point(49, 288);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 23);
             this.label6.TabIndex = 10;
+            // 
+            // label5
+            // 
             this.label5.Location = new System.Drawing.Point(732, 172);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 23);
             this.label5.TabIndex = 9;
+            // 
+            // pieChart
+            // 
             chartArea1.Name = "ChartArea1";
             this.pieChart.ChartAreas.Add(chartArea1);
             legend1.Name = "PM10";
             this.pieChart.Legends.Add(legend1);
-            this.pieChart.Location = new System.Drawing.Point(65, 381);
+            this.pieChart.Location = new System.Drawing.Point(185, 370);
             this.pieChart.Name = "pieChart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
@@ -405,11 +573,17 @@ namespace GUI
             this.pieChart.Series.Add(series1);
             this.pieChart.Size = new System.Drawing.Size(222, 213);
             this.pieChart.TabIndex = 8;
+            // 
+            // label3
+            // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label3.Location = new System.Drawing.Point(33, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 18);
             this.label3.TabIndex = 7;
+            // 
+            // button4
+            // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.button4.Location = new System.Drawing.Point(803, 113);
             this.button4.Name = "button4";
@@ -418,20 +592,29 @@ namespace GUI
             this.button4.Text = "Ir ARIMA";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label4
+            // 
             this.label4.Location = new System.Drawing.Point(775, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(149, 23);
             this.label4.TabIndex = 5;
+            // 
+            // forecastTextBox
+            // 
             this.forecastTextBox.Location = new System.Drawing.Point(824, 69);
             this.forecastTextBox.Name = "forecastTextBox";
             this.forecastTextBox.Size = new System.Drawing.Size(55, 20);
             this.forecastTextBox.TabIndex = 4;
             this.forecastTextBox.Text = "5";
+            // 
+            // arima
+            // 
             chartArea2.Name = "ChartArea1";
             this.arima.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.arima.Legends.Add(legend2);
-            this.arima.Location = new System.Drawing.Point(693, 230);
+            this.arima.Location = new System.Drawing.Point(704, 241);
             this.arima.Name = "arima";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
@@ -442,11 +625,14 @@ namespace GUI
             this.arima.Series.Add(series2);
             this.arima.Size = new System.Drawing.Size(366, 238);
             this.arima.TabIndex = 3;
+            // 
+            // timeSeries
+            // 
             chartArea3.Name = "ChartArea1";
             this.timeSeries.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.timeSeries.Legends.Add(legend3);
-            this.timeSeries.Location = new System.Drawing.Point(3, 101);
+            this.timeSeries.Location = new System.Drawing.Point(3, 69);
             this.timeSeries.Name = "timeSeries";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -457,43 +643,14 @@ namespace GUI
             this.timeSeries.TabIndex = 2;
             title1.Name = "Serie de Tiempo";
             this.timeSeries.Titles.Add(title1);
+            // 
+            // timer
+            // 
             this.timer.Interval = 10;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label11.Location = new System.Drawing.Point(775, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(149, 23);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Datos a predecir";
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label12.Location = new System.Drawing.Point(394, 43);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(142, 23);
-            this.label12.TabIndex = 18;
-            this.label12.Text = "Datos a mostrar de la serie";
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label13.Location = new System.Drawing.Point(420, 131);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(88, 23);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "Variable";
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label8.Location = new System.Drawing.Point(732, 204);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(185, 23);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Predicciones ARIMA";
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label7.Location = new System.Drawing.Point(33, 336);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(292, 23);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Contribución de los contaminantes";
-            this.label14.Location = new System.Drawing.Point(53, 22);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(100, 23);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "Serie de tiempo";
+            // 
+            // Blume
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
