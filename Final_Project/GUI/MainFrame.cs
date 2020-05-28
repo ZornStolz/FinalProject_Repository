@@ -696,8 +696,9 @@ namespace GUI
 
         private void Marker_Click(GMapMarker item, MouseEventArgs e)
         {
-            MessageBox.Show("" + item.Tag);
+            // MessageBox.Show("" + item.Tag);
             municipioActual.Nombre_del_municipio = item.Tag.ToString();
+            municipioActualLabel.Text = municipioActual.Nombre_del_municipio;
         }
 
 
@@ -1300,5 +1301,6 @@ namespace GUI
             // PieChart();
             // Arima(nombreMunicipio, MunicipioActual.Variables.First().ToString());
         }
+
     }
 }
