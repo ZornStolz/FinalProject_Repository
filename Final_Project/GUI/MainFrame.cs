@@ -362,7 +362,7 @@ namespace GUI
             btAdd.Location = new System.Drawing.Point(351, 3);
             btAdd.Size = new System.Drawing.Size(75, 23);
             btAdd.TabIndex = 8;
-            btAdd.Text = "Agregar" + count_click.ToString();
+            btAdd.Text = "Agregar";
             btAdd.UseVisualStyleBackColor = true;
             btAdd.UseVisualStyleBackColor = true;
             btAdd.Name = "btAdd" + count_click.ToString();
@@ -402,10 +402,8 @@ namespace GUI
                                 fLP.Controls.Remove(elements[j].ButtonAdd);
                                 fLP.Controls.Remove(elements[j].ButtonClear);
                                 elements.Remove(elements[j]);
-                                MessageBox.Show("Lo borre");
                                 found = true;
                                 count_click--;
-                                MessageBox.Show("Se presiono el boton" + i.ToString());
                             }
                         }
 
